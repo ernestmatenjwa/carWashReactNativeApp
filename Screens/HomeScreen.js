@@ -4,7 +4,8 @@ import gbImage from '../assets/homeBG1.jpg'
 
 export default function HomeScreen({ navigation }) {
   return (
-    <ImageBackground source={gbImage} style={styles.container}> 
+    <ImageBackground source={gbImage} style={styles.container}>
+         
      <Pressable 
       style={styles.signup} 
       onPress={() => {
@@ -29,6 +30,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   signup: {
+    position: 'absolute',
+    bottom: '20%',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,
@@ -40,6 +43,8 @@ const styles = StyleSheet.create({
     height: '7.4%',
   },
   login: {
+    position: 'absolute',
+    bottom: '10%',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,
