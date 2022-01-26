@@ -5,7 +5,7 @@ import gbImage from '../assets/homeBG1.jpg'
 export default function HomeScreen({ navigation }) {
   return (
     <ImageBackground source={gbImage} style={styles.container}>
-         
+     <Text style={styles.titlee}>Sek'Clean Car Wash Services</Text> 
      <Pressable 
       style={styles.signup} 
       onPress={() => {
@@ -28,6 +28,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  titlee: {
+      fontSize: 50,
+      display: 'flex',
+      alignItems: 'center',
+      textTransform: 'uppercase',
+      color: 'white',
+      fontWeight: 'bold'
   },
   signup: {
     position: 'absolute',
