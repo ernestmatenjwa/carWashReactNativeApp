@@ -1,3 +1,4 @@
+import "react-native-gesture-handler"
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import React from 'react';
 import { 
@@ -52,13 +53,14 @@ export default function SignupScreen({ navigation }) {
                  <Text style={{fontSize: 15, textAlign: 'right', color: "#064451", fontWeight: "bold" }}>Forgot password?</Text>
                  <View style={{height: 10}}></View>
                  <View style={{ alignItems: "center", marginTop: 20 }}>
-                   <TouchableOpacity onPress={() =>  navigation.push("LocationScreen")}>
+                   <TouchableOpacity >
                      <LinearGradient 
                     
                      style={{width: width / 1.2, padding: 15, borderRadius: 10}}
                      colors={["#064451", "#064451"]}
                      >
                     <Text 
+                    onPress={() =>  navigation.push("LocationScreen")}
                      style={{
                        color: "#fff",
                        textAlign: "center",

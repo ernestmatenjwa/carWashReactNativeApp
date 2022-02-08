@@ -5,7 +5,7 @@ import { Text,
         Dimensions,
         Image } from 'react-native';
 import paymentPic from "../assets/pictures/paymentPic.jpg"
-
+ 
 
 const { width, height } = Dimensions.get("screen");
 

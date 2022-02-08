@@ -1,3 +1,4 @@
+import "react-native-gesture-handler"
 import React from 'react';
 import { Text,
          View, 
@@ -23,7 +24,7 @@ export default function LocationScreen({ navigation }) {
   />
  </LinearGradient>
  <View style={{height: height/2.5, backgroundColor: "red"}}>
-    <Text>Map area</Text>
+    <Text onPress={() =>  navigation.push("ConfirmScreen")}>Map area</Text>
  </View>
  <View style={{height: height/3, backgroundColor: "green"}}>
     <Text>items</Text>
