@@ -6,7 +6,12 @@ import LoginScreen from "./components/Login";
 import LocationScreen from "./Screens/locationScreen";
 import MessengerScreen from "./Screens/messagesScreen";
 import ProfileScreen from "./Screens/profile";
+import ConfirmScreen from "./components/confirmation";
+import CarBrand from "./components/CarBrand";
+import DateSetter from "./components/DateSetter";
+import SearchCarWash from "./components/SearchCarWash";
 
+import Iconicons from "react-native-vector-icons/Ionicons"
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -15,7 +20,7 @@ const Stack = createNativeStackNavigator();
 const locationStack= createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 
-const locationStackScreen = () => {
+const LocationStackScreen = () => {
   return(
     <locationStack.Navigator>
         <locationStack.Screen name="Home" component={LocationScreen} options={{header: () => null}} />
@@ -27,8 +32,26 @@ const locationStackScreen = () => {
 
 const TabScreen = () => {
   return(
-    <Tabs.Navigator>
-        <Tabs.Screen name="LocationScreen" component={locationStackScreen} options={{header: () => null}} />
+    <Tabs.Navigator
+     screenOptions={({route}) => ({
+       tabBarIcon: ({focused, color, size}) => {
+         let iconName;
+         let rn = route.name;
+
+         if (rn === 'LocationScreenStack') {
+           iconName = focused ? 'home' : 'home-outline'
+         } else if (rn === 'Messanger') {
+          iconName = focused ? 'chatbubbles' : 'chatbubbles-outline'
+         } else if (rn === 'Profile') {
+          iconName = focused ? 'person' : 'person-outline'
+         }
+      
+        return <Iconicons name={iconName} size={size} color={color} />
+       },
+       tabBarLabel:() => {return null}
+     })}
+    >
+        <Tabs.Screen name="LocationScreenStack" component={LocationStackScreen} options={{header: () => null}} />
         <locationStack.Screen name="Messanger" component={MessengerScreen} />
         <locationStack.Screen name="Profile" component={ProfileScreen} />
     </Tabs.Navigator>
@@ -42,7 +65,11 @@ export default function App() {
         <Stack.Screen name="Splash" component={HomeScreen} options={{header: () => null}} />
         <Stack.Screen name="SignupScreen" component={SignupScreen} options={{header: () => null}} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="ConfirmScreen" component={ConfirmScreen} />
         <Stack.Screen name="LocationScreen" component={TabScreen} options={{header: () => null}} />
+        <Stack.Screen name="CarBrand" component={CarBrand} options={{header: () => null}} />
+        <Stack.Screen name="DateSetter" component={DateSetter} options={{header: () => null}} />
+        <Stack.Screen name="SearchCarWash" component={SearchCarWash} options={{header: () => null}} />
     </Stack.Navigator>
   </NavigationContainer>
   );

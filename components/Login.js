@@ -4,7 +4,6 @@ import gbImage from './../assets/pictures/homeBG3.jpg';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 
-
 export default function LoginScreen({ navigation }) {
 
   const [email, onChangeEmail] = React.useState('');
@@ -112,7 +111,7 @@ const styles = StyleSheet.create({
   },
   label: {
     overflow: 'visible',
-    fontWeight:300,
+    fontWeight: "300",
     fontFamily: `"Inter-Bold", "Inter", sans-serif`,
     color: '#064451',
     fontSize: 18,  
@@ -127,15 +126,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "visible",
-    backgroundColor:'#064451',
-    backgroundImage: "url(/* blue and orange building under blue sky.jpg */)",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
+    // backgroundColor:'#064451',
+    // backgroundSize: "cover",
+    // backgroundRepeat: "no-repeat",
+    // backgroundPosition: "center",
   },
   frame: {
     width: "90%",
-    boxShadow: "0px 14px 9px 0px rgba(0, 0, 0, 0.05)",
+    // boxShadow: "0px 14px 9px 0px rgba(0, 0, 0, 0.05)",
     backgroundColor: "rgb(247, 247, 247)",
     overflow: "visible",
     borderRadius: 15,
@@ -145,7 +143,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       marginTop: 25,
       overflow: 'visible',
-      fontWeight:700,
+      fontWeight: "700",
       fontFamily: `"Inter-Bold", "Inter", sans-serif`,
       color: '#064451',
       fontSize: 20,  

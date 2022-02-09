@@ -24,7 +24,10 @@ export default function LocationScreen({ navigation }) {
   />
  </LinearGradient>
  <View style={{height: height/2.5, backgroundColor: "red"}}>
-    <Text onPress={() =>  navigation.push("ConfirmScreen")}>Map area</Text>
+    <Text style={{fontSize: 30 }} onPress={() =>  navigation.push("CarBrand")}>CarBrand screen</Text>
+    <Text style={{fontSize: 30 }} onPress={() =>  navigation.push("DateSetter")}> DateSetter screen</Text>
+    <Text style={{fontSize: 30 }} onPress={() =>  navigation.push("SearchCarWash")}>SearchCarWash screen</Text>
+    <Text style={{fontSize: 30 }} onPress={() =>  navigation.push("ConfirmScreen")}>Confirm screen</Text>
  </View>
  <View style={{height: height/3, backgroundColor: "green"}}>
     <Text>items</Text>
