@@ -9,14 +9,14 @@ export default function HomeScreen({ navigation }) {
      <Pressable 
       style={styles.signup} 
       onPress={() => {
-       navigation.navigate("LoginScreen");
+       navigation.navigate("SearchCarWash");
      }}
      ><Text style={styles.text}>Sign Up</Text></Pressable>
       <View style={styles.space} />
      <Pressable 
       style={styles.login} 
       onPress={() => {
-       navigation.navigate("LoginScreen");
+       navigation.navigate("SearchCarWash");
      }}
      ><Text style={styles.text}>Log in</Text></Pressable>
   </ImageBackground>
