@@ -7,7 +7,7 @@ import RadioForm, {
   RadioButtonInput, 
   RadioButtonLabel
 } from 'react-native-simple-radio-button';
-
+import gbImage from '../assets/homeBG1.jpg';
 
 
 function CarBrand ({navigation}) {
@@ -24,7 +24,7 @@ function CarBrand ({navigation}) {
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
           <View style={{height: 300, backgroundColor: COLORS.tial, borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}>
             <View style={style.header}>
-            <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 13, marginLeft: 10}}/>
+            <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 10, marginLeft: 10}}/>
             <View style={{marginLeft: 35}}>
                 <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Vehicle Brand</Text>
             </View>
@@ -34,6 +34,7 @@ function CarBrand ({navigation}) {
             <Text style={style.subHeader}>Select your vehicle brand</Text>
             </View>
              <View style={style.currentCar}>
+
              <Text style={{color: COLORS.white, fontWeight: 'bold', marginTop: 20, marginLeft: 90}}>Continue with BMW- WWE 123 GP</Text>
              </View>
             </ScrollView>
@@ -63,7 +64,7 @@ const style = StyleSheet.create({
     color: COLORS.white,
     marginTop: 30,
     fontWeight: 'bold',
-    fontSize: 17,
+    fontSize: 15,
 
   },
 
