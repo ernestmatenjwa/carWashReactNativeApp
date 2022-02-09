@@ -6,7 +6,8 @@ import { View,
           FlatList, 
           Dimensions, 
           StatusBar,
-          Image, 
+          Image,
+          ScrollView, 
           TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import services from '../consts/services';
@@ -23,6 +24,9 @@ export default function  SearchCarWash({ navigation }) {
                 <View style={{height: 100, alignItems: 'center'}}>
                <Image style={{flex: 1,resizeMode: 'contain'}} source={service.img}/>
               </View>
+              <Text style={{fontWeight: 'bold', fontSize: 17, marginTop: 10}}>
+            {service.name}
+          </Text>
          </View>
        </TouchableOpacity>
     
@@ -32,19 +36,31 @@ export default function  SearchCarWash({ navigation }) {
         <SafeAreaView style={{ flex: 1, paddingHorizontal: 20, backgroundColor: COLORS.white}} style={styles.container}>
             <StatusBar backgroundColor={COLORS.tial}/>
             <View style={styles.header}>
-                <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.tial, marginTop: 13, marginLeft: 10}}/>
-                <View style={{marginRight: 50}}>
-                    <Text style={{fontSize: 33, fontWeight: "bold", color: COLORS.tial}}>Service Package</Text>
-                    <Text style={{fontSize: 17, fontWeight: "bold", color: COLORS.tial}}>Select the type of service you want</Text>
-                </View>
+            <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.tial, marginTop: 10, marginLeft: 10}}/>
+            <View style={{marginLeft: 35}}>
+                <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.tial}}>Service Packages</Text>
             </View>
-          <FlatList 
-          columnWrapperStyle={{justifyContent: 'space-between'}}
-          showsVerticalScrollIndicator={false}
-           numColumns={2}
-           data={services}
-           renderItem={(item) => <Card service={item}/>}
-        />
+            </View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={{height: 120, paddingHorizontal: 20}}>
+            <Text style={styles.subHeader}>Select Type of vehicle</Text>
+            </View>
+            </ScrollView>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            </View>
+         <FlatList
+        columnWrapperStyle={{justifyContent: 'space-between'}}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          marginTop: 10,
+          paddingBottom: 50,
+        }}
+        numColumns={2}
+        data={services}
+        renderItem={({item}) => {
+          return <Card service={item} />;
+        }}
+      />
         </SafeAreaView>
 
     );
@@ -52,9 +68,8 @@ export default function  SearchCarWash({ navigation }) {
 
 const styles = StyleSheet.create ({
     header: {
-        marginTop: 15,
+        marginTop: 30,
         flexDirection: 'row',
-        justifyContent: 'space-between',
         marginBottom: 20,
     },
     card:{
@@ -83,5 +98,13 @@ const styles = StyleSheet.create ({
       title: {
         fontSize: 32,
       },
+      subHeader:{
+        color: COLORS.tial,
+        marginTop: 20,
+        fontWeight: 'bold',
+        fontSize: 15,
+    
+      },
+    
 })
 
