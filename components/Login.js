@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SafeAreaView, TextInput, Text, Pressable, ImageBackground, StyleSheet, View } from 'react-native';
-import gbImage from './../assets/bg_01.jpg';
+import gbImage from './../assets/pictures/homeBG3.jpg';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 
