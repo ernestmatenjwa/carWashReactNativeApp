@@ -4,6 +4,8 @@ import { View,Text,StyleSheet,Image } from "react-native";
 
 
 import car from './../assets/pictures/car.jpg';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import COLORS from '../consts/colors';
 
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -11,7 +13,14 @@ export default function VihicleScreen({ navigation }) {
     return(
       
         <View style={styles.container}>
-          <Text style={styles.subHeader}>Select Type Of Vehicle Brand </Text>
+          <View style={styles.header}>
+      <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.tial, marginTop: 9, marginLeft: 10}}/>
+       <View style={{marginLeft: 35}}>
+         <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.tial}}>Vihicle Type</Text>
+         <Text style={{fontSize: 14, marginTop: 25, fontWeight: "bold", color: COLORS.tial}}>Select Type Of Vihicle</Text>
+       </View>
+      </View>
+     
 
          
            
@@ -178,12 +187,11 @@ const styles = StyleSheet.create({
         padding:5,
         
     },
-    subHeader:{
-      color: 'black',
+   
+    header:{
       marginTop: 30,
-      fontWeight: 'bold',
-      fontSize: 17,
-  
+      flexDirection: 'row',
+      paddingHorizontal: 10,
     },
 
 })
