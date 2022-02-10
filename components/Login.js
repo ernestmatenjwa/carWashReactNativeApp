@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   label: {
     overflow: 'visible',
     fontWeight: "300",
-    fontFamily: `"Inter-Bold", "Inter", sans-serif`,
+    //fontFamily: `"Inter-Bold", "Inter", sans-serif`,
     color: '#064451',
     fontSize: 18,  
     marginLeft: 15,
@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
       marginTop: 25,
       overflow: 'visible',
       fontWeight: "700",
-      fontFamily: `"Inter-Bold", "Inter", sans-serif`,
       color: '#064451',
       fontSize: 20,  
       marginBottom: 30,    
