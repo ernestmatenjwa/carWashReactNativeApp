@@ -187,11 +187,17 @@ const styles = StyleSheet.create({
         padding:5,
         
     },
-   
+    subHeader:{
+      color: 'black',
+      marginTop: 30,
+      fontWeight: 'bold',
+      fontSize: 17,
+  
+    },
     header:{
       marginTop: 30,
       flexDirection: 'row',
-      paddingHorizontal: 10,
+      paddingHorizontal: 20,
     },
 
 })
