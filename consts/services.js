@@ -4,7 +4,7 @@ const services = [
         name: 'Half Body Wash',
         price: '70.00',
         time: '30min - 40min',
-        img: require('../assets/homeBG.jpg'),
+        img: require('./../assets/pictures/car.jpg'),
         describetion: 'Exterior wash only!'
     }, 
 
@@ -13,7 +13,7 @@ const services = [
         name: 'Full Wash',
         price: '120.00',
         time: '30min - 40min',
-        img: require('../assets/homeBG1.jpg'),
+        img: require('./../assets/pictures/car.jpg'),
         describetion: 'Exterior wash, interior clean up and vaccum'
     }
     , 
@@ -23,7 +23,7 @@ const services = [
         name: 'Full Wash',
         price: '120.00',
         time: '30min - 40min',
-        img: require('../assets/homeBG1.jpg'),
+        img: require('./../assets/pictures/car.jpg'),
         describetion: 'Exterior wash, interior clean up and vaccum'
     }
     , 
@@ -33,7 +33,7 @@ const services = [
         name: 'Full Wash',
         price: '120.00',
         time: '30min - 40min',
-        img: require('../assets/homeBG1.jpg'),
+        img: require('./../assets/pictures/car.jpg'),
         describetion: 'Exterior wash, interior clean up and vaccum'
     }
     , 
@@ -43,7 +43,7 @@ const services = [
         name: 'Full Wash',
         price: '120.00',
         time: '30min - 40min',
-        img: require('../assets/homeBG1.jpg'),
+        img: require('./../assets/pictures/car.jpg'),
         describetion: 'Exterior wash, interior clean up and vaccum'
     }
     , 
@@ -53,7 +53,7 @@ const services = [
         name: 'Full Wash',
         price: '120.00',
         time: '30min - 40min',
-        img: require('../assets/homeBG1.jpg'),
+        img: require('./../assets/pictures/car.jpg'),
         describetion: 'Exterior wash, interior clean up and vaccum'
     }
 ];
