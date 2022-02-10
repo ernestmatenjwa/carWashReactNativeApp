@@ -70,6 +70,7 @@ export default function App() {
         <Stack.Screen name="CarBrand" component={CarBrand} options={{header: () => null}} />
         <Stack.Screen name="DateSetter" component={DateSetter} options={{header: () => null}} />
         <Stack.Screen name="SearchCarWash" component={SearchCarWash} options={{header: () => null}} />
+        
     </Stack.Navigator>
   </NavigationContainer>
   );
