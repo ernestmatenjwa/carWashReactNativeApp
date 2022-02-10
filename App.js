@@ -4,7 +4,7 @@ import HomeScreen from "./Screens/HomeScreen";
 import SignupScreen from "./components/Signup";
 import LoginScreen from "./components/Login";
 import LocationScreen from "./Screens/locationScreen";
-import MessengerScreen from "./Screens/messagesScreen";
+import MessagesScreen from "./Screens/messagesScreen";
 import ProfileScreen from "./Screens/profile";
 import ConfirmScreen from "./components/confirmation";
 import CarBrand from "./components/CarBrand";
@@ -26,8 +26,11 @@ const Tabs = createBottomTabNavigator();
 const LocationStackScreen = () => {
   return(
     <locationStack.Navigator>
-        <locationStack.Screen name="Home" component={LocationScreen} options={{header: () => null}} />
-        <locationStack.Screen name="Messanger" component={MessengerScreen} />
+        <locationStack.Screen name="Home" 
+        component={LocationScreen} 
+        options={{header: () => null}} />
+        <locationStack.Screen name="Messanger" 
+        component={MessagesScreen} />
         <locationStack.Screen name="Profile" component={ProfileScreen} />
     </locationStack.Navigator>
   )
@@ -49,13 +52,35 @@ const TabScreen = () => {
           iconName = focused ? 'person' : 'person-outline'
          }
       
-        return <Iconicons name={iconName} size={size} color={color} />
+        return <Iconicons name={iconName} size={size} color={"#064451"} />
        },
        tabBarLabel:() => {return null}
      })}
     >
         <Tabs.Screen name="LocationScreenStack" component={LocationStackScreen} options={{header: () => null}} />
-        <locationStack.Screen name="Messanger" component={MessengerScreen} />
+        <locationStack.Screen 
+        name="Messanger" 
+        component={MessagesScreen}
+        options={{
+          title: 'Messages',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "black",
+            fontWeight: "800"
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+          },
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <View style={{marginLeft: 15}}>
+              <Ionicons name="arrow-back" size={25} color="#2e64e5" />
+            </View>
+          ),
+        }}
+        />
         <locationStack.Screen name="Profile" component={ProfileScreen} />
     </Tabs.Navigator>
   )
