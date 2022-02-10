@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, ScrollView} from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ScrollView, Image} from 'react-native';
 import COLORS from '../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import RadioForm, {
@@ -7,8 +7,17 @@ import RadioForm, {
   RadioButtonInput, 
   RadioButtonLabel
 } from 'react-native-simple-radio-button';
+import gbImage from '../assets/pictures/car.jpg';
 
 
+
+const currentVehicle = [
+  {
+    carBrandName: 'BMW',
+    carRegistration: 'WWE 123 GP',
+    carImg: require('../assets/users/user-3.jpg'),
+  }
+];
 
 function CarBrand ({navigation}) {
     
@@ -34,7 +43,8 @@ function CarBrand ({navigation}) {
             <Text style={style.subHeader}>Select your vehicle brand</Text>
             </View>
              <View style={style.currentCar}>
-             <Text style={{color: COLORS.white, fontWeight: 'bold', marginTop: 20, marginLeft: 90}}>Continue with BMW- WWE 123 GP</Text>
+             <Image style={style.UserImg} source={gbImage}/>
+             <Text style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with BMW- WWE 123 GP</Text>
              </View>
             </ScrollView>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -86,7 +96,14 @@ const style = StyleSheet.create({
     backgroundColor: '#54BAB9',
     borderRadius: 30,
     marginTop: -20,
-  }
+  },
+  UserImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginLeft: 5,
+    marginTop: 5,
+  },
   
 
 });
