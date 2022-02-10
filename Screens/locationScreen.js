@@ -30,7 +30,7 @@ export default function LocationScreen({ navigation }) {
     <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("ConfirmScreen")}>Confirm screen</Text>
     <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("CheckoutScreen")}>checkout screen</Text>
     <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("VehicleScreen")}> Vehicle screen</Text>
-    <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("PaymentScreen")}>SearchCarWash screen</Text>
+    <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("PaymentScreen")}>Payment screen</Text>
  </View>
  <View style={{height: height/3, backgroundColor: "green"}}>
     <Text>items</Text>

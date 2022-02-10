@@ -71,7 +71,7 @@ export default function SignupScreen({ navigation }) {
             <Pressable 
                style={styles.login} 
                onPress={() => {
-              //  navigation.navigate("LocationScreen");
+              navigation.navigate("LocationScreen");
             }}>
               <Text style={styles.text}>Create Account</Text>
             </Pressable>
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
   },
   label: {
     overflow: 'visible',
-    fontWeight:300,
-    fontFamily: `"Inter-Bold", "Inter", sans-serif`,
+    fontWeight: "300",
+    //fontFamily: `"Inter-Bold", "Inter", sans-serif`,
     color: '#064451',
     fontSize: 18,  
     marginLeft: 15,
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   frame: {
     width: "90%",
-    boxShadow: "0px 14px 9px 0px rgba(0, 0, 0, 0.05)",
+    //boxShadow: "0px 14px 9px 0px rgba(0, 0, 0, 0.05)",
     backgroundColor: "rgb(247, 247, 247)",
     overflow: "visible",
     borderRadius: 15,
@@ -154,8 +154,8 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       marginTop: 25,
       overflow: 'visible',
-      fontWeight:700,
-      fontFamily: `"Inter-Bold", "Inter", sans-serif`,
+      fontWeight: "700",
+      //fontFamily: `"Inter-Bold", "Inter", sans-serif`,
       color: '#064451',
       fontSize: 20,  
       marginBottom: 30,    
