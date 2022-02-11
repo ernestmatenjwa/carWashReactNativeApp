@@ -14,7 +14,7 @@ export default function CheckoutScreen({ navigation }) {
       <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 13, marginLeft: 10}}/>
       </View>
       <View style={{marginLeft: 95}}>
-        <Text onPress={() =>  navigation.push("ConfirmScreen")} style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Check Out</Text>
+        <Text onPress={() =>  navigation.push("PaymentScreen")} style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Check Out</Text>
         </View>
       </View>
       <View style={style.footer}>

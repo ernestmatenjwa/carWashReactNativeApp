@@ -12,12 +12,8 @@ import DateSetter from "./components/DateSetter";
 import SearchCarWash from "./components/SearchCarWash";
 import CheckoutScreen from "./components/checkoup"
 import VehicleScreen from "./components/vehicletype"
-<<<<<<< HEAD
 import PaymentScreen from "./components/payment"
 import ChatScreen from "./components/chatScreen"
-=======
- import PaymentScreen from "./components/payment"
->>>>>>> 82242d6ec1e727db5725207ea769d86556c8d69b
 
 import Iconicons from "react-native-vector-icons/Ionicons"
 import { NavigationContainer } from "@react-navigation/native";
@@ -105,7 +101,6 @@ export default function App() {
         <Stack.Screen name="SearchCarWash" component={SearchCarWash} options={{header: () => null}} />
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{header: () => null}} />
         <Stack.Screen name="VehicleScreen" component={VehicleScreen} options={{header: () => null}} />
-<<<<<<< HEAD
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
         <Stack.Screen 
         name="ChatScreen"
@@ -125,9 +120,6 @@ export default function App() {
           },
         })}
         />
-=======
-         <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} /> 
->>>>>>> 82242d6ec1e727db5725207ea769d86556c8d69b
     </Stack.Navigator>
   </NavigationContainer>
   );
