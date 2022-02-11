@@ -81,18 +81,20 @@ const styles = StyleSheet.create({
   inputText: {
     color: '#064451',
     fontWeight:'normal',
-    padding: 13,
+    padding: 1,
     paddingLeft:15,
     marginRight:5,
     borderRadius:20,
+    fontFamily: '"Inter-Bold", "Inter", sans-serif',
   },
   inputContainer: {
-    height: 50,
+    height: 40,
     borderRadius:20,
     borderColor: '#064451',
     borderWidth: 1,  
     paddingRight:10,
-    backgroundColor:"rgb(247, 247, 247)",
+    backgroundColor:"rgb(247, 247, 247)",  
+    fontFamily: '"Inter-Bold", "Inter", sans-serif',
   },
   icon:{
     color:'#064451',
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
   label: {
     overflow: 'visible',
     fontWeight: "300",
-    //fontFamily: `"Inter-Bold", "Inter", sans-serif`,
+    fontFamily: '"Inter-Bold", "Inter", sans-serif',
     color: '#064451',
     fontSize: 18,  
     marginLeft: 15,
@@ -126,18 +128,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "visible",
-    // backgroundColor:'#064451',
-    // backgroundSize: "cover",
-    // backgroundRepeat: "no-repeat",
-    // backgroundPosition: "center",
   },
   frame: {
     width: "90%",
-    // boxShadow: "0px 14px 9px 0px rgba(0, 0, 0, 0.05)",
+    // boxShadow: `0px 14px 9px 0px rgba(0, 0, 0, 0.05)`,
     backgroundColor: "rgb(247, 247, 247)",
     overflow: "visible",
     borderRadius: 15,
-   
   },
    title: {
       textAlign: 'center',

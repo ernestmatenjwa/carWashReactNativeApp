@@ -98,13 +98,14 @@ const styles = StyleSheet.create({
   inputText: {
     color: '#064451',
     fontWeight:'normal',
-    padding: 13,
+    fontFamily: '"Inter-Bold", "Inter", sans-serif',
+    padding: 1,
     paddingLeft:15,
     marginRight:5,
     borderRadius:20,
   },
   inputContainer: {
-    height: 50,
+    height: 40,
     borderRadius:20,
     borderColor: '#064451',
     borderWidth: 1,  
@@ -129,18 +130,22 @@ const styles = StyleSheet.create({
   label: {
     overflow: 'visible',
     fontWeight: "300",
-    //fontFamily: `"Inter-Bold", "Inter", sans-serif`,
+    // fontFamily: '"Times New Roman", Times, serif',
+    fontFamily: '"Inter-Bold", "Inter", sans-serif',
     color: '#064451',
     fontSize: 18,  
     marginLeft: 15,
     marginBottom: 10,
   },
   link:{
-    color: 'blue'
+    color: 'blue',
+    fontWeight: "300",
+
   },
   container: {
     alignItems: "center",
     justifyContent: "center",
+    height: "100%"
   },
   frame: {
     width: "90%",
@@ -161,7 +166,7 @@ const styles = StyleSheet.create({
   },
   space: {
     width: 20, // or whatever size you need
-    height: 20,
+    height: 10,
   },
   login:{
     alignItems: 'center',

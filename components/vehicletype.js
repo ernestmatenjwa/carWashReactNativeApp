@@ -15,7 +15,7 @@ export default function VihicleScreen({ navigation }) {
       <View style={styles.header}>
          <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.tial, marginTop: 9, marginLeft: 10}}/>
          <View style={{marginLeft: 35}}>
-         <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.tial}}>Vihicle Type</Text>
+         <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.tial}}>Vehicle Type</Text>
          <Text style={{fontSize: 14, marginTop: 25, fontWeight: "bold", color: COLORS.tial}}>Select Type Of Vihicle</Text>
          </View>
       </View>
