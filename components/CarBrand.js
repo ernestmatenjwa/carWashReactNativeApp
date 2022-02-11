@@ -34,7 +34,7 @@ function CarBrand ({navigation}) {
             <Text style={style.subHeader}>Select your vehicle brand</Text>
             </View>
              <View style={style.currentCar}>
-             <Text style={{color: COLORS.white, fontWeight: 'bold', marginTop: 20, marginLeft: 90}}>Continue with BMW- WWE 123 GP</Text>
+             <Text onPress={() =>  navigation.push("SearchCarWash")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: 20, marginLeft: 90}}>Continue with BMW- WWE 123 GP</Text>
              </View>
             </ScrollView>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>

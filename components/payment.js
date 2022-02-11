@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 export default function PaymentScreen({ navigation }) {
   return (
     <View>
-       <Text>This is Payment screen</Text>
+       <Text onPress={() =>  navigation.push("ConfirmScreen")}>This is Payment screen</Text>
     </View>
   );
 }
