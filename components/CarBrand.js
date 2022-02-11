@@ -44,7 +44,7 @@ function CarBrand ({navigation}) {
             </View>
              <View style={style.currentCar}>
              <Image style={style.UserImg} source={gbImage}/>
-             <Text style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with BMW- WWE 123 GP</Text>
+             <Text onPress={() =>  navigation.push("DateSetter")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with BMW- WWE 123 GP</Text>
              </View>
             </ScrollView>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>

@@ -19,6 +19,7 @@ export default function VihicleScreen({ navigation }) {
          <Text style={{fontSize: 14, marginTop: 25, fontWeight: "bold", color: COLORS.tial}}>Select Type Of Vihicle</Text>
          </View>
       </View>
+
        <View style={styles.box}>
           <View style={styles.inner}>
              <Image
@@ -34,6 +35,16 @@ export default function VihicleScreen({ navigation }) {
               </View>
         </View>
               <View style={styles.box}>
+
+     
+
+         
+           
+            
+
+            <View style={styles.box}>
+              
+            
                 <View style={styles.inner}>
                 <Image
   style={{
@@ -44,7 +55,24 @@ marginTop:30
   }}
   source={car }
 />
-<Text>Minivan</Text>
+<Text onPress={() =>  navigation.push("CarBrand")}>Car</Text>
+
+                </View>
+                 
+            </View>
+            <View style={styles.box}>
+
+                <View style={styles.inner}>
+                <Image
+  style={{
+    width: 150,
+    height: 80,
+borderRadius:10,
+marginTop:30
+  }}
+  source={car }
+/>
+<Text onPress={() =>  navigation.push("CarBrand")}>Minivan</Text>
 
                 </View>
                  
@@ -60,45 +88,7 @@ marginTop:30
   }}
   source={car }
 />
-<Text>Bus</Text>
-
-                </View>
-
-                
-                 
-            </View>
-
-            <View style={styles.box}>
-                <View style={styles.inner}>
-                <Image
-  style={{
-    width: 150,
-    height: 80,
-borderRadius:10,
-marginTop:30
-  }}
-  source={car }
-/>
-<Text>Motorcycle</Text>
-
-                </View>
-
-                
-                 
-            </View>
-
-            <View style={styles.box}>
-                <View style={styles.inner}>
-                <Image
-  style={{
-    width: 150,
-    height: 80,
-borderRadius:10,
-marginTop:30
-  }}
-  source={car }
-/>
-<Text>Truck</Text>
+<Text onPress={() =>  navigation.push("CarBrand")}>Bus</Text>
 
                 </View>
 
@@ -117,7 +107,45 @@ marginTop:30
   }}
   source={car }
 />
-<Text>Tractor</Text>
+<Text onPress={() =>  navigation.push("CarBrand")}>Motorcycle</Text>
+
+                </View>
+
+                
+                 
+            </View>
+
+            <View style={styles.box}>
+                <View style={styles.inner}>
+                <Image
+  style={{
+    width: 150,
+    height: 80,
+borderRadius:10,
+marginTop:30
+  }}
+  source={car }
+/>
+<Text onPress={() =>  navigation.push("CarBrand")}>Truck</Text>
+
+                </View>
+
+                
+                 
+            </View>
+
+            <View style={styles.box}>
+                <View style={styles.inner}>
+                <Image
+  style={{
+    width: 150,
+    height: 80,
+borderRadius:10,
+marginTop:30
+  }}
+  source={car }
+/>
+<Text onPress={() =>  navigation.push("CarBrand")}>Tractor</Text>
 
 
 
@@ -138,7 +166,7 @@ marginTop:30
   }}
   source={car }
 />
-<Text>Abnormal car</Text>
+<Text onPress={() =>  navigation.push("CarBrand")}>Abnormal car</Text>
 
                 </View>
 
@@ -149,6 +177,7 @@ marginTop:30
            
           
             
+        </View>
         </View>
        
       

@@ -78,7 +78,7 @@ export default function PaymentScreen({ navigation }) {
                <View style={{paddingLeft:150}}>
                  <Text style={styles.text_footer}>Security Code</Text>
                  <TextInput
-                  placeholder="***********"
+                  placeholder="*****"
                   secureTextEntry={true}
                   autoCapitalize="none"
                   style={{ borderBottomWidth: 1,
@@ -162,5 +162,3 @@ marginLeft:10
   
 
 });
-
-
