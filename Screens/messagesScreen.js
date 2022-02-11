@@ -113,10 +113,7 @@ const styles = StyleSheet.create({
   UserName: {
     fontSize: 14,
     fontWeight: "bold",
-<<<<<<< HEAD
     //fontFamily: "Lato-Regular",
-=======
->>>>>>> aa35fff134a82ae7b59a793970976accfbb5a396
   },
   PostTime: {
     fontSize: 12,

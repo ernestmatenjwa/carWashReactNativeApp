@@ -8,36 +8,28 @@ import gbImage from '../assets/pictures/car.jpg';
 
 export default function CheckoutScreen({ navigation }) {
   return (
-<<<<<<< HEAD
-    <View>
-       <Text onPress={() =>  navigation.push("PaymentScreen")}>This is checkout screen</Text>
-    </View>
-=======
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
       <View style={{height: 300, backgroundColor: COLORS.tial, borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}>
       <View style={style.header}>
       <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 13, marginLeft: 10}}/>
       </View>
       <View style={{marginLeft: 95}}>
-        <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Check Out</Text>
+        <Text onPress={() =>  navigation.push("ConfirmScreen")} style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Check Out</Text>
         </View>
       </View>
       <View style={style.footer}>
       <View style={{height: 207, width: 370, alignItems: 'center', marginBottom: 280}}>
       <Image style={{flex: 1,resizeMode: 'contain', borderTopLeftRadius: 33, borderTopRightRadius: 33}} source={gbImage}/>
       </View>
-      <View>
-      <Pressable style={style.bookbtn}
-      onPress={() => {
-        navigation.navigate("payment");
-      }}>
-        <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Pay</Text>
+      <View >
+      <Pressable  style={style.bookbtn}
+      >
+        <Text  style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Pay</Text>
       </Pressable>
       </View>
       </View>
     </SafeAreaView>
     
->>>>>>> aa35fff134a82ae7b59a793970976accfbb5a396
   );
 };
 
