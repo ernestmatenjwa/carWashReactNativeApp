@@ -12,7 +12,7 @@ import DateSetter from "./components/DateSetter";
 import SearchCarWash from "./components/SearchCarWash";
 import CheckoutScreen from "./components/checkoup"
 import VehicleScreen from "./components/vehicletype"
-import PaymentScreen from "./components/payment"
+// import PaymentScreen from "./components/payment"
 
 import Iconicons from "react-native-vector-icons/Ionicons"
 import { NavigationContainer } from "@react-navigation/native";
@@ -92,7 +92,7 @@ export default function App() {
        <Stack.Navigator>
         <Stack.Screen name="Splash" component={HomeScreen} options={{header: () => null}} />
         <Stack.Screen name="SignupScreen" component={SignupScreen} options={{header: () => null}} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{header: () => null}} />
         <Stack.Screen name="ConfirmScreen" component={ConfirmScreen} />
         <Stack.Screen name="LocationScreen" component={TabScreen} options={{header: () => null}} />
         <Stack.Screen name="CarBrand" component={CarBrand} options={{header: () => null}} />
@@ -100,7 +100,7 @@ export default function App() {
         <Stack.Screen name="SearchCarWash" component={SearchCarWash} options={{header: () => null}} />
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{header: () => null}} />
         <Stack.Screen name="VehicleScreen" component={VehicleScreen} options={{header: () => null}} />
-        <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
+        {/* <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} /> */}
     </Stack.Navigator>
   </NavigationContainer>
   );
