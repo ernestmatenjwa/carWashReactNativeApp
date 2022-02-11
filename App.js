@@ -13,6 +13,7 @@ import SearchCarWash from "./components/SearchCarWash";
 import CheckoutScreen from "./components/checkoup"
 import VehicleScreen from "./components/vehicletype"
 import PaymentScreen from "./components/payment"
+import ChatScreen from "./components/chatScreen"
 
 import Iconicons from "react-native-vector-icons/Ionicons"
 import { NavigationContainer } from "@react-navigation/native";
@@ -65,8 +66,8 @@ const TabScreen = () => {
           title: 'Messages',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            color: "black",
-            fontWeight: "800"
+            color: "white",
+            fontWeight: "600"
           },
           headerStyle: {
             backgroundColor: '#064451',
@@ -101,6 +102,24 @@ export default function App() {
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{header: () => null}} />
         <Stack.Screen name="VehicleScreen" component={VehicleScreen} options={{header: () => null}} />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
+        <Stack.Screen 
+        name="ChatScreen"
+        component={ChatScreen} 
+        options={({route}) => ({
+          title: route.params.userName,
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "600"
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+          },
+        })}
+        />
     </Stack.Navigator>
   </NavigationContainer>
   );
