@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import services from '../consts/services';
 import COLORS from '../consts/colors';
 
-const width = Dimensions.get("screen").width/2-13
+
 
 
 export default function  SearchCarWash({ navigation }) {
@@ -21,13 +21,31 @@ export default function  SearchCarWash({ navigation }) {
     const Card = ({service}) =>{
        return (<TouchableOpacity onPress={() => navigation.navigate("DateSetter") }>
               <View style={styles.card}>
-                <View style={{height: 100, alignItems: 'center'}}>
-               <Image style={{flex: 1,resizeMode: 'contain'}} source={service.img}/>
-              </View>
-              <Text style={{fontWeight: 'bold', fontSize: 17, marginTop: 10}}>
-            {service.name}
-          </Text>
-         </View>
+                <View style={{height: 100, width: 100, alignItems: 'center'}}>
+               <Image style={{flex: 1,resizeMode: 'contain', borderRadius: 13}} source={service.img}/>
+                </View>
+                <View style={{alignItems: 'flex-end', marginRight: 100, marginTop: -90}}>
+                <Text style={{fontWeight: 'bold', fontSize: 17, color: COLORS.paile}}>
+                {service.name}
+                </Text>
+                <Text style={styles.price}>
+                R{service.price}
+               </Text>
+                </View>
+                <View style={{alignItems: 'flex-end', marginRight: 100, marginTop: 10}}>
+                  <Text style={{fontWeight: 'bold', fontSize: 14, color: COLORS.lightGray}}>
+                  {service.time}
+                  </Text>
+                </View>
+                <View style={{alignItems: 'flex-end', marginRight: 2.5, marginTop: 5}}>
+                  <Text style={{fontWeight: 'bold', fontSize: 14, color: COLORS.black}}>
+                  {service.describetion}
+                  </Text>
+                </View>
+                <View style={{alignItems: 'flex-end', marginBottom: 50}}>
+                
+               </View>
+            </View>
        </TouchableOpacity>
     
          );
@@ -49,13 +67,13 @@ export default function  SearchCarWash({ navigation }) {
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
             </View>
          <FlatList
-        columnWrapperStyle={{justifyContent: 'space-between'}}
+        
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          marginTop: 10,
+          marginTop: 11,
           paddingBottom: 50,
         }}
-        numColumns={2}
+        f
         data={services}
         renderItem={({item}) => {
           return <Card service={item} />;
@@ -73,14 +91,14 @@ const styles = StyleSheet.create ({
         marginBottom: 20,
     },
     card:{
-        height:200,
+        height:130,
         backgroundColor: COLORS.white,
-        width,
         marginHorizontal: 2,
         borderRadius: 10,
-        marginBottom: 15,
-        padding: 15,
+        marginBottom: 10,
+        padding: 10,
         marginTop: 15,
+        flex: 1,
     },
     container: {
         backgroundColor: COLORS.gray,
@@ -105,6 +123,12 @@ const styles = StyleSheet.create ({
         fontSize: 15,
     
       },
+      price:{
+        fontSize: 15,
+        marginRight: -85,
+        marginTop: -23,
+        fontWeight: 'bold',
+      }
     
 })
 
