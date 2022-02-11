@@ -11,15 +11,162 @@ import { ScrollView } from "react-native-gesture-handler";
 
 export default function VihicleScreen({ navigation }) {
     return(
-      
-        <View style={styles.container}>
-          <View style={styles.header}>
-      <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.tial, marginTop: 9, marginLeft: 10}}/>
-       <View style={{marginLeft: 35}}>
-         <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.tial}}>Vihicle Type</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+         <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.tial, marginTop: 9, marginLeft: 10}}/>
+         <View style={{marginLeft: 35}}>
+         <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.tial}}>Vehicle Type</Text>
          <Text style={{fontSize: 14, marginTop: 25, fontWeight: "bold", color: COLORS.tial}}>Select Type Of Vihicle</Text>
-       </View>
+         </View>
       </View>
+
+      <View style={styles.box}>
+            
+            <View style={styles.inner}>
+            <Image
+style={{
+width: 150,
+height: 80,
+borderRadius:10,
+marginTop:30
+}}
+source={car }
+/>
+<Text  onPress={() =>  navigation.push("CarBrand")}>Car</Text>
+
+            </View>
+             
+        </View>
+        <View style={styles.box}>
+            <View style={styles.inner}>
+            <Image
+style={{
+width: 150,
+height: 80,
+borderRadius:10,
+marginTop:30
+}}
+source={car }
+/>
+<Text  onPress={() =>  navigation.push("CarBrand")}>Minivan</Text>
+
+            </View>
+             
+        </View>
+        <View style={styles.box}>
+            <View style={styles.inner}>
+            <Image
+style={{
+width: 150,
+height: 80,
+borderRadius:10,
+marginTop:30
+}}
+source={car }
+/>
+<Text  onPress={() =>  navigation.push("CarBrand")}>Bus</Text>
+
+            </View>
+
+            
+             
+        </View>
+
+        <View style={styles.box}>
+            <View style={styles.inner}>
+            <Image
+style={{
+width: 150,
+height: 80,
+borderRadius:10,
+marginTop:30
+}}
+source={car }
+/>
+<Text  onPress={() =>  navigation.push("CarBrand")}>Motorcycle</Text>
+
+            </View>
+
+            
+             
+        </View>
+
+        <View style={styles.box}>
+            <View style={styles.inner}>
+            <Image
+style={{
+width: 150,
+height: 80,
+borderRadius:10,
+marginTop:30
+}}
+source={car }
+/>
+<Text  onPress={() =>  navigation.push("CarBrand")}>Truck</Text>
+
+            </View>
+
+            
+             
+        </View>
+
+        <View style={styles.box}>
+            <View style={styles.inner}>
+            <Image
+style={{
+width: 150,
+height: 80,
+borderRadius:10,
+marginTop:30
+}}
+source={car }
+/>
+<Text  onPress={() =>  navigation.push("CarBrand")}>Tractor</Text>
+
+
+
+            </View>
+
+            
+             
+        </View>
+
+        <View style={styles.box}>
+            <View style={styles.inner}>
+            <Image
+style={{
+width: 150,
+height: 80,
+borderRadius:10,
+marginTop:30
+}}
+source={car }
+/>
+<Text  onPress={() =>  navigation.push("CarBrand")}>Abnormal car</Text>
+
+            </View>
+
+            
+             
+        </View>
+      
+
+       {/* <View style={styles.box}>
+          <View style={styles.inner}>
+             <Image
+             style={{
+               width: 150,
+               height: 80,
+               borderRadius:10,
+               marginTop:30
+              }}
+              source={car }
+              />
+              <Text>Car</Text>
+              </View>
+        </View>
+              <View style={styles.box}>
+
      
 
          
@@ -45,6 +192,7 @@ marginTop:30
                  
             </View>
             <View style={styles.box}>
+
                 <View style={styles.inner}>
                 <Image
   style={{
@@ -160,6 +308,7 @@ marginTop:30
            
           
             
+        </View> */}
         </View>
        
       
@@ -178,7 +327,7 @@ const styles = StyleSheet.create({
  
     inner:{
   
-        //color:'#009387 ',
+      
         backgroundColor:'#ffffff',
     alignItems:'center',
        height:150,

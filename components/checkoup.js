@@ -24,8 +24,8 @@ export default function CheckoutScreen({ navigation }) {
       <View >
       <Pressable  style={style.bookbtn}
       >
-        <Text  style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Pay</Text>
-      </Pressable>
+        <Text onPress={() =>  navigation.push("PaymentScreen")} style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Pay</Text>
+      </Pressable> 
       </View>
       </View>
     </SafeAreaView>
