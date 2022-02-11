@@ -22,7 +22,7 @@ const currentVehicle = [
 function CarBrand ({navigation}) {
     
     var carType = [
-      {label: "BMW", Value: 0},
+      {label: "BMW", Value: 0, name: "STrata"},
       {label: "Toyota", Value: 1},
       {label: "VolksWagen", Value: 2},
       {label: "Nissan", Value: 3},
@@ -56,6 +56,7 @@ function CarBrand ({navigation}) {
             onPress={(Value) => {}}
             radio_props={carType}
            />
+    
          </View>
         </View>
     </SafeAreaView>
