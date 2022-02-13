@@ -51,7 +51,7 @@ export default function MessagesScreen({ navigation }) {
       data={Messages}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
-        <TouchableOpacity onPress={() => navigation.navigate('Chat', {userName: item.userName})}>
+        <TouchableOpacity onPress={() => navigation.navigate('ChatScreen', {userName: item.userName})}>
           <View style={styles.userInfo}>
             <View style={styles.UserImgWrapper}>
               <Image style={styles.UserImg} source={item.userImg} />
@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
   UserName: {
     fontSize: 14,
     fontWeight: "bold",
+    color: '#064451',
     //fontFamily: "Lato-Regular",
   },
   PostTime: {
