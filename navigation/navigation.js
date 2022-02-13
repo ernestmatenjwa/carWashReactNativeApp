@@ -47,6 +47,8 @@ export default function Navigation(props) {
             <Tab.Navigator>
                 <Tab.Screen name="Home" component={locationStackScreen} />
                 <Tab.Screen name="Profile" component={ProfileStackScreen} />
+                <Tab.Screen name="Profile" component={ProfileStackScreen} />
+
             </Tab.Navigator>
         </NavigationContainer>
     )

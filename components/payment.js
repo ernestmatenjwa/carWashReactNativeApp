@@ -29,19 +29,23 @@ export default function PaymentScreen({ navigation }) {
        </View>
       </View>
 
-      <View>
+      <View  >
            <RadioForm
             onPress={(Value) => {}}
             radio_props={PaymentMethod}
-            style={{flexDirection:'row',marginLeft:15}}
+            style={{flexDirection:'row',margin:20,justifyContent:"space-around"}}
+            
            />
          </View>
+<View style={{alignItems:'center'}}>
+<Image source={bankCard} style={styles.image}/>
 
-      <Image source={bankCard} style={styles.image}/>
-
+</View>
+    
       <View>
+        <View style={{paddingLeft:20,paddingRight:20}}>
 
-       <Text style={styles.text_footer}>Card Number</Text>
+        <Text style={styles.text_footer}>Card Number</Text>
         <View style={styles.action}>
             
                   <TextInput
@@ -62,8 +66,8 @@ export default function PaymentScreen({ navigation }) {
                   />
                 
              </View>
-             <View style={{flexDirection:'row' }}>
-               <View style={{alignItem:'flex-start'}}>
+             <View style={{flexDirection:'row' ,justifyContent:'space-between'}}>
+               <View>
                  <Text style={styles.text_footer}>Expiration Date</Text>
                  
                  <TextInput
@@ -75,7 +79,7 @@ export default function PaymentScreen({ navigation }) {
                </View>
 
 
-               <View style={{paddingLeft:150}}>
+               <View >
                  <Text style={styles.text_footer}>Security Code</Text>
                  <TextInput
                   placeholder="*****"
@@ -87,25 +91,29 @@ export default function PaymentScreen({ navigation }) {
                </View>
              </View>
 
-          <View>
-            <View style={{flexDirection:'row',marginTop:10 }}>
-             <View>
+        </View>
+
+
+          
+            <View style={{flexDirection:'row',marginTop:10,justifyContent:'space-between' }}>
+                     
+        <View>
+
+        <View style={{paddingLeft:20}}>
               <Text>Subtotal</Text>
-              <Text>R120.00</Text>
+              <Text style={{fontSize:20,fontWeight:'bold'}}>R120.00</Text>
               </View>
             </View>
 
-
-            <View>
-        <View></View>
-      <Pressable style={styles.bookbtn}
+        <Pressable style={styles.bookbtn}
       onPress={() => {
         navigation.navigate("ConfirmScreen");
       }}>
         <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Pay</Text>
       </Pressable>
+    
       </View> 
-          </View>
+          
 
 
              </View>
@@ -153,7 +161,9 @@ bookbtn:{
  
 },
 image:{
-marginLeft:10
+width:'90%',
+resizeMode:'contain',
+
 
 
   
