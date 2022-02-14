@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, ScrollView, Image} from 'react-native';
+import { View, Text,TextInput, SafeAreaView, StyleSheet, ScrollView, Image} from 'react-native';
 import COLORS from '../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import RadioForm, {
-  RadioButton, 
+  // RadioButton, 
   RadioButtonInput, 
   RadioButtonLabel
 } from 'react-native-simple-radio-button';
 import gbImage from '../assets/pictures/car.jpg';
+import RadioButton from '../Screens/RadioButton';
 
+import BMW from '../assets/pictures/Cars/BMW.jpg'
+import VW from '../assets/pictures/Cars/VW.jpg'
 
 
 const currentVehicle = [
@@ -19,8 +22,50 @@ const currentVehicle = [
   }
 ];
 
+// {label: "BMW", Value: 0, name: "STrata"},
+// {label: "Toyota", Value: 1},
+// {label: "VolksWagen", Value: 2},
+// {label: "Nissan", Value: 3},
+// {label: "Scania", Value: 4},
+const options = [
+  {
+    key: 0,
+    text: 'BMW',
+    imageURL: require('../assets/pictures/Cars/BMW.jpg'),
+  },
+  {
+    key: 1,
+    text: 'VolksWagen',
+    imageURL: require('../assets/pictures/Cars/VW.jpg'),
+  },
+  {
+    key: 2,
+    text: 'Toyota',
+    imageURL: require('../assets/pictures/Cars/Toyota.jpg')
+  },
+  {
+    key: 3,
+    text: 'Nissan',
+    imageURL: require('../assets/pictures/Cars/Nissan.jpg'),
+  },
+];
+
+
+
 function CarBrand ({navigation}) {
-    
+  const [selectedOption, setSelectedOption] = React.useState(options[0]);
+
+  const onSelect = (item) => {
+    if (selectedOption && selectedOption.key === item.key) {
+      setSelectedOption(null);
+      console.log(options[item.key]);
+    } else {
+      setSelectedOption(options[item.key]);
+      console.log(selectedOption);
+      // console.log(options[item.key]);
+    }
+  };
+  
     var carType = [
       {label: "BMW", Value: 0, name: "STrata"},
       {label: "Toyota", Value: 1},
@@ -28,6 +73,7 @@ function CarBrand ({navigation}) {
       {label: "Nissan", Value: 3},
       {label: "Scania", Value: 4},
     ];
+    
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -43,8 +89,8 @@ function CarBrand ({navigation}) {
             <Text style={style.subHeader}>Select your vehicle brand</Text>
             </View>
              <View style={style.currentCar}>
-             <Image style={style.UserImg} source={gbImage}/>
-             <Text onPress={() =>  navigation.push("DateSetter")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with BMW- WWE 123 GP</Text>
+             <Image style={style.UserImg} source={selectedOption.imageURL}/>
+             <Text onPress={() =>  navigation.push("DateSetter")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text}</Text>
              </View>
             </ScrollView>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -52,10 +98,18 @@ function CarBrand ({navigation}) {
         </View>
         <View style={style.footer}>
          <View style={style.checkbox}>
-           <RadioForm
+           {/* <RadioForm
             onPress={(Value) => {}}
             radio_props={carType}
-           />
+           /> */}
+         
+            <View style={style.partco}>
+              <RadioButton
+              selectedOption={selectedOption}
+              onSelect={onSelect}
+              options={options}
+            />
+          </View>
     
          </View>
         </View>
@@ -64,6 +118,15 @@ function CarBrand ({navigation}) {
 };
 
 const style = StyleSheet.create({
+  partco:{
+    // display:'inline-block',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imgName: {
+
+  },
   header:{
     marginTop: 30,
     flexDirection: 'row',
