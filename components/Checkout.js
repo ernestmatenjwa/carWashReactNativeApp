@@ -23,7 +23,12 @@ const Checkout = ({ navigation, route }) => {
 return (
     <View style={styles.container}>
       <SectionHeader>
-        <McIcon source={icons.back_arrow} size={24} marginRight={5} color='#fff' marginHorizontal={20}/>
+        <McIcon 
+          source={icons.back_arrow} 
+          size={24} marginRight={5} 
+          color='#fff'
+          marginHorizontal={20}
+        />
         <McText h1 style={{left: '40%' }}>Checkout</McText>
       </SectionHeader>
       <View 
@@ -104,7 +109,7 @@ return (
                     /> */}
                     <TouchableOpacity 
                         onPress={() => {
-                        navigation.navigate('Payment')
+                        navigation.navigate('PaymentScreen')
                       }}>
                         <LinearGradient
                             colors={COLORS.btnLinear}

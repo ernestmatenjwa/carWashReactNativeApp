@@ -101,7 +101,7 @@ export default function App() {
         <Stack.Screen name="SearchCarWash" component={SearchCarWash} options={{header: () => null}} />
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{header: () => null}} />
         <Stack.Screen name="VehicleScreen" component={VehicleScreen} options={{header: () => null}} />
-        {/* <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} /> */}
+        <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
         <Stack.Screen 
         name="ChatScreen"
         component={ChatScreen} 
