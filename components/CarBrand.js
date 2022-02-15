@@ -22,32 +22,38 @@ const currentVehicle = [
   }
 ];
 
-// {label: "BMW", Value: 0, name: "STrata"},
-// {label: "Toyota", Value: 1},
-// {label: "VolksWagen", Value: 2},
-// {label: "Nissan", Value: 3},
-// {label: "Scania", Value: 4},
 const options = [
   {
     key: 0,
     text: 'BMW',
     imageURL: require('../assets/pictures/Cars/BMW.jpg'),
+    regNumber: "DC34HF GP"
   },
   {
     key: 1,
     text: 'VolksWagen',
     imageURL: require('../assets/pictures/Cars/VW.jpg'),
+    regNumber: "FCK 344 KZN"
   },
   {
     key: 2,
     text: 'Toyota',
-    imageURL: require('../assets/pictures/Cars/Toyota.jpg')
+    imageURL: require('../assets/pictures/Cars/Toyota.jpg'),
+    regNumber: "DCH 342 NW"
   },
   {
     key: 3,
     text: 'Nissan',
     imageURL: require('../assets/pictures/Cars/Nissan.jpg'),
+    regNumber: "12434FD CT"
   },
+  {
+    key: 4,
+    text: 'Scania',
+    imageURL: require('../assets/pictures/Cars/Nissan.jpg'),
+    regNumber: "YTY 234 GP"
+  },
+  
 ];
 
 
@@ -56,13 +62,13 @@ function CarBrand ({navigation}) {
   const [selectedOption, setSelectedOption] = React.useState(options[0]);
 
   const onSelect = (item) => {
+    
+    setSelectedOption(options[item.key]);
+    console.log(selectedOption.text);
     if (selectedOption && selectedOption.key === item.key) {
-      setSelectedOption(null);
-      console.log(options[item.key]);
+      setSelectedOption(options[0]);
     } else {
       setSelectedOption(options[item.key]);
-      console.log(selectedOption);
-      // console.log(options[item.key]);
     }
   };
   
@@ -90,14 +96,14 @@ function CarBrand ({navigation}) {
             </View>
              <View style={style.currentCar}>
              <Image style={style.UserImg} source={selectedOption.imageURL}/>
-             <Text onPress={() =>  navigation.push("DateSetter")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text}</Text>
+             <Text onPress={() =>  navigation.push("DateSetter")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text} {selectedOption.regNumber}</Text>
              </View>
             </ScrollView>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
             </View>
         </View>
         <View style={style.footer}>
-         <View style={style.checkbox}>
+         
            {/* <RadioForm
             onPress={(Value) => {}}
             radio_props={carType}
@@ -110,8 +116,6 @@ function CarBrand ({navigation}) {
               options={options}
             />
           </View>
-    
-         </View>
         </View>
     </SafeAreaView>
   );
@@ -119,7 +123,6 @@ function CarBrand ({navigation}) {
 
 const style = StyleSheet.create({
   partco:{
-    // display:'inline-block',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -143,7 +146,7 @@ const style = StyleSheet.create({
 
   footer: {
       width: 370,
-      height: 150,
+      // height: 150,
       backgroundColor: COLORS.gray,
       borderTopRightRadius: 25,
       borderTopLeftRadius: 25,

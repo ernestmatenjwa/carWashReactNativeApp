@@ -11,9 +11,7 @@ export default function RadioButtons({ options, selectedOption, onSelect }) {
             <Image style={styles.UserImg} 
               source={item.imageURL}
             />
-             <Text  onPress={() => {
-                onSelect(item);
-              }}>{item.text}</Text>
+             <Text >{item.text}</Text>
               <TouchableOpacity
               style={styles.circle}
               onPress={() => {
