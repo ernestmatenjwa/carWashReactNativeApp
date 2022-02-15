@@ -47,7 +47,7 @@ export default function ProfileScreen({ navigation }) {
             name="send-circle"
             style={{marginBottom: 5, marginRight: 5}}
             size={32}
-            color="#2e64e5"
+            color="#064451"
           />
         </View>
       </Send>
@@ -60,7 +60,7 @@ export default function ProfileScreen({ navigation }) {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: '#2e64e5',
+            backgroundColor: '#064451',
           },
         }}
         textStyle={{

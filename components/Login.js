@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     paddingLeft:15,
     marginRight:5,
     borderRadius:20,
-    fontFamily: '"Inter-Bold", "Inter", sans-serif',
+   // fontFamily: '"Inter-Bold", "Inter", sans-serif',
   },
   inputContainer: {
     height: 40,
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,  
     paddingRight:10,
     backgroundColor:"rgb(247, 247, 247)",  
-    fontFamily: '"Inter-Bold", "Inter", sans-serif',
+    //fontFamily: '"Inter-Bold", "Inter", sans-serif',
   },
   icon:{
     color:'#064451',
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   label: {
     overflow: 'visible',
     fontWeight: "300",
-    fontFamily: '"Inter-Bold", "Inter", sans-serif',
+   // fontFamily: '"Inter-Bold", "Inter", sans-serif',
     color: '#064451',
     fontSize: 18,  
     marginLeft: 15,
