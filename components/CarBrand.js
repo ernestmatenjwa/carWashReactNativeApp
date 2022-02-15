@@ -49,9 +49,9 @@ const options = [
   },
   {
     key: 4,
-    text: 'Scania',
-    imageURL: require('../assets/pictures/Cars/Nissan.jpg'),
-    regNumber: "YTY 234 GP"
+    text: 'Others',
+    imageURL: require('../assets/pictures/car.jpg'),
+    regNumber: "Not Provided"
   },
   
 ];
@@ -63,23 +63,16 @@ function CarBrand ({navigation}) {
 
   const onSelect = (item) => {
     
-    setSelectedOption(options[item.key]);
-    console.log(selectedOption.text);
+    setSelectedOption(options[item]);
+    
     if (selectedOption && selectedOption.key === item.key) {
-      setSelectedOption(options[0]);
+      setSelectedOption(options[item.key]);
     } else {
       setSelectedOption(options[item.key]);
     }
+    // console.log(selectedOption.text);
   };
   
-    var carType = [
-      {label: "BMW", Value: 0, name: "STrata"},
-      {label: "Toyota", Value: 1},
-      {label: "VolksWagen", Value: 2},
-      {label: "Nissan", Value: 3},
-      {label: "Scania", Value: 4},
-    ];
-    
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -103,11 +96,6 @@ function CarBrand ({navigation}) {
             </View>
         </View>
         <View style={style.footer}>
-         
-           {/* <RadioForm
-            onPress={(Value) => {}}
-            radio_props={carType}
-           /> */}
          
             <View style={style.partco}>
               <RadioButton
@@ -148,9 +136,9 @@ const style = StyleSheet.create({
       width: 370,
       // height: 150,
       backgroundColor: COLORS.gray,
-      borderTopRightRadius: 25,
-      borderTopLeftRadius: 25,
-      flex: 1,
+      borderRadius: 25,
+      // borderTopLeftRadius: 25,
+      // flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf:'center',
