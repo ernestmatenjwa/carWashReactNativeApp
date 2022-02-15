@@ -12,7 +12,7 @@ import DateSetter from "./components/DateSetter";
 import SearchCarWash from "./components/SearchCarWash";
 import CheckoutScreen from "./components/Checkout"
 import VehicleScreen from "./components/vehicletype"
-import PaymentScreen from "./components/Payment"
+import PaymentScreen from "./components/payment"
 import ChatScreen from "./components/chatScreen"
 
 import Iconicons from "react-native-vector-icons/Ionicons"

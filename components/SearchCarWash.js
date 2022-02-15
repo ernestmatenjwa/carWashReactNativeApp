@@ -15,16 +15,20 @@ import COLORS from '../consts/colors';
 
 
 
+const { width, height } = Dimensions.get("screen");
+
+
+
 
 export default function  SearchCarWash({ navigation }) {
 
     const Card = ({service}) =>{
        return (<TouchableOpacity onPress={() => navigation.navigate("DateSetter") }>
-              <View style={styles.card}>
+              {/* <View style={styles.card}>
                 <View style={{height: 100, width: 100, alignItems: 'center'}}>
                <Image style={{flex: 1,resizeMode: 'contain', borderRadius: 13}} source={service.img}/>
                 </View>
-                <View style={{alignItems: 'flex-end', marginRight: 100, marginTop: -90}}>
+                <View style={{flexDirection: "column",justifyContent: "center",alignItems: 'flex-end', marginRight: 100, marginTop: -90}}>
                 <Text style={{fontWeight: 'bold', fontSize: 17, color: COLORS.paile}}>
                 {service.name}
                 </Text>
@@ -45,6 +49,22 @@ export default function  SearchCarWash({ navigation }) {
                 <View style={{alignItems: 'flex-end', marginBottom: 50}}>
                 
                </View>
+            </View> */}
+            <View style={styles.userInfo}>
+            <View style={styles.UserImgWrapper}>
+              <Image style={styles.UserImg} source={service.img} />
+            </View>
+            <View style={styles.TextSection}>
+            <View style={styles.UserInfoText}>
+            <Text style={styles.UserName}>{service.name}</Text>
+            <Text style={styles.price}>R{service.price}</Text>
+            </View>
+            <Text style={styles.MessageText}>{service.time}</Text>
+            <View>
+            <Text style={{fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{service.describetion}</Text>
+            </View>
+           
+            </View>
             </View>
        </TouchableOpacity>
     
@@ -70,7 +90,8 @@ export default function  SearchCarWash({ navigation }) {
         
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          marginTop: 11,
+          marginTop: 20,
+          paddingBottom: 20,
           paddingBottom: 50,
         }}
         f
@@ -96,8 +117,8 @@ const styles = StyleSheet.create ({
         marginHorizontal: 2,
         borderRadius: 10,
         marginBottom: 10,
-        padding: 10,
-        marginTop: 15,
+        padding: 20,
+        marginTop: 30,
         flex: 1,
     },
     container: {
@@ -128,7 +149,45 @@ const styles = StyleSheet.create ({
         marginRight: -85,
         marginTop: -23,
         fontWeight: 'bold',
+        marginRight: 100
+      },
+      userInfo: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+      },
+      UserImg: {
+        width: width/2.4,
+        height: height/8,
+        borderRadius: 13,
+      },
+      TextSection: {
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: 15,
+        paddingLeft: 0,
+        marginLeft: 10,
+        width: 300,
+        borderBottomWidth: 1,
+        borderBottomColor: "#cccccc",
+      },
+      UserInfoText: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: 5,
+      },
+      UserName: {
+        fontSize: 14,
+        fontWeight: "bold",
+        //fontFamily: "Lato-Regular",
+        marginTop: -23,
+        color: COLORS.paile,
+      },
+      MessageText:{
+        fontWeight: 'bold',
+        fontSize: 14, 
+        color: COLORS.lightGray
       }
+      
     
 })
 

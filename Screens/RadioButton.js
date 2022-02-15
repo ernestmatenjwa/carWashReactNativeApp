@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 25,
   },
 
   circle: {
@@ -56,8 +56,7 @@ const styles = StyleSheet.create({
   UserImg:{
     width: 75,
     height: 75,
-    borderRadius: 25,
-    marginRight: 15,
-    marginTop: 5,
+    borderRadius: 40,
+    marginRight: 75,
   }
 });
