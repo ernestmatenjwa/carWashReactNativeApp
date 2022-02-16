@@ -305,3 +305,14 @@ const styles = StyleSheet.create({
 });
 
 export default Payment;
+
+// import React from "react";
+// import { View,Text } from "react-native";
+
+// export default function Payment({ navigation }) {
+//     return(
+//         <View>
+//             <Text>helkjkbchjschsb payment</Text>
+//         </View>
+//     )
+// }
