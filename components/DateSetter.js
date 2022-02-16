@@ -68,7 +68,7 @@ function DateSetter({navigation}) {
         <View></View>
       <Pressable style={style.bookbtn}
       onPress={() => {
-        navigation.navigate("CheckoutScreen");
+        navigation.navigate("vihicleDetail");
       }}>
         <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Proceed</Text>
       </Pressable>

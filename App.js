@@ -12,6 +12,7 @@ import DateSetter from "./components/DateSetter";
 import SearchCarWash from "./components/SearchCarWash";
 import CheckoutScreen from "./components/Checkout"
 import VehicleScreen from "./components/vehicletype"
+import vehicleDetail from "./components/vihicleDetail";
 import PaymentScreen from "./components/Payment"
 import ChatScreen from "./components/chatScreen"
 
@@ -101,7 +102,8 @@ export default function App() {
         <Stack.Screen name="SearchCarWash" component={SearchCarWash} options={{header: () => null}} />
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{header: () => null}} />
         <Stack.Screen name="VehicleScreen" component={VehicleScreen} options={{header: () => null}} />
-        {/* <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} /> */}
+        <Stack.Screen name="vihicleDetail" component={vehicleDetail} options={{header: () => null}} />
+        <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
         <Stack.Screen 
         name="ChatScreen"
         component={ChatScreen} 

@@ -2,14 +2,10 @@ import * as React from 'react';
 import { Text, View,StyleSheet,SafeAreaView,TextInput,Pressable,Image } from 'react-native';
 import COLORS from '../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import RadioForm, {
-  RadioButton, 
-  RadioButtonInput, 
-  RadioButtonLabel
-} from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import bankCard from './../assets/pictures/bankCard.jpg';
+//import bankCard from './../assets/pictures/bankCard.jpg';
 
 
 export default function PaymentScreen({ navigation }) {
@@ -28,18 +24,18 @@ export default function PaymentScreen({ navigation }) {
          <Text style={{fontSize: 14, marginTop: 25, fontWeight: "bold", color: COLORS.tial}}>Select Your Payment Method</Text>
        </View>
       </View>
+      
 
-      <View  >
+      {/* <View  >
            <RadioForm
             onPress={(Value) => {}}
             radio_props={PaymentMethod}
             style={{flexDirection:'row',margin:20,justifyContent:"space-around"}}
             
            />
-         </View>
+         </View> */}
 <View style={{alignItems:'center'}}>
-<Image source={bankCard} style={styles.image}/>
-
+<Image  source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
 </View>
     
       <View>
@@ -137,7 +133,7 @@ const styles = StyleSheet.create({
 },
 textInput: {
   flex: 1,
-  marginTop: Platform.OS === 'ios' ? 0 : -12,
+  //marginTop: Platform.OS === 'ios' ? 0 : -12,
   paddingLeft: 10,
   color: '#05375a',
   
