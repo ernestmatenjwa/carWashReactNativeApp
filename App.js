@@ -19,6 +19,7 @@ import Iconicons from "react-native-vector-icons/Ionicons"
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import vihicleDetail from "./components/vihicleDetail";
 
 const Stack = createNativeStackNavigator();
 const locationStack= createNativeStackNavigator();
@@ -102,6 +103,7 @@ export default function App() {
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{header: () => null}} />
         <Stack.Screen name="VehicleScreen" component={VehicleScreen} options={{header: () => null}} />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
+        <Stack.Screen name="vihicleDetail" component={vihicleDetail} options={{header: () => null}} />
         <Stack.Screen 
         name="ChatScreen"
         component={ChatScreen} 

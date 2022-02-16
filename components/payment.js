@@ -20,7 +20,7 @@ const Payment = ({ navigation, route }) => {
       <SectionHeader>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Checkout')
+            navigation.navigate('CheckoutScreen')
           }}>
           <McIcon 
             source={icons.back_arrow} 
