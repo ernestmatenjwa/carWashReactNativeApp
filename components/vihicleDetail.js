@@ -85,7 +85,7 @@ import RadioButton from '../Screens/RadioButton';
 
 
 
-function vihicleDetail ({navigation}) {
+function VihicleDetail ({navigation}) {
   const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
 
@@ -228,7 +228,7 @@ const style = StyleSheet.create({
 });
 
 
-export default vihicleDetail;
+export default VihicleDetail;
 
 
 
