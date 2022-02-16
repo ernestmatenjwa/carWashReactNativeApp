@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text,TextInput, SafeAreaView, StyleSheet, ScrollView, Image} from 'react-native';
+import { View, Text,TextInput, SafeAreaView, StyleSheet, ScrollView, Image, Dimensions} from 'react-native';
 import COLORS from '../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import RadioForm, {
@@ -12,6 +12,9 @@ import RadioButton from '../Screens/RadioButton';
 
 import BMW from '../assets/pictures/Cars/BMW.jpg'
 import VW from '../assets/pictures/Cars/VW.jpg'
+
+
+const { width, height }= Dimensions.get("screen");
 
 
 const currentVehicle = [
@@ -89,7 +92,7 @@ function CarBrand ({navigation}) {
             </View>
              <View style={style.currentCar}>
              <Image style={style.UserImg} source={selectedOption.imageURL}/>
-             <Text onPress={() =>  navigation.push("DateSetter")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text} {selectedOption.regNumber}</Text>
+             <Text onPress={() =>  navigation.push("SearchCarWash")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text} {selectedOption.regNumber}</Text>
              </View>
             </ScrollView>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -133,16 +136,14 @@ const style = StyleSheet.create({
   },
 
   footer: {
-      width: 370,
-      // height: 150,
+    height: height/1.75,
+    width: width/1.12,
       backgroundColor: COLORS.gray,
       borderRadius: 25,
-      // borderTopLeftRadius: 25,
-      // flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf:'center',
-      marginTop: -35,
+      marginTop: -45,
   },
   currentCar:{
     height: 60,

@@ -15,36 +15,30 @@ import COLORS from '../consts/colors';
 
 
 
+const { width, height } = Dimensions.get("screen");
+
+
+
 
 export default function  SearchCarWash({ navigation }) {
 
     const Card = ({service}) =>{
        return (<TouchableOpacity onPress={() => navigation.navigate("DateSetter") }>
-              <View style={styles.card}>
-                <View style={{height: 100, width: 100, alignItems: 'center'}}>
-               <Image style={{flex: 1,resizeMode: 'contain', borderRadius: 13}} source={service.img}/>
-                </View>
-                <View style={{alignItems: 'flex-end', marginRight: 100, marginTop: -90}}>
-                <Text style={{fontWeight: 'bold', fontSize: 17, color: COLORS.paile}}>
-                {service.name}
-                </Text>
-                <Text style={styles.price}>
-                R{service.price}
-               </Text>
-                </View>
-                <View style={{alignItems: 'flex-end', marginRight: 100, marginTop: 10}}>
-                  <Text style={{fontWeight: 'bold', fontSize: 14, color: COLORS.lightGray}}>
-                  {service.time}
-                  </Text>
-                </View>
-                <View style={{alignItems: 'flex-end', marginRight: 2.5, marginTop: 5}}>
-                  <Text style={{fontWeight: 'bold', fontSize: 14, color: COLORS.black}}>
-                  {service.describetion}
-                  </Text>
-                </View>
-                <View style={{alignItems: 'flex-end', marginBottom: 50}}>
-                
-               </View>
+            <View style={styles.userInfo}>
+            <View style={styles.UserImgWrapper}>
+              <Image style={styles.UserImg} source={service.img} />
+            </View>
+            <View style={styles.TextSection}>
+            <View style={styles.UserInfoText}>
+            <Text style={styles.UserName}>{service.name}</Text>
+            <Text style={styles.price}>R{service.price}</Text>
+            </View>
+            <Text style={styles.MessageText}>{service.time}</Text>
+            <View>
+            <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{service.describetion}</Text>
+            </View>
+           
+            </View>
             </View>
        </TouchableOpacity>
     
@@ -70,8 +64,10 @@ export default function  SearchCarWash({ navigation }) {
         
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          marginTop: 11,
+          marginTop: 20,
+          paddingBottom: 20,
           paddingBottom: 50,
+
         }}
         f
         data={services}
@@ -89,16 +85,6 @@ const styles = StyleSheet.create ({
         marginTop: 30,
         flexDirection: 'row',
         marginBottom: 20,
-    },
-    card:{
-        height:130,
-        backgroundColor: COLORS.white,
-        marginHorizontal: 2,
-        borderRadius: 10,
-        marginBottom: 10,
-        padding: 10,
-        marginTop: 15,
-        flex: 1,
     },
     container: {
         backgroundColor: COLORS.gray,
@@ -128,7 +114,56 @@ const styles = StyleSheet.create ({
         marginRight: -85,
         marginTop: -23,
         fontWeight: 'bold',
-      }
-    
+        marginRight: 100
+      },
+      userInfo: {
+        width: width/1.03,
+        height: 130,
+        backgroundColor: COLORS.white,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginHorizontal: 2,
+        marginBottom: 5,
+        marginTop: 15,
+        borderRadius: 13,
+        padding: 2,
+        
+      },
+      UserImg: {
+        width: width/2.7,
+        height: height/8,
+        borderRadius: 13,
+        marginBottom: 15,
+      },
+      TextSection: {
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: 15,
+        paddingLeft: 0,
+        marginLeft: 10,
+        width: 300,
+      },
+      UserInfoText: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: 5,
+      },
+      UserName: {
+        fontSize: 14,
+        fontWeight: "bold",
+        //fontFamily: "Lato-Regular",
+        marginTop: -23,
+        color: COLORS.paile,
+      },
+      MessageText:{
+        fontWeight: 'bold',
+        fontSize: 14, 
+        color: COLORS.lightGray
+      },
+
+      UserImgWrapper: {
+        paddingTop: 10,
+        paddingBottom: 15,
+      },
 })
 
