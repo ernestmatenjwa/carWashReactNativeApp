@@ -12,7 +12,7 @@ import {LinearGradient} from 'expo-linear-gradient'
 import { dummyData, FONTS, SIZES, COLORS, icons, images } from '../constants';
 import { McText, McIcon } from '../component';
 
-const Checkout = ({ navigation, route }) => {
+const Checkout = ({ navigation }) => {
 //   const [selectedEvent, setSelectedEvent] = useState(null);
 
 //   useEffect(() => {
@@ -22,14 +22,25 @@ const Checkout = ({ navigation, route }) => {
 
 return (
     <View style={styles.container}>
-      <SectionHeader>
-        <McIcon 
-          source={icons.back_arrow} 
-          size={24} marginRight={5} 
-          color='#fff'
-          marginHorizontal={20}
-        />
-        <McText h1 style={{left: '40%' }}>Checkout</McText>
+   <SectionHeader>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('vihicleDetail')
+          }}>
+          <McIcon 
+            source={icons.back_arrow} 
+            size={24} marginRight={5} 
+            marginHorizontal={20}
+            style = {{
+              color:'#064451'
+            }}
+            top={30}
+            
+          />
+          <McText h1 style={{left: '120%', color: 'white', marginBottom: 10 }}>
+            Checkout
+          </McText>
+        </TouchableOpacity>
       </SectionHeader>
       <View 
         style={{
