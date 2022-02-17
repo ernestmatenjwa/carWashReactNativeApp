@@ -130,6 +130,23 @@ function VihicleDetail ({navigation}) {
               />
                    <Text style={style.label}>Select vihicle Colour</Text> 
 
+                   <View style={{flexDirection:'row',justifyContent:'space-between'}} >
+
+                     <ScrollView  horizontal={true} >
+
+                     <View  style={[style.black,{marginLeft:20}]}> </View>
+                     <View  style={style.gray}> </View>
+                     <View  style={style.white}> </View>
+                     <View  style={style.blue}> </View>
+                     <View  style={style.red}> </View>
+                     <View  style={style.brown}> </View>
+                     <View  style={style.Yellow}> </View>
+
+                     </ScrollView>
+                   </View>
+
+                   
+
 <View>
          <Text onPress={() =>  navigation.push("CheckoutScreen")}>NEXT</Text>
     </View>
@@ -224,6 +241,49 @@ const style = StyleSheet.create({
     marginLeft: 5,
     marginTop: 5,
   },
+  black:{
+    height:50,
+    width:50,
+    backgroundColor:"black",
+    borderRadius:25
+  },
+  gray:{
+    height:50,
+    width:50,
+    backgroundColor:"gray",
+    borderRadius:25
+  },
+  white:{
+    height:50,
+    width:50,
+    backgroundColor:"white",
+    borderRadius:25
+  },
+  blue:{
+    height:50,
+    width:50,
+    backgroundColor:"blue",
+    borderRadius:25
+  },
+  red:{
+    height:50,
+    width:50,
+    backgroundColor:"red",
+    borderRadius:25
+  },
+  brown:{
+    height:50,
+    width:50,
+    backgroundColor:"brown",
+    borderRadius:25
+  },
+  Yellow:{
+    height:50,
+    width:50,
+    backgroundColor:"yellow",
+    borderRadius:25
+  }
+
   
 
 });

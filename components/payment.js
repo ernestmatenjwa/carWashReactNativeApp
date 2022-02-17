@@ -14,6 +14,7 @@ import { dummyData, FONTS, SIZES, COLORS, icons, images } from '../constants';
 import { McText, McIcon } from '../component';
 import 'react-native-gesture-handler';
 import { ScrollView } from 'react-native-gesture-handler';
+import bankCard from './../assets/pictures/bankCard.jpg';
 
 const Payment = ({ navigation, route }) => {
   return (
@@ -79,8 +80,13 @@ const Payment = ({ navigation, route }) => {
             </TouchableOpacity>
           </PaymentSection>
         </View>
+        <View style={{width:100,height:100}}>
 
-        <View style={{width: '100%'}}>
+       
+      <Image source={bankCard} />
+        </View>
+
+        {/* <View style={{width: '100%'}}>
           <CardSection>
             <Image 
               resizeMode='cover'
@@ -88,7 +94,7 @@ const Payment = ({ navigation, route }) => {
               borderRadius={15}
             />
           </CardSection>
-        </View>
+        </View> */}
 
         <View style={{width: '100%'}}>
           <CardNumber>
