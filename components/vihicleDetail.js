@@ -130,7 +130,7 @@ function VihicleDetail ({navigation}) {
               />
                    <Text style={style.label}>Select vihicle Colour</Text> 
 
-                   <View style={{flexDirection:'row',justifyContent:'space-between'}} >
+                   
 
                      <ScrollView  horizontal={true} >
 
@@ -143,7 +143,7 @@ function VihicleDetail ({navigation}) {
                      <View  style={style.Yellow}> </View>
 
                      </ScrollView>
-                   </View>
+                   
 
                    
 
