@@ -25,7 +25,7 @@ return (
      <SectionHeader>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('vihicleDetail')
+            navigation.navigate('VihicleDetail')
           }}>
           <McIcon 
             source={icons.back_arrow} 
