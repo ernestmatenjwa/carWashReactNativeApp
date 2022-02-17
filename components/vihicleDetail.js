@@ -154,6 +154,7 @@ const style = StyleSheet.create({
   },
   inputContainer: {
     height: 40,
+    width:'100%',
     borderRadius:20,
     borderColor: '#064451',
     borderWidth: 1,  
