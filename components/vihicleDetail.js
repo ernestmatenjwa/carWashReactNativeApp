@@ -149,11 +149,12 @@ const style = StyleSheet.create({
     padding: 1,
     paddingLeft:15,
     marginRight:5,
-    borderRadius:20,
+    borderRadius:20,  
    // fontFamily: '"Inter-Bold", "Inter", sans-serif',
   },
   inputContainer: {
     height: 40,
+    width:'100%',
     borderRadius:20,
     borderColor: '#064451',
     borderWidth: 1,  
