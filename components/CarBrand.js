@@ -79,7 +79,7 @@ function CarBrand ({navigation}) {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
-          <View style={{height: 300, backgroundColor: COLORS.tial, borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}>
+          <View style={{height: 300, backgroundColor: COLORS.tial, borderBottomLeftRadius: 30, borderBottomRightRadius: 30, }}>
             <View style={style.header}>
             <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 13, marginLeft: 10}}/>
             <View style={{marginLeft: 35}}>
@@ -105,6 +105,7 @@ function CarBrand ({navigation}) {
               selectedOption={selectedOption}
               onSelect={onSelect}
               options={options}
+
             />
           </View>
         </View>
@@ -117,6 +118,7 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   imgName: {
 
@@ -152,6 +154,7 @@ const style = StyleSheet.create({
     backgroundColor: '#54BAB9',
     borderRadius: 30,
     marginTop: -20,
+    
   },
   UserImg: {
     width: 50,
@@ -159,6 +162,7 @@ const style = StyleSheet.create({
     borderRadius: 25,
     marginLeft: 5,
     marginTop: 5,
+    
   },
   
 
