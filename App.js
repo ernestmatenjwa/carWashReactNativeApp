@@ -14,6 +14,7 @@ import CheckoutScreen from "./components/Checkout"
 import VehicleScreen from "./components/vehicletype"
 import PaymentScreen from "./components/payment"
 import ChatScreen from "./components/chatScreen"
+import ProfileEdit from "./Screens/EditProfile"
 
 import Iconicons from "react-native-vector-icons/Ionicons"
 import { NavigationContainer } from "@react-navigation/native";
@@ -126,6 +127,7 @@ export default function App() {
         <Stack.Screen name="VehicleScreen" component={VehicleScreen} options={{header: () => null}} />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
         <Stack.Screen name="VihicleDetail" component={VihicleDetail} options={{header: () => null}} />
+        <Stack.Screen name="ProfileEdit" component={ProfileEdit} options={{header: () => null}} />
         <Stack.Screen 
         name="ChatScreen"
         component={ChatScreen} 

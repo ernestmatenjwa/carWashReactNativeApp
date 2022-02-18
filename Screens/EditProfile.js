@@ -6,71 +6,71 @@ import {LinearGradient} from 'expo-linear-gradient';
 import { Input } from 'react-native-elements';
 import img from "../assets/pictures/person.png"
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import Icon1 from 'react-native-vector-icons/MaterialIcons';
 
 const { width, height }= Dimensions.get("screen");
 
-export default function ProfileScreen({ navigation }) {
-  const [text, onChangeText] = React.useState('');
+export default function ProfileEdit({ navigation }) {
+//   const [text, onChangeText] = React.useState('');
+//   const [email, onChangeEmail] = React.useState('');
+//   const [phone, onChangePhone] = React.useState('');
   return (
     <View style = {styles.container}>
-    <View style = {{justifyContent:'center',alignItems:'center', width:"100%", }}>          
+        <View style={{height: height/4.8, backgroundColor: "#064451", width: width, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
+        <Icon1 name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: "white", margin: "5%"}}/>
+           <Text style={{color: "white", paddingTop: "2%", fontSize:50, fontWeight:"700", alignSelf: "center"}}>Edit Profile</Text>
+        </View>
+    <View style = {{justifyContent:'center',alignItems:'center', width:"100%", marginTop: "1%", marginBottom: "0%"}}>          
        <Image source={img} style={styles.UserImg} /> 
     </View>
     <Text style = {styles.text_header}>Alex Mathenjwa </Text>
-    <Text style={[styles.text_footer, {marginTop:"-10%"}]}>Full Name</Text>
+    <Text style={styles.text_footer}>Full Name</Text>
     <Input 
-        onChangeText={onChangeText} value={text}
+        //onChangeText={onChangeText} value={text}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle ={[styles.inputText, {paddingLeft: 15}]}                
         placeholder="Alex Mathenjwa"
         rightIcon={ <Icon size={24} 
         style={styles.icon} name='user'/>}
-        disabled
     />
     
     <Text style={styles.text_footer}>Email Address</Text>
     <Input 
-        onChangeText={onChangeText} value={text}
+        //onChangeText={onChangeEmail} value={text}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle = {[styles.inputText, {paddingLeft: 15}]}
         placeholder="alexmatenjwa@gmail.com"
         rightIcon={ <Icon size={24} 
         style={styles.icon} name='envelope'/>}
-        disabled
     />
     <Text style={styles.text_footer}>Phone</Text>
     <Input 
-        onChangeText={onChangeText} value={text}
+        //onChangeText={onChangePhone} value={text}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle = {[styles.inputText, {paddingLeft: 15}]}               
         placeholder="0729476167"
         rightIcon={ <Icon size={24} 
         style={styles.icon} name='phone'/>}
-        disabled
     />
     <View style={styles.button}> 
         <LinearGradient
-        
            colors={['#064451', '#064451']}
-           style={[styles.signIn, {margin: "5%"}]}
+           style={[styles.signIn, {margin: "5%", marginTop: "10%"}]}
         ><Text style={[
             styles.textSign, 
-            {color:'#fff'}]}
-            onPress={() =>  navigation.push("ProfileEdit")}
-            >Edit</Text>
+            {color:'#fff'}]}>Submit</Text>
         </LinearGradient>
     </View> 
     </View>
   );
 }
-
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      width: width,
+      //width: width,
       //backgroundColor: '#009387'
-      padding: 10
+    //   padding: 10,
+    //   paddingTop: 0,
     },
     icon: {
         color: "#064451",
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     text_footer: {
         color: '#064451',
         fontSize: 18,
-        paddingTop: 0,
+        paddingBottom: 10,
     },
     action: {
         flexDirection: 'row',
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: 'flex-end',
-        marginTop: "-5%"
+        //marginTop: "-3%"
     },
     signIn: {
         width: '30%',
