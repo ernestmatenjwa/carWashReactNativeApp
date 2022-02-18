@@ -67,9 +67,9 @@
 //     height: 5,
 //   },
 // });
-
+ 
 import React, { useState } from 'react';
-import { View, Text,TextInput, SafeAreaView, StyleSheet, ScrollView, Image} from 'react-native';
+import { View, Text,TextInput, SafeAreaView, StyleSheet, ScrollView, Image,Pressable} from 'react-native';
 import COLORS from '../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Input } from 'react-native-elements';
@@ -143,13 +143,23 @@ function VihicleDetail ({navigation}) {
                      <View  style={style.Yellow}> </View>
 
                      </ScrollView>
+
+                     <View style={{ alignItems: 'center', flex: 1,justifyContent:'center'}}>
+       
+       <Pressable style={style.bookbtn}
+       onPress={() => {
+         navigation.navigate("CheckoutScreen");
+       }}>
+         <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Proceed</Text>
+       </Pressable>
+       </View> 
                    
 
                    
 
-<View>
+{/* <View>
          <Text onPress={() =>  navigation.push("CheckoutScreen")}>NEXT</Text>
-    </View>
+    </View> */}
             
             {/* Social Icons */}
           </SafeAreaView>
@@ -282,7 +292,18 @@ const style = StyleSheet.create({
     width:50,
     backgroundColor:"yellow",
     borderRadius:25
-  }
+  },
+  bookbtn:{
+    width: 170,
+    height: 50,
+    backgroundColor: COLORS.tial,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginLeft: 100,
+    marginBottom: 50,
+
+  },
 
   
 
