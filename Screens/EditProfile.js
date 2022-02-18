@@ -55,7 +55,7 @@ export default function ProfileEdit({ navigation }) {
     <View style={styles.button}> 
         <LinearGradient
            colors={['#064451', '#064451']}
-           style={[styles.signIn, {margin: "5%", marginTop: "10%"}]}
+           style={[styles.signIn, {margin: "5%", marginTop: "-2%"}]}
         ><Text style={[
             styles.textSign, 
             {color:'#fff'}]}>Submit</Text>
