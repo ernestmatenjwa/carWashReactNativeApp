@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   inputText: {
     color: '#064451',
     fontWeight:'normal',
-    fontFamily: '"Inter-Bold", "Inter", sans-serif',
+   // fontFamily: '"Inter-Bold", "Inter", sans-serif',
     padding: 1,
     paddingLeft:15,
     marginRight:5,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     overflow: 'visible',
     fontWeight: "300",
     // fontFamily: '"Times New Roman", Times, serif',
-    fontFamily: '"Inter-Bold", "Inter", sans-serif',
+   // fontFamily: '"Inter-Bold", "Inter", sans-serif',
     color: '#064451',
     fontSize: 18,  
     marginLeft: 15,

@@ -10,15 +10,17 @@ import ConfirmScreen from "./components/confirmation";
 import CarBrand from "./components/CarBrand";
 import DateSetter from "./components/DateSetter";
 import SearchCarWash from "./components/SearchCarWash";
-import CheckoutScreen from "./components/checkoup"
+import CheckoutScreen from "./components/Checkout"
 import VehicleScreen from "./components/vehicletype"
-// import PaymentScreen from "./components/payment"
+import PaymentScreen from "./components/payment"
 import ChatScreen from "./components/chatScreen"
+import ProfileEdit from "./Screens/EditProfile"
 
 import Iconicons from "react-native-vector-icons/Ionicons"
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import VihicleDetail from "./components/vihicleDetail";
 
 const Stack = createNativeStackNavigator();
 const locationStack= createNativeStackNavigator();
@@ -82,7 +84,29 @@ const TabScreen = () => {
           ),
         }}
         />
-        <locationStack.Screen name="Profile" component={ProfileScreen} />
+        <locationStack.Screen 
+        name="Profile" 
+        component={ProfileScreen}
+        options={{
+          title: 'User Profile',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "700",
+            fontSize: 40,
+            padding: 20,
+          },
+          headerStyle: {
+            height: 170,
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+          },
+          headerBackTitleVisible: false
+        }}
+        />
     </Tabs.Navigator>
   )
 }
@@ -101,7 +125,9 @@ export default function App() {
         <Stack.Screen name="SearchCarWash" component={SearchCarWash} options={{header: () => null}} />
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{header: () => null}} />
         <Stack.Screen name="VehicleScreen" component={VehicleScreen} options={{header: () => null}} />
-        {/* <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} /> */}
+        <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
+        <Stack.Screen name="VihicleDetail" component={VihicleDetail} options={{header: () => null}} />
+        <Stack.Screen name="ProfileEdit" component={ProfileEdit} options={{header: () => null}} />
         <Stack.Screen 
         name="ChatScreen"
         component={ChatScreen} 

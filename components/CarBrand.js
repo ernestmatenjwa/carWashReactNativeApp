@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text,TextInput, SafeAreaView, StyleSheet, ScrollView, Image} from 'react-native';
+import { View, Text,TextInput, SafeAreaView, StyleSheet, ScrollView, Image, Dimensions} from 'react-native';
 import COLORS from '../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import RadioForm, {
@@ -12,6 +12,9 @@ import RadioButton from '../Screens/RadioButton';
 
 import BMW from '../assets/pictures/Cars/BMW.jpg'
 import VW from '../assets/pictures/Cars/VW.jpg'
+
+
+const { width, height }= Dimensions.get("screen");
 
 
 const currentVehicle = [
@@ -76,7 +79,7 @@ function CarBrand ({navigation}) {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
-          <View style={{height: 300, backgroundColor: COLORS.tial, borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}>
+          <View style={{height: 300, backgroundColor: COLORS.tial, borderBottomLeftRadius: 30, borderBottomRightRadius: 30, }}>
             <View style={style.header}>
             <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 13, marginLeft: 10}}/>
             <View style={{marginLeft: 35}}>
@@ -89,7 +92,7 @@ function CarBrand ({navigation}) {
             </View>
              <View style={style.currentCar}>
              <Image style={style.UserImg} source={selectedOption.imageURL}/>
-             <Text onPress={() =>  navigation.push("DateSetter")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text} {selectedOption.regNumber}</Text>
+             <Text onPress={() =>  navigation.push("SearchCarWash")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text} {selectedOption.regNumber}</Text>
              </View>
             </ScrollView>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -102,6 +105,7 @@ function CarBrand ({navigation}) {
               selectedOption={selectedOption}
               onSelect={onSelect}
               options={options}
+
             />
           </View>
         </View>
@@ -114,6 +118,7 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   imgName: {
 
@@ -133,16 +138,14 @@ const style = StyleSheet.create({
   },
 
   footer: {
-      width: 370,
-      // height: 150,
+    height: height/1.75,
+    width: width/1.12,
       backgroundColor: COLORS.gray,
       borderRadius: 25,
-      // borderTopLeftRadius: 25,
-      // flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf:'center',
-      marginTop: -35,
+      marginTop: -45,
   },
   currentCar:{
     height: 60,
@@ -151,6 +154,7 @@ const style = StyleSheet.create({
     backgroundColor: '#54BAB9',
     borderRadius: 30,
     marginTop: -20,
+    
   },
   UserImg: {
     width: 50,
@@ -158,6 +162,7 @@ const style = StyleSheet.create({
     borderRadius: 25,
     marginLeft: 5,
     marginTop: 5,
+    
   },
   
 

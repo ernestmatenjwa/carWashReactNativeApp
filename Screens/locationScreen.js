@@ -56,7 +56,7 @@ export default function LocationScreen({ navigation }) {
     onChangeText={onChangesearchValue} value={searchValue}
     inputContainerStyle={styles.inputContainer}
     inputStyle ={styles.inputText}
-    placeholder="Seach location"
+    placeholder="Search"
     rightIcon={ <Icon size={24} 
     style={styles.icon} name='search'/>}
   />

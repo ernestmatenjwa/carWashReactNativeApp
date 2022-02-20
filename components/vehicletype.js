@@ -2,7 +2,6 @@
 import React from "react";
 import { View,Text,StyleSheet,Image } from "react-native";
 
-
 import car from './../assets/pictures/car.jpg';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
