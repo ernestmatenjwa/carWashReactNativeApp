@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text,  Dimensions, StyleSheet, View, Image,TouchableOpacity } from 'react-native';
+import { Text,  Dimensions, StyleSheet, View, Image,Pressable } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -10,10 +10,11 @@ import Icon1 from 'react-native-vector-icons/MaterialIcons';
 
 const { width, height }= Dimensions.get("screen");
 
-export default function ProfileEdit({ navigation }) {
+export default function ProfileEdit({ navigation, route }) {
 //   const [text, onChangeText] = React.useState('');
 //   const [email, onChangeEmail] = React.useState('');
 //   const [phone, onChangePhone] = React.useState('');
+const {name, email, phone} = route.params;
   return (
     <View style = {styles.container}>
         <View style={{height: height/4.8, backgroundColor: "#064451", width: width, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
@@ -29,7 +30,7 @@ export default function ProfileEdit({ navigation }) {
         //onChangeText={onChangeText} value={text}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle ={[styles.inputText, {paddingLeft: 15}]}                
-        placeholder="Alex Mathenjwa"
+        value={name}
         rightIcon={ <Icon size={24} 
         style={styles.icon} name='user'/>}
     />
@@ -39,7 +40,7 @@ export default function ProfileEdit({ navigation }) {
         //onChangeText={onChangeEmail} value={text}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle = {[styles.inputText, {paddingLeft: 15}]}
-        placeholder="alexmatenjwa@gmail.com"
+        value={email}
         rightIcon={ <Icon size={24} 
         style={styles.icon} name='envelope'/>}
     />
@@ -48,19 +49,20 @@ export default function ProfileEdit({ navigation }) {
         //onChangeText={onChangePhone} value={text}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle = {[styles.inputText, {paddingLeft: 15}]}               
-        placeholder="0729476167"
+        value={phone}
         rightIcon={ <Icon size={24} 
         style={styles.icon} name='phone'/>}
     />
-    <View style={styles.button}> 
-        <LinearGradient
-           colors={['#064451', '#064451']}
-           style={[styles.signIn, {margin: "5%", marginTop: "-2%"}]}
-        ><Text style={[
-            styles.textSign, 
-            {color:'#fff'}]}>Submit</Text>
-        </LinearGradient>
-    </View> 
+    
+        <Pressable 
+        style={styles.loginG} 
+        // onPress={() =>  navigation.push("ProfileEdit")}
+        >
+        <Text 
+        style={{
+            fontSize: 15, 
+            color: "white"}}>Submit</Text>
+        </Pressable>
     </View>
   );
 }
@@ -72,6 +74,22 @@ const styles = StyleSheet.create({
     //   padding: 10,
     //   paddingTop: 0,
     },
+    loginG:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        //alignSelf: "flex-end",
+        //paddingVertical: 12,
+        //paddingHorizontal: 32,
+        borderRadius: 15,
+        elevation: 3,
+        backgroundColor: "#064451",
+        //borderWidth:2,
+        //borderColor: '#064451',
+        width: '40%',
+        height: 50,
+        marginLeft: "55%",
+       
+      },
     icon: {
         color: "#064451",
     },

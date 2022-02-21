@@ -21,7 +21,7 @@ export default function SignupScreen({ navigation }) {
             onChangeText={onChangeText} value={text}
             inputContainerStyle={styles.inputContainer}
             inputStyle ={styles.inputText}                
-            placeholder="Karabo Seheri"
+            placeholder="Enter names"
             rightIcon={<Icon size={24} 
             style={styles.icon} name='user'/>}
           />
@@ -30,7 +30,7 @@ export default function SignupScreen({ navigation }) {
             onChangeText={onChangeEmail} value={email}
             inputContainerStyle={styles.inputContainer}
             inputStyle ={styles.inputText}                
-            placeholder="gomo@gmail.com"
+            placeholder="Enter email"
             rightIcon={<Icon size={24} style={styles.icon} name='envelope'/>}
           />
 
@@ -40,7 +40,7 @@ export default function SignupScreen({ navigation }) {
             value={number}
             inputContainerStyle={styles.inputContainer}
             inputStyle ={styles.inputText}                
-            placeholder="+27 71 004 2020" keyboardType="numeric"
+            placeholder="Enter number" keyboardType="numeric"
             rightIcon={<Icon size={24} 
             style={styles.icon} name='phone'/>}
           />
@@ -52,7 +52,7 @@ export default function SignupScreen({ navigation }) {
             inputContainerStyle={styles.inputContainer}
             inputStyle ={styles.inputText}
             type="password"
-            placeholder="Password"
+            placeholder="Enter password"
             rightIcon={<Icon size={28} 
             style={styles.icon} name='lock'/>} 
           />

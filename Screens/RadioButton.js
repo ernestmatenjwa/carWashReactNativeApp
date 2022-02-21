@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 25,
+    marginBottom: "5%",
+    height: "15%"
   },
 
   circle: {

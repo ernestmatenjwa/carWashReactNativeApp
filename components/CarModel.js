@@ -14,12 +14,12 @@ export default function CarModel({ navigation }) {
       <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 13, marginLeft: 10}}/>
       </View>
       <View style={{marginLeft: 95}}>
-        <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Model & Car</Text>
+        <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Car details</Text>
         </View>
       </View>
       <View style={style.footer}>
       <View style={{height: 207, width: 370, alignItems: 'center', marginBottom: 280}}>
-       <Text>Enter Registration</Text>
+       <Text>Enter Registrationn</Text>
       </View>
       </View>
     </SafeAreaView>
