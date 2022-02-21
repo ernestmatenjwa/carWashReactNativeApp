@@ -1,63 +1,64 @@
+
 import React from "react";
 import { View,
-  Text,
-  StyleSheet,
-  Image, 
-  Dimensions, 
-  FlatList, 
-  TouchableOpacity } from "react-native";
+    Text,
+    StyleSheet,
+    Image, 
+    Dimensions, 
+    FlatList, 
+    TouchableOpacity } from "react-native";
 import COLORS from '../consts/colors';
 import Icon1 from 'react-native-vector-icons/MaterialIcons';
 import Iconicons from "react-native-vector-icons/Ionicons"
 
 const { width, height } = Dimensions.get("screen");
 
-const serCar = [
+const Tractor = [
   {
     id: '1',
     package: 'Full Body wash',
-    userImg: require('../assets/pictures/serImgs/carInt.jpg'),
-    tmstimated: '10min-15min',
-    price: '105',
+    userImg: require('../assets/pictures/serImgs/tractor.jpg'),
+    tmstimated: '30min-40min',
+    price: '410',
     Description: 'Exterior wash, Interior clean up and vaccum',
   },
   {
     id: '2',
     package: 'Half Body wash',
-    userImg: require('../assets/pictures/serImgs/bmw.jpg'),
-    tmstimated: '5min-10min',
-    price: '79',
+    userImg: require('../assets/pictures/serImgs/tractor1.jpg'),
+    tmstimated: '15min-30min',
+    price: '305',
     Description: 'Exterior wash only!',
   },]
-  const serTax = [
+  const bus = [
     {
       id: '1',
       package: 'Full Body wash',
-      userImg: require('../assets/pictures/serImgs/taxi.jpg'),
-      tmstimated: '15min-20min',
-      price: '145',
+      userImg: require('../assets/pictures/serImgs/bus2.jpg'),
+      tmstimated: '30min-40min',
+      price: '450',
       Description: 'Exterior wash, Interior clean up and vaccum',
     },
     {
       id: '2',
       package: 'Half Body wash',
-      userImg: require('../assets/pictures/serImgs/van.jpg'),
-      tmstimated: '10min-15min',
-      price: '115',
+      userImg: require('../assets/pictures/serImgs/bus.jpg'),
+      tmstimated: '15min-30min',
+      price: '340',
       Description: 'Exterior wash only!',
     },
   ]
 
-export default function VihicleScreen({ navigation, route }) {
+export default function More2({ navigation, route }) {
   return(
     <View style={styles.container}>
         <View style={{height: "10%", backgroundColor: "#064451", width: width, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
         <Icon1 name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: "white", margin: "5%"}}/>
-           <Text style={{marginTop: "-10%", color: "white", fontSize:25, fontWeight:"500", alignSelf: "center"}}>Services</Text>
+           <Text style={{marginTop: "-10%", color: "white", fontSize:25, fontWeight:"500", alignSelf: "center"}}>More Services</Text>
         </View>
-      <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>C a r</Text>
+      <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>B u s</Text>
       <FlatList 
-      data={serCar}
+      data={bus}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
         <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
@@ -80,9 +81,9 @@ export default function VihicleScreen({ navigation, route }) {
        </TouchableOpacity>
       )}
     />
-    <Text style={{ color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>T a x i</Text>
+    <Text style={{ color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>T r a c t o r</Text>
     <FlatList 
-      data={serTax}
+      data={Tractor}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
         <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
@@ -106,7 +107,7 @@ export default function VihicleScreen({ navigation, route }) {
        
       )}
     />
-   <View style={{
+     <View style={{
      marginTop:"-20%", 
      marginLeft:"80%",
      width:1,
@@ -115,10 +116,10 @@ export default function VihicleScreen({ navigation, route }) {
     size={70} 
     color={"#064451"}
     name="arrow-forward-circle" 
-    onPress={() => navigation.navigate('More1')}  
+    onPress={() => navigation.navigate('More3')}  
    />
     </View>
-  </View>
+</View>   
     );
 }
 

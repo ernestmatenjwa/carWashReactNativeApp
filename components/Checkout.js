@@ -134,7 +134,7 @@ return (
                               alignItems: 'center'
                             }}
                         >
-                          <McText>PAY</McText>
+                          <McText>CONFIRM</McText>
                         </LinearGradient>
                     </TouchableOpacity>
                 </FooterBox>

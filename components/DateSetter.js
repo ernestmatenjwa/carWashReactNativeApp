@@ -105,7 +105,7 @@ function DateSetter({navigation}) {
        
       <Pressable style={style.bookbtn}
       onPress={() => {
-        navigation.navigate("VihicleDetail");
+        navigation.navigate("CheckoutScreen");
       }}>
         <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Proceed</Text>
       </Pressable>

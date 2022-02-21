@@ -19,7 +19,7 @@ export default function LoginScreen({ navigation }) {
                   onChangeText={onChangeEmail} value={email}
                   inputContainerStyle={styles.inputContainer}
                   inputStyle ={styles.inputText}
-                  placeholder="Email Address"
+                  placeholder="Enter email"
                   rightIcon={ <Icon size={24} 
                   style={styles.icon} name='envelope'/>}
             />
@@ -29,7 +29,7 @@ export default function LoginScreen({ navigation }) {
                   value={password}
                   inputContainerStyle={styles.inputContainer}
                   inputStyle ={styles.inputText}
-                  placeholder="Password"
+                  placeholder="Enter password"
                   rightIcon={<Icon size={28} 
                   style={styles.icon} name='lock'/>} 
               />

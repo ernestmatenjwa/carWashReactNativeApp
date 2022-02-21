@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text,  Dimensions, StyleSheet, View, Image,TouchableOpacity } from 'react-native';
+import { Text,  Dimensions, StyleSheet, View, Image,Pressable } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -11,7 +11,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const { width, height }= Dimensions.get("screen");
 
 export default function ProfileScreen({ navigation }) {
-  const [text, onChangeText] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [phone, setPhone] = React.useState('');
   return (
     <View style = {styles.container}>
     <View style = {{justifyContent:'center',alignItems:'center', width:"100%", }}>          
@@ -20,7 +22,7 @@ export default function ProfileScreen({ navigation }) {
     <Text style = {styles.text_header}>Alex Mathenjwa </Text>
     <Text style={[styles.text_footer, {marginTop:"-10%"}]}>Full Name</Text>
     <Input 
-        onChangeText={onChangeText} value={text}
+        onChangeText={setName} value={name}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle ={[styles.inputText, {paddingLeft: 15}]}                
         placeholder="Alex Mathenjwa"
@@ -31,7 +33,7 @@ export default function ProfileScreen({ navigation }) {
     
     <Text style={styles.text_footer}>Email Address</Text>
     <Input 
-        onChangeText={onChangeText} value={text}
+        onChangeText={setEmail} value={email}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle = {[styles.inputText, {paddingLeft: 15}]}
         placeholder="alexmatenjwa@gmail.com"
@@ -41,7 +43,7 @@ export default function ProfileScreen({ navigation }) {
     />
     <Text style={styles.text_footer}>Phone</Text>
     <Input 
-        onChangeText={onChangeText} value={text}
+        onChangeText={setPhone} value={phone}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle = {[styles.inputText, {paddingLeft: 15}]}               
         placeholder="0729476167"
@@ -49,19 +51,17 @@ export default function ProfileScreen({ navigation }) {
         style={styles.icon} name='phone'/>}
         disabled
     />
-    <View style={styles.button}> 
-        <LinearGradient
-        
-           colors={['#064451', '#064451']}
-           style={[styles.signIn, {margin: "5%"}]}
-        ><Text style={[
-            styles.textSign, 
-            {color:'#fff'}]}
-            onPress={() =>  navigation.push("ProfileEdit")}
-            >Edit</Text>
-        </LinearGradient>
+    
+        <Pressable 
+        style={styles.loginG} 
+        onPress={() =>  navigation.push("ProfileEdit", {name: "Alex Mathenjwa", email: "alexmatenjwa@gmail.com", phone: "0729476167"})}
+        >
+        <Text 
+        style={{
+            fontSize: 15, 
+            color: "white"}}>Edit</Text>
+        </Pressable>
     </View> 
-    </View>
   );
 }
 
@@ -75,6 +75,21 @@ const styles = StyleSheet.create({
     icon: {
         color: "#064451",
     },
+    loginG:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        //alignSelf: "flex-end",
+        //paddingVertical: 12,
+        //paddingHorizontal: 32,
+        borderRadius: 15,
+        elevation: 3,
+        backgroundColor: "#064451",
+        //borderWidth:2,
+        //borderColor: '#064451',
+        width: '40%',
+        height: 50,
+        marginLeft: "55%",
+      },
     UserImg: {
         width: 90,
         height: 90,

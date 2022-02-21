@@ -1,89 +1,9 @@
-// import * as React from 'react';
-// import { Text, Pressable, ImageBackground, StyleSheet, View, StatusBar } from 'react-native';
-// import gbImage from '../assets/pictures/homeBG3.jpg';
-// import COLORS from '../consts/colors';
-
-// export default function vihicleDetail({ navigation }) {
-//   return (
-//     <View>
-//         <Text onPress={() =>  navigation.push("CheckoutScreen")}>Pay eeeee</Text>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   titlee: {
-//       position: 'absolute',
-//       fontSize: 60,
-//       display: 'flex',
-//       alignItems: 'center',
-//       textTransform: 'uppercase',
-//       color: 'white',
-//       fontWeight: 'bold',
-//       textAlign: 'center',
-//       top: 100,
-//   },
-//   signup: {
-//     position: 'absolute',
-//     bottom: '30%',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     paddingVertical: 12,
-//     paddingHorizontal: 32,
-//     borderRadius: 30,
-//     elevation: 3,
-//     backgroundColor: '#064451',
-//     width: '70%',
-//     height: '7.4%',
-//   },
-//   login: {
-//     position: 'absolute',
-//     bottom: '20%',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     paddingVertical: 12,
-//     paddingHorizontal: 32,
-//     borderRadius: 30,
-//     elevation: 3,
-//     backgroundColor: 'transparent',
-//     borderWidth:2,
-//     borderColor: '#064451',
-//     width: '70%',
-//     height: '7.4%',
-//   },
-//   text: {
-//     fontSize: 16,
-//     lineHeight: 21,
-//     letterSpacing: 0.25,
-//     color: 'white',
-//   },
-//   space: {
-//     width: 20, // or whatever size you need
-//     height: 5,
-//   },
-// });
- 
 import React, { useState } from 'react';
 import { View, Text,TextInput, SafeAreaView, StyleSheet, ScrollView, Image,Pressable} from 'react-native';
 import COLORS from '../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Input } from 'react-native-elements';
-
-import gbImage from '../assets/pictures/car.jpg';
-import RadioButton from '../Screens/RadioButton';
-
-
-
-
-
-  
-
-
+import Iconicons from "react-native-vector-icons/Ionicons"
 
 function VihicleDetail ({navigation}) {
   const [email, onChangeEmail] = React.useState('');
@@ -95,7 +15,7 @@ function VihicleDetail ({navigation}) {
             <View style={style.header}>
             <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 13, marginLeft: 10}}/>
             <View style={{marginLeft: 35}}>
-                <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Model & Car</Text>
+                <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Vihicle details</Text>
             </View>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -109,12 +29,12 @@ function VihicleDetail ({navigation}) {
         </View>
         <View style={style.footer}>
         <SafeAreaView>
-            <Text style={style.label}>Enter Registration</Text> 
+            <Text style={style.label}>Registration Number</Text> 
             <Input 
                   onChangeText={onChangeEmail} value={email}
                   inputContainerStyle={style.inputContainer}
                   inputStyle ={style.inputText}
-                  placeholder="WWW 224 GP"
+                  placeholder="Enter Registration"
                   rightIcon={ <Icon size={28} 
                   style={style.icon} name='lock'/>}
             />
@@ -124,47 +44,41 @@ function VihicleDetail ({navigation}) {
                   value={password}
                   inputContainerStyle={style.inputContainer}
                   inputStyle ={style.inputText}
-                  placeholder="example@gmail.com"
+                  placeholder="Enter car model"
                   rightIcon={<Icon size={28} 
                   style={style.icon} name='lock'/>} 
               />
-                   <Text style={style.label}>Select vihicle Colour</Text> 
-
-                   
-
-                     <ScrollView  horizontal={true} >
-
-                     <View  style={[style.black,{marginLeft:20}]}> </View>
-                     <View  style={style.gray}> </View>
-                     <View  style={style.white}> </View>
-                     <View  style={style.blue}> </View>
-                     <View  style={style.red}> </View>
-                     <View  style={style.brown}> </View>
-                     <View  style={style.Yellow}> </View>
-
-                     </ScrollView>
+                   <Text style={style.label}>Vihicle Description</Text> 
+                   <Input  secureTextEntry={true}
+                  onChangeText={onChangePassword} 
+                  value={password}
+                  inputContainerStyle={style.inputContainer}
+                  inputStyle ={style.inputText}
+                  placeholder="Enter description"
+                  rightIcon={<Icon size={28} 
+                  style={style.icon} name='lock'/>} 
+              />
+            
 
                      <View style={{ alignItems: 'center', flex: 1,justifyContent:'center'}}>
-       
-       <Pressable style={style.bookbtn}
-       onPress={() => {
-         navigation.navigate("CheckoutScreen");
-       }}>
-         <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Proceed</Text>
-       </Pressable>
-       </View> 
+   
+    </View>
                    
-
-                   
-
-{/* <View>
-         <Text onPress={() =>  navigation.push("CheckoutScreen")}>NEXT</Text>
-    </View> */}
-            
-            {/* Social Icons */}
           </SafeAreaView>
           
         </View>
+       <View>
+    <Iconicons 
+    size={70} 
+    name="arrow-forward-circle" 
+    onPress={() => navigation.navigate('DateSetter')}  
+    style={{
+      color: "#064451", 
+      //marginTop:"-20%", 
+      paddingLeft:"80%",
+      }}/>
+    </View>
+        
     </SafeAreaView>
   );
 };
@@ -195,7 +109,7 @@ const style = StyleSheet.create({
   },
   label: {
     overflow: 'visible',
-    fontWeight: "300",
+    fontWeight: "700",
    // fontFamily: '"Inter-Bold", "Inter", sans-serif',
     color: '#064451',
     fontSize: 18,  

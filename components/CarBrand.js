@@ -64,51 +64,47 @@ const options = [
 function CarBrand ({navigation}) {
   const [selectedOption, setSelectedOption] = React.useState(options[0]);
 
-  const onSelect = (item) => {
-    
+  const onSelect = (item) => {  
     setSelectedOption(options[item]);
-    
     if (selectedOption && selectedOption.key === item.key) {
       setSelectedOption(options[item.key]);
     } else {
       setSelectedOption(options[item.key]);
     }
-    // console.log(selectedOption.text);
+    //console.log(selectedOption.text);
   };
   
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
-          <View style={{height: 300, backgroundColor: COLORS.tial, borderBottomLeftRadius: 30, borderBottomRightRadius: 30, }}>
-            <View style={style.header}>
-            <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 13, marginLeft: 10}}/>
-            <View style={{marginLeft: 35}}>
-                <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Vehicle Brand</Text>
-            </View>
-            </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={{height: 120, paddingHorizontal: 20}}>
-            <Text style={style.subHeader}>Select your vehicle brand</Text>
-            </View>
-             <View style={style.currentCar}>
-             <Image style={style.UserImg} source={selectedOption.imageURL}/>
-             <Text onPress={() =>  navigation.push("SearchCarWash")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text} {selectedOption.regNumber}</Text>
-             </View>
-            </ScrollView>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            </View>
-        </View>
-        <View style={style.footer}>
-         
-            <View style={style.partco}>
-              <RadioButton
-              selectedOption={selectedOption}
-              onSelect={onSelect}
-              options={options}
-
-            />
+    <SafeAreaView style={{ backgroundColor: COLORS.white}}>
+    <View style={{height: 200, backgroundColor: COLORS.tial, borderBottomLeftRadius: 30, borderBottomRightRadius: 30, }}>
+      <View style={style.header}>
+          <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: "-8%", marginLeft: "-5%"}}/>
+          <View style={{marginLeft: 35}}>
+              <Text style={{marginTop: "-7%", fontSize: 25, alignSelf: "center", fontWeight: "bold", color: COLORS.white}}>Vehicle Brand</Text>
           </View>
+      </View>
+    <View>
+        <View style={{ paddingHorizontal: 20, }}>
+            <Text style={style.subHeader}>Select your vehicle brand</Text>
         </View>
+        <View style={style.currentCar}>
+             <Image style={style.UserImg} source={selectedOption.imageURL}/>
+             <Text onPress={() =>  navigation.push("VihicleDetail")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text} {selectedOption.regNumber}</Text>
+        </View>
+    </View>
+            {/* <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            </View> */}
+    </View>
+    <View style={style.footer}>
+      <View style={style.partco}>
+          <RadioButton
+            selectedOption={selectedOption}
+            onSelect={onSelect}
+            options={options}
+            />
+      </View>
+    </View>
     </SafeAreaView>
   );
 };
@@ -118,27 +114,27 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    
+    marginTop: "-5%",
   },
   imgName: {
 
   },
   header:{
     marginTop: 30,
-    flexDirection: 'row',
+    //flexDirection: 'row',
     paddingHorizontal: 20,
   },
    
   subHeader:{
     color: COLORS.white,
-    marginTop: 30,
+    marginTop: "5%",
     fontWeight: 'bold',
     fontSize: 17,
 
   },
 
   footer: {
-    height: height/1.75,
+    height: height/1.27,
     width: width/1.12,
       backgroundColor: COLORS.gray,
       borderRadius: 25,
@@ -153,8 +149,8 @@ const style = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#54BAB9',
     borderRadius: 30,
-    marginTop: -20,
-    
+    marginTop: "1%",
+    width: width/1.12,
   },
   UserImg: {
     width: 50,

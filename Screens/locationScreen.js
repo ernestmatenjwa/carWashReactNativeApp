@@ -8,146 +8,174 @@ import { Text,
  FlatList,
  TouchableOpacity,
 Image } from 'react-native';
+import Iconicons from "react-native-vector-icons/Ionicons"
 import { LinearGradient } from 'expo-linear-gradient';
 import mapImage from "../assets/pictures/map.jpg"
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 
+import COLORS from '../consts/colors';
+
 const { width, height } = Dimensions.get("screen");
 
-const carwash = [
-  {
-    id: '1',
-    userName: 'Alex Car wash',
-    userImg: require('../assets/pictures/car.jpg'),
-    location:
-      'Johannesburg',
-  },
-  {
-    id: '2',
-    userName: 'Mpho Car wash',
-    userImg: require('../assets/pictures/car.jpg'),
-    location:
-      'Pretoria',
-  },
-  {
-    id: '3',
-    userName: 'Shaun',
-    userImg: require('../assets/pictures/car.jpg'),
-    location:
-      'Mbombela',
-  },
-  
-];
-
 export default function LocationScreen({ navigation }) {
+  const [carwash, SetCarwash] = React.useState([
+    {
+      id: '1',
+      userName: 'Alex Car wash',
+      userImg: require('../assets/pictures/car.jpg'),
+      location: 'Johannesburg',
+      Desc: 'We have provide good service',
+    },
+    {
+      id: '2',
+      userName: 'Mpho Car wash',
+      userImg: require('../assets/pictures/car.jpg'),
+      location: 'Pretoria',
+      Desc: 'We have provide good service',
+    },
+    {
+      id: '3',
+      userName: 'Shaun',
+      userImg: require('../assets/pictures/car.jpg'),
+      location: 'Mbombela',
+      Desc: 'We have provide good service',
+    },
+    {
+      id: '4',
+      userName: 'Alex Car wash',
+      userImg: require('../assets/pictures/car.jpg'),
+      location: 'Johannesburg',
+      Desc: 'We have provide good service',
+    },
+    {
+      id: '5',
+      userName: 'Mpho Car wash',
+      userImg: require('../assets/pictures/car.jpg'),
+      location: 'Pretoria',
+      Desc: 'We have provide good service',
+    },
+    {
+      id: '6',
+      userName: 'Shaun',
+      userImg: require('../assets/pictures/car.jpg'),
+      location: 'Mbombela',
+      Desc: 'We have provide good service',
+    },
+    {
+      id: '7',
+      userName: 'Shaun',
+      userImg: require('../assets/pictures/car.jpg'),
+      location: 'Mbombela',
+      Desc: 'We have provide good service',
+    },
+  ]);
   const [searchValue, onChangesearchValue] = React.useState('');
 
   return (
   <View>
-      <LinearGradient
-   colors={["#064451", "#064451"]}
-   style={styles.container} 
-  >
-    <View style={{height: 10}}></View>
-  <Text style={{fontSize:20, fontWeight: "bold"}}>   Select nearest service provider</Text>
-  <View style={{height: 10}}></View>
   <Input 
-    onChangeText={onChangesearchValue} value={searchValue}
+    onChangeText={event => {onChangesearchValue(event.target.value)}}
     inputContainerStyle={styles.inputContainer}
-    inputStyle ={styles.inputText}
-    placeholder="Search"
+    inputStyle ={[styles.inputText, {padding: 10}]}
+    placeholder="Search..."
     rightIcon={ <Icon size={24} 
     style={styles.icon} name='search'/>}
   />
- </LinearGradient>
- <ImageBackground source={mapImage} style={{height: height/2}}>
-    {/* <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("CarBrand")}>CarBrand screen</Text>
-    <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("DateSetter")}> DateSetter screen</Text>
-    <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("SearchCarWash")}>SearchCarWash screen</Text>
-    <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("ConfirmScreen")}>Confirm screen</Text>
-    <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("CheckoutScreen")}>checkout screen</Text>
-    <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("VehicleScreen")}> Vehicle screen</Text>
-    <Text style={{fontSize: 25 }} onPress={() =>  navigation.push("PaymentScreen")}>Payment screen</Text> */}
- </ImageBackground>
- <View style={{height: height/6, borderRadius: 70}}>
+  <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>Select a carwash closer to you</Text>
+     
  <FlatList 
+ style={{height:height/1.54}}
       data={carwash}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
-        <TouchableOpacity onPress={() => navigation.navigate('VehicleScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate("VehicleScreen") }>
           <View style={styles.userInfo}>
-            <View style={styles.UserImgWrapper}>
+          <View style={styles.UserImgWrapper}>
               <Image style={styles.UserImg} source={item.userImg} />
-            </View>
-            <View style={styles.TextSection}>
-              <View style={styles.UserInfoText}>
-                <Text style={styles.UserName}>{item.userName}</Text>
-              </View>
-              <Text style={styles.MessageText}>{item.location}</Text>
-            </View>
           </View>
-        </TouchableOpacity>
+          <View style={styles.TextSection}>
+              <View style={styles.UserInfoText}>
+                  <Text style={[styles.UserName, {marginTop: "-10%", color: "#064451", textTransform: "uppercase" }]}>{item.userName}</Text>
+               </View>
+            <View style={{marginTop: "-5%", }}>
+                <Text style={styles.MessageText}>Location:   {item.location}</Text>
+                <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
+            </View>
+          </View> 
+          </View>
+       </TouchableOpacity>
       )}
     />
- </View>
+   <View style={{
+     marginTop:"-20%", 
+     marginLeft:"85%",
+     width:1,
+  }}>
+    <Icon
+    size={50} 
+    color={"#064451"}
+    name="map-marker" 
+    onPress={() => navigation.navigate('MapScreen')}  
+   />
+    </View>
   </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    height: height / 6.8,
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
+  header: {
+    marginTop: 30,
+    flexDirection: 'row',
+    marginBottom: 20,
+},
+container: {
+    backgroundColor: COLORS.gray,
+    flex: 1,
   },
-  inputContainer: {
-    height: 50,
-    borderRadius:20,
-    //borderColor: '#064451',
-    //borderWidth: 1,  
-    paddingRight:10,
-    backgroundColor:"rgb(247, 247, 247)",
+  item: {
+    backgroundColor: '#F5F5F5',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    marginTop: 35,
+    borderRadius: 10,
   },
-  inputText: {
-    color: '#064451',
-    fontWeight:'normal',
-    padding: 13,
-    paddingLeft:15,
-    marginRight:5,
-    borderRadius:20,
+  title: {
+    fontSize: 32,
   },
-  seachInput: {
+  subHeader:{
+    color: COLORS.tial,
+    marginTop: 20,
+    fontWeight: 'bold',
     fontSize: 15,
-    paddingRight:10,
-    fontWeight: "bold",
-    borderRadius: 20,
-    width: width / 1.1,
-    height: 50,
-    backgroundColor: "#f8f8ff",
-    marginTop: height / 90,
-    alignSelf: 'center'
+
   },
-  card: {
-    width: "100%",
+  price:{
+    fontSize: 15,
+    marginRight: -85,
+    marginTop: -23,
+    fontWeight: 'bold',
+    marginRight: 100
   },
   userInfo: {
+    width: width/1.03,
+    height: 130,
+    backgroundColor: COLORS.white,
     flexDirection: "row",
     justifyContent: "space-between",
-  },
-  UserImgWrapper: {
-    paddingTop: 50,
-    paddingBottom: 15,
+    marginHorizontal: 2,
+    marginBottom: 5,
+    marginTop: 15,
+    borderRadius: 13,
+    padding: 2,
+    
   },
   UserImg: {
-    width: 120,
-    height: 70,
-    borderRadius: 0,
-  },
-  icon:{
-    color:'#064451',
-    width:20,
+    width: width/2.7,
+    height: height/8,
+    borderRadius: 13,
+    marginBottom: 15,
   },
   TextSection: {
     flexDirection: "column",
@@ -156,8 +184,6 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     marginLeft: 10,
     width: 300,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
   },
   UserInfoText: {
     flexDirection: "row",
@@ -165,17 +191,19 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   UserName: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "bold",
-    //fontFamily: "Lato-Regular",
+    color: "grey",
   },
-  PostTime: {
-    fontSize: 12,
-    color: "#666",
-    //fontFamily: "Lato-Regular",
+  MessageText:{
+    fontWeight: 'bold',
+    fontSize: 14, 
+    color: COLORS.lightGray
   },
-  MessageText: {
-    fontSize: 14,
-    color: "#333333"
-  }
+
+  UserImgWrapper: {
+    paddingTop: 10,
+    paddingBottom: 15,
+  },
+
 })
