@@ -111,7 +111,7 @@ export default function More2({ navigation, route }) {
      <View style={{
      marginTop:"-20%", 
      marginLeft:"80%",
-     width: "100%",
+     width:1,
   }}>
     <Iconicons
     size={70} 

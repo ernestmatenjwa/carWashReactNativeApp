@@ -101,7 +101,7 @@ function DateSetter({navigation}) {
 
       
       
-       <View style={{ alignItems: 'center', flex: 1,marginTop:250,marginLeft:50}}>
+       <View style={{ alignItems: 'center', flex: 1,marginTop:0,marginLeft:50}}>
        
       <Pressable style={style.bookbtn}
       onPress={() => {

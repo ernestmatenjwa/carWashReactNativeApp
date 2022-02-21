@@ -85,7 +85,6 @@ export default function LocationScreen({ navigation }) {
   <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>Select a carwash closer to you</Text>
      
  <FlatList 
- showsVerticalScrollIndicator={false}
  style={{height:height/1.54}}
       data={carwash}
       keyExtractor={item=>item.id}

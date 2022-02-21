@@ -12,24 +12,23 @@ import Iconicons from "react-native-vector-icons/Ionicons"
 
 const { width, height } = Dimensions.get("screen");
 
-const bus = [
+const Minivan = [
   {
     id: '1',
     package: 'Full Body wash',
-    userImg: require('../assets/pictures/serImgs/bus2.jpg'),
-    tmstimated: '30min-40min',
-    price: '450',
+    userImg: require('../assets/pictures/serImgs/vann2.jpg'),
+    tmstimated: '15min-25min',
+    price: '180',
     Description: 'Exterior wash, Interior clean up and vaccum',
   },
   {
     id: '2',
     package: 'Half Body wash',
-    userImg: require('../assets/pictures/serImgs/bus.jpg'),
-    tmstimated: '15min-30min',
-    price: '340',
+    userImg: require('../assets/pictures/serImgs/vann.jpg'),
+    tmstimated: '15min-20min',
+    price: '110',
     Description: 'Exterior wash only!',
-  },
-]
+  },]
   const truck = [
     {
       id: '1',
@@ -112,7 +111,7 @@ export default function More1({ navigation, route }) {
     <View style={{
      marginTop:"-20%", 
      marginLeft:"80%",
-     width: "100%",
+     width:1,
   }}>
     <Iconicons
     size={70} 
