@@ -109,7 +109,7 @@ export default function VihicleScreen({ navigation, route }) {
    <View style={{
      marginTop:"-20%", 
      marginLeft:"80%",
-     width:1,
+     width: "100%",
   }}>
     <Iconicons
     size={70} 

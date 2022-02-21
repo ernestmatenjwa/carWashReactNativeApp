@@ -12,23 +12,24 @@ import Iconicons from "react-native-vector-icons/Ionicons"
 
 const { width, height } = Dimensions.get("screen");
 
-const Minivan = [
+const bus = [
   {
     id: '1',
     package: 'Full Body wash',
-    userImg: require('../assets/pictures/serImgs/vann2.jpg'),
-    tmstimated: '15min-25min',
-    price: '180',
+    userImg: require('../assets/pictures/serImgs/bus2.jpg'),
+    tmstimated: '30min-40min',
+    price: '450',
     Description: 'Exterior wash, Interior clean up and vaccum',
   },
   {
     id: '2',
     package: 'Half Body wash',
-    userImg: require('../assets/pictures/serImgs/vann.jpg'),
-    tmstimated: '15min-20min',
-    price: '110',
+    userImg: require('../assets/pictures/serImgs/bus.jpg'),
+    tmstimated: '15min-30min',
+    price: '340',
     Description: 'Exterior wash only!',
-  },]
+  },
+]
   const truck = [
     {
       id: '1',
@@ -56,9 +57,9 @@ export default function More1({ navigation, route }) {
         <Iconicons name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: "white", margin: "5%"}}/>
            <Text style={{marginTop: "-10%", color: "white", fontSize:25, fontWeight:"500", alignSelf: "center"}}>More Services</Text>
         </View>
-      <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>M i n i v a n</Text>
+      <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>B u s</Text>
       <FlatList 
-      data={Minivan}
+      data={bus}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
         <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
@@ -109,7 +110,7 @@ export default function More1({ navigation, route }) {
     <View style={{
      marginTop:"-20%", 
      marginLeft:"80%",
-     width:1,
+     width: "100%",
   }}>
     <Iconicons
     size={70} 
