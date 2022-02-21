@@ -59,7 +59,7 @@ export default function More1({ navigation, route }) {
         </View>
       <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>B u s</Text>
       <FlatList
-       
+       showsVerticalScrollIndicator={false}
       data={bus}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
@@ -85,6 +85,7 @@ export default function More1({ navigation, route }) {
     />
     <Text style={{ color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>T r u c k</Text>
     <FlatList 
+    showsVerticalScrollIndicator={false}
       data={truck}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (

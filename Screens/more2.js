@@ -30,24 +30,23 @@ const Tractor = [
     price: '305',
     Description: 'Exterior wash only!',
   },]
-  const bus = [
+  const Abnormal = [
     {
       id: '1',
       package: 'Full Body wash',
-      userImg: require('../assets/pictures/serImgs/bus2.jpg'),
+      userImg: require('../assets/pictures/serImgs/abnormal.jpg'),
       tmstimated: '30min-40min',
-      price: '450',
+      price: '512',
       Description: 'Exterior wash, Interior clean up and vaccum',
     },
     {
       id: '2',
       package: 'Half Body wash',
-      userImg: require('../assets/pictures/serImgs/bus.jpg'),
+      userImg: require('../assets/pictures/serImgs/abnomal.jpg'),
       tmstimated: '15min-30min',
-      price: '340',
+      price: '488',
       Description: 'Exterior wash only!',
-    },
-  ]
+    },]
 
 export default function More2({ navigation, route }) {
   return(
@@ -56,9 +55,10 @@ export default function More2({ navigation, route }) {
         <Icon1 name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: "white", margin: "5%"}}/>
            <Text style={{marginTop: "-10%", color: "white", fontSize:25, fontWeight:"500", alignSelf: "center"}}>More Services</Text>
         </View>
-      <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>B u s</Text>
-      <FlatList 
-      data={bus}
+      <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>A b n o r m a l</Text>
+      <FlatList
+      showsVerticalScrollIndicator={false} 
+      data={Abnormal}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
         <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
@@ -83,6 +83,7 @@ export default function More2({ navigation, route }) {
     />
     <Text style={{ color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>T r a c t o r</Text>
     <FlatList 
+    showsVerticalScrollIndicator={false}
       data={Tractor}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
