@@ -58,7 +58,8 @@ export default function More1({ navigation, route }) {
            <Text style={{marginTop: "-10%", color: "white", fontSize:25, fontWeight:"500", alignSelf: "center"}}>More Services</Text>
         </View>
       <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>B u s</Text>
-      <FlatList 
+      <FlatList
+       
       data={bus}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (

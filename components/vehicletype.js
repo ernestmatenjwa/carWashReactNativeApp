@@ -82,6 +82,7 @@ export default function VihicleScreen({ navigation, route }) {
     />
     <Text style={{ color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>T a x i</Text>
     <FlatList 
+    scrollEnabled={false}
       data={serTax}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
