@@ -179,11 +179,11 @@ const TitleBox = styled.View`
 
 const TimeBox = styled.View`
     flex-direction: row;
-    padding-top: 10
+    padding-top: 10px
 `;
 
 const FooterBox = styled.View`
-    top: 55
+    top: 55px
 `;
 
 const SectionDetails = styled.View`

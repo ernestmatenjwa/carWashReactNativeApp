@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Button,Platform,Pressable,TouchableOpacity } from 'react-native';
 import COLORS from '../consts/colors';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 //import { event } from 'react-native-reanimated';
 
@@ -43,46 +43,44 @@ function DateSetter({navigation}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
       <View style={style.header}>
-      <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.tial, marginTop: 9, marginLeft: 10}}/>
+      <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 9, marginLeft: 0}}/>
        <View style={{marginLeft: 35}}>
-         <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.tial}}>Date & Time</Text>
-         <Text style={{fontSize: 14, marginTop: 25, fontWeight: "bold", color: COLORS.tial}}>Select time and date</Text>
+         <Text style={{fontSize: 40, marginTop: "40%", fontWeight: "bold", alignSelf: "center", color: COLORS.white}}>Date & Time</Text>
+
        </View>
       </View>
-
+      <Text style={{fontSize: 18, paddingLeft: "5%", marginTop: "3%", fontWeight: "bold", color: COLORS.tial}}>Select time and date</Text>
         <View>
         
       <View  style={{width:"90%", alignItems:'center',padding:50, borderColor:COLORS.tial, borderWidth:2, margin:25}}>
         <Text style={{fontWeight:'bold',fontSize:20}}>{text}</Text>
-    
       </View>
-      
-      <View style={{margin:20, flexDirection:'row',justifyContent:'space-around'}}>
+      <View style={{
+     //marginTop:"0%", 
+     //marginLeft:"18%",
+     flexDirection: 'row', 
+     width:"150%",
+     marginLeft: "20%"
+  }}>
+   <Icon
+    onPress={showTimepicker}
+    size={50} 
+    color={"#064451"}
+    name="time-outline" 
+    //onPress={() => navigation.navigate('MapScreen')}  
+   />
+   <Text style={{marginTop:"10%", fontSize: 15, marginLeft: "-8%", fontWeight: "bold"}}>Time</Text>
+     <Icon
+    onPress={showDatepicker}
+    size={50} 
+    color={"#064451"}
+    name="calendar-outline" 
+    style={{marginLeft:"25%"}}
+    //onPress={() => navigation.navigate('MapScreen')}  
+   />
+   <Text style={{marginTop:"10%", fontSize: 15, marginLeft: "-7%", fontWeight: "bold"}}>Date</Text>
+    </View>
 
-     
-      <TouchableOpacity
-      style={{width:100,height:70,backgroundColor:COLORS.tial, borderRadius:20,
-        alignItems:'center',justifyContent:'center'}}
-           onPress={showDatepicker}
-            >
-              <Text style={{color:'white', fontSize:20,fontWeight:"500"}}>Select date</Text> 
-
-            </TouchableOpacity>
-
-
-            <TouchableOpacity
-        
-        style={{width:100,height:70,backgroundColor:COLORS.tial, borderRadius:20,
-          alignItems:'center',justifyContent:'center'}}
-
-            onPress={showTimepicker}
-            >
-
-<Text  style={{color:'white', fontSize:20,fontWeight:"500"}}>Select time </Text> 
-            </TouchableOpacity>
-
-
-      </View>
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -96,29 +94,27 @@ function DateSetter({navigation}) {
         />
       )}
     </View>
-
-
-
-      
-      
-       <View style={{ alignItems: 'center', flex: 1,marginTop:250,marginLeft:50}}>
-       
+   
       <Pressable style={style.bookbtn}
       onPress={() => {
         navigation.navigate("CheckoutScreen");
       }}>
         <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Proceed</Text>
       </Pressable>
-      </View> 
+   
     </SafeAreaView>
   );
 };
 
 const style = StyleSheet.create({
   header:{
-    marginTop: 30,
+    //marginTop: 30,
     flexDirection: 'row',
     paddingHorizontal: 20,
+    backgroundColor: "#064451",
+    height: "25%",
+    borderBottomEndRadius:20,
+    borderBottomStartRadius:20
   },
   bookbtn:{
     width: 170,
@@ -127,9 +123,9 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    marginLeft: 100,
+    marginLeft: 170,
     marginBottom: 50,
-    marginTop:50
+    marginTop:"40%"
   },
 
   

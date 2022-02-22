@@ -75,7 +75,7 @@ export default function LocationScreen({ navigation }) {
   return (
   <View>
   <Input 
-    onChangeText={event => {onChangesearchValue(event.target.value)}}
+    //onChangeText={event => {onChangesearchValue(event.target.value)}}
     inputContainerStyle={styles.inputContainer}
     inputStyle ={[styles.inputText, {padding: 10}]}
     placeholder="Search..."

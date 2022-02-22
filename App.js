@@ -15,7 +15,7 @@ import VehicleScreen from "./components/vehicletype"
 import PaymentScreen from "./components/payment"
 import ChatScreen from "./components/chatScreen"
 import ProfileEdit from "./Screens/EditProfile"
-import More1 from "./Screens/more1";
+import RegisteredCars from "./Screens/RegisteredCars";
 import More2 from "./Screens/more2";
 import More3 from "./Screens/more3";
 
@@ -167,7 +167,7 @@ export default function App() {
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
         <Stack.Screen name="VihicleDetail" component={VihicleDetail} options={{header: () => null}} />
         <Stack.Screen name="ProfileEdit" component={ProfileEdit} options={{header: () => null}} />
-        <Stack.Screen name="More1" component={More1} options={{header: () => null}} />
+        <Stack.Screen name="RegisteredCars" component={RegisteredCars} options={{header: () => null}} />
         <Stack.Screen name="More2" component={More2} options={{header: () => null}} />
         <Stack.Screen name="More3" component={More3} options={{header: () => null}} />
         <Stack.Screen 
