@@ -6,7 +6,7 @@ import { View,
   Dimensions, 
   FlatList, 
   TouchableOpacity,
-  Button } from "react-native";
+  ImageBackground  } from "react-native";
 import COLORS from '../consts/colors';
 import Icon1 from 'react-native-vector-icons/MaterialIcons';
 import Iconicons from "react-native-vector-icons/Ionicons"
@@ -17,7 +17,7 @@ import taxImg from "../assets/pictures/serImgs/taxi.jpg"
 import busImg from "../assets/pictures/serImgs/bus2.jpg"
 import truckImg from "../assets/pictures/serImgs/truck.jpg"
 import bikeImg from "../assets/pictures/serImgs/motob1.jpg"
-import abnImg from "../assets/pictures/serImgs/abnomal.jpg"
+import abnImg from "../assets/pictures/serImgs/ab.jpg"
 
 const { width, height } = Dimensions.get("screen");
 
@@ -170,25 +170,27 @@ export default function VihicleScreen({ navigation, route }) {
      style={[styles.inner, {}]}
      onPress={toggleModal}
      >
-        <View >
-           <Image 
+          <View>
+          <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Car</Text>
+        <Image 
            source={carImg}
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Car</Text>
+           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
         </View>
-        
       </TouchableOpacity>   
       <TouchableOpacity 
       style={styles.inner}
       onPress={toggleModal1}
       >
         <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Bus</Text>
         <Image 
            source={busImg}
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Bus</Text>
+         
+           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
         </View>
         
       </TouchableOpacity>   
@@ -197,11 +199,13 @@ export default function VihicleScreen({ navigation, route }) {
       onPress={toggleModal2}
       >
         <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Motorcycle</Text>
         <Image 
            source={bikeImg}
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Motorcycle</Text>
+          
+           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
         </View>
         
       </TouchableOpacity>   
@@ -210,11 +214,13 @@ export default function VihicleScreen({ navigation, route }) {
       onPress={toggleModal3}
       >
         <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Truck </Text>
         <Image 
            source={truckImg}
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Truck </Text>
+          
+           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
         </View>
        
       </TouchableOpacity>   
@@ -223,11 +229,13 @@ export default function VihicleScreen({ navigation, route }) {
       onPress={toggleModal4}
       >
         <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Taxi</Text>
         <Image 
            source={taxImg}
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Taxi</Text>
+          
+           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
         </View>
         
       </TouchableOpacity>   
@@ -236,11 +244,13 @@ export default function VihicleScreen({ navigation, route }) {
       onPress={toggleModal5}
       >
         <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Abnormal</Text>
         <Image 
            source={abnImg}
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Abnormal</Text>
+           
+           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
         </View>
         
       </TouchableOpacity>
@@ -597,8 +607,6 @@ container: {
     //marginBottom: 0,
     marginTop: 3,
     borderRadius: 5,
-    borderColor: "green",
-    borderWidth: 2,
   },
   UserImg: {
     width: width/2.7,
@@ -640,7 +648,7 @@ container: {
     alignItems:'center',
     height:"35%",
     width: "45%",
-    borderRadius:10,
+    //borderRadius:100,
     margin:4,
     marginTop: "3%"
     //padding:5,

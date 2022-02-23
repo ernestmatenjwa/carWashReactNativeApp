@@ -129,8 +129,9 @@ export default function App() {
         }}
         />
         <Stack.Screen name="LocationScreen" component={TabScreen}
-        options={({route}) => ({
-          title: "Carwash Registered",
+        options={({route}) => ({ 
+          header: () => null,
+          title: "Location Screen",
           headerBackTitleVisible: false,
           headerTitleAlign: 'center',
           headerTitleStyle: {

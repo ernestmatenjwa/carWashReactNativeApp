@@ -6,16 +6,14 @@ import {
     Pressable, 
     Dimensions, 
     FlatList, 
-    TouchableOpacity } from "react-native";
+    TouchableOpacity,
+    InputText } from "react-native";
 import COLORS from '../consts/colors';
 import Iconicons from "react-native-vector-icons/Ionicons"
+import Modal from "react-native-modal";
+import { Input } from 'react-native-elements';
 
 const { width, height } = Dimensions.get("screen");
-
-const show = () => {
-  setModalVisible(!isModalVisible);
-  setService(1)
-};
 
   const vehicle = [
     {
@@ -35,7 +33,14 @@ const show = () => {
   ]
 
 export default function RegisteredCars({ navigation, route }) {
-  //const {userName} = route.params
+  const [carBrand, setCarBrand] = React.useState(false);
+  const [isModalVisible, setModalVisible] = React.useState(false);
+const show = () => {
+  setModalVisible(!isModalVisible);
+};
+const close = () => {
+  setModalVisible(!isModalVisible);
+};
   return(
     <View style={styles.container}>
         <View style={{height: "12%", backgroundColor: "#064451", width: width, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
@@ -51,39 +56,107 @@ export default function RegisteredCars({ navigation, route }) {
         <TouchableOpacity onPress={() => navigation.navigate("DateSetter") }>
           <View style={styles.userInfo}>
             <View>
-            <Text style={styles.UserName}>{item.brand} - {item.RegNumber}</Text>
+                <Text style={styles.UserName}>{item.brand} - {item.RegNumber}</Text>
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Model: {item.model}</Text>
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
                <View style={{flexDirection: 'row', paddingTop: "2%"}}>
-               <Pressable><Text style={{color: "green", fontSize: 16, fontWeight: "bold"}}>EDIT</Text></Pressable>
+               <Pressable onPress={show}><Text style={{color: "green", fontSize: 16, fontWeight: "bold"}}>EDIT</Text></Pressable>
                 <Pressable><Text style={{paddingLeft: 20, color: "red", fontSize: 16, fontWeight: "bold"}}>DELETE</Text></Pressable>
                 <Pressable 
                 onPress={() => navigation.navigate("DateSetter")}
-                style={{marginLeft: "70%"}}
+                style={{marginLeft: "50%"}}
                 ><Text style={{ color: "#064451", fontSize: 16, fontWeight: "bold"}}>SELECT</Text></Pressable> 
                    </View> 
             </View>
-          </View>
-         
+          </View>   
        </TouchableOpacity>
       )}
     />
-    <Iconicons 
-    onPress={() => navigation.navigate("CarBrand")}
-    name={"add-circle"} 
-    size={80}
-    color={"#064451"}
-    style={{marginLeft: "75%"}}
-    />
+    {(() => {
+    if (isModalVisible === true){
+      return (
+        <Modal isVisible={isModalVisible} style={{backgroundColor: "white", opacity: 0.8, height: 50, marginTop: "30%", marginBottom: "30%"}}>   
+          <View
+          style={{ marginTop: "0%"}}
+          >
+          <Text style={[styles.tit, {alignSelf: "center", color:"green"}]}>UPDATE</Text>
+          <Text style={styles.tit}>Car Brand</Text>
+          <Input
+          style={styles.inpt}
+            inputContainerStyle={styles.Con}
+            inputStyle ={styles.inputText}
+            value="BMW"
+          />
+            <Text style={styles.tit}>Car Model</Text>
+          <Input
+          style={styles.inpt}
+            inputContainerStyle={styles.Con}
+            inputStyle ={styles.inputText}
+            value="4series"
+          />
+          <Text style={styles.tit}>Registration Number</Text>
+          <Input
+            style={styles.inpt}
+            inputContainerStyle={styles.Con}
+            inputStyle ={styles.inputText}
+            value="425 42C"
+          />
+          <Text style={styles.tit}>Discription</Text>
+          <Input
+          style={styles.inpt}
+          inputContainerStyle={styles.Con}
+          inputStyle ={styles.inputText}
+          value="Red"
+          />
+          </View>
+          <View style={{flexDirection:"row", alignContent: "center"}}>
+          <Pressable
+          style={{padding: 10}}
+          ><Text style={{fontSize: 20, fontWeight: "bold", color: "green"}}>UPDATE</Text></Pressable>
+          <Pressable 
+          onPress={close}
+          style={{padding: 10}}
+          ><Text style={{fontSize: 20, fontWeight: "bold", color: "red"}}>CANCEL</Text></Pressable>
+          </View>
+        </Modal>
+        )
+      }
+      return (
+        null
+        );
+      })()}
     </View>
     );
 }
 
 const styles = StyleSheet.create({
-  header: {
+header: {
     marginTop: 30,
     flexDirection: 'row',
     marginBottom: 20,
+},
+tit: {
+  fontSize: 20,
+  padding: 5,
+  color: "#064451",
+  fontWeight: "bold"
+},
+inpt:{
+  height: 30,
+  borderColor: "black",
+  backgroundColor: "white",
+  opacity: 1,
+  borderWidth: 0.5,
+  borderColor: "black"
+},
+inputText: {
+  fontSize: 20,
+  padding: 10,
+  color: "black"
+},
+Con: {
+  height: 35,
+  padding: 5,
 },
 actionButtonIcon: {
     fontSize: 20,
@@ -132,8 +205,6 @@ container: {
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
     padding: 2,
-    borderColor: "green",
-    borderWidth: 1,
   },
   UserImg: {
     width: width/2.7,

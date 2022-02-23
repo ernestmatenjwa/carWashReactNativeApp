@@ -3,7 +3,9 @@ import { Text,  Dimensions, StyleSheet, View, Image,Pressable } from 'react-nati
 import { StatusBar } from "expo-status-bar";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {LinearGradient} from 'expo-linear-gradient';
+import Modal from "react-native-modal";
 import { Input } from 'react-native-elements';
+
 import img from "../assets/pictures/person.png"
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -11,9 +13,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const { width, height }= Dimensions.get("screen");
 
 export default function ProfileScreen({ navigation }) {
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [phone, setPhone] = React.useState('');
+  const [name, setName] = React.useState('Alex Mathenjwa');
+  const [email, setEmail] = React.useState('alexmatenjwa@gmail.com');
+  const [phone, setPhone] = React.useState('0729476167');
+  const [isModalVisible, setModalVisible] = React.useState(false);
+  
+  const show = () => {
+    setModalVisible(!isModalVisible);
+  };
+  const close = () => {
+    setModalVisible(!isModalVisible);
+  };
   return (
     <View style = {styles.container}>
     <View style = {{justifyContent:'center',alignItems:'center', width:"100%", }}>          
@@ -22,7 +32,7 @@ export default function ProfileScreen({ navigation }) {
     <Text style = {styles.text_header}>Alex Mathenjwa </Text>
     <Text style={[styles.text_footer, {marginTop:"-10%"}]}>Full Name</Text>
     <Input 
-        onChangeText={setName} value={name}
+        value={name}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle ={[styles.inputText, {paddingLeft: 15}]}                
         placeholder="Alex Mathenjwa"
@@ -54,13 +64,62 @@ export default function ProfileScreen({ navigation }) {
     
         <Pressable 
         style={styles.loginG} 
-        onPress={() =>  navigation.push("ProfileEdit", {name: "Alex Mathenjwa", email: "alexmatenjwa@gmail.com", phone: "0729476167"})}
+        onPress={show}
         >
         <Text 
         style={{
             fontSize: 15, 
             color: "white"}}>Edit</Text>
         </Pressable>
+        {(() => {
+    if (isModalVisible === true){
+      return (
+      <Modal isVisible={isModalVisible} style={{backgroundColor: "white", opacity: 0.8, height: 50, marginTop: "30%", marginBottom: "30%"}}>   
+        <View
+        style={{ marginTop: "0%"}}
+        >
+        <Text style={[styles.tit, {alignSelf: "center", color:"green"}]}>UPDATE</Text>
+        <Text style={styles.tit}>Name</Text>
+        <Input
+        style={styles.inpt}
+          inputContainerStyle={styles.Con}
+          inputStyle ={styles.inputText}
+          onChangeText={setName}
+          value={name}
+        />
+          <Text style={styles.tit}>Email</Text>
+        <Input
+        style={styles.inpt}
+          inputContainerStyle={styles.Con}
+          inputStyle ={styles.inputText}
+          onChangeText={setEmail}
+          value={email}
+        />
+        <Text style={styles.tit}>Phone Number</Text>
+        <Input
+          style={styles.inpt}
+          inputContainerStyle={styles.Con}
+          inputStyle ={styles.inputText}
+          onChangeText={setPhone}
+          value={phone}
+        />
+        </View>
+        <View style={{flexDirection:"row", alignContent: "center"}}>
+        <Pressable
+        style={{padding: 10}}
+        ><Text style={{fontSize: 20, fontWeight: "bold", color: "green"}}>UPDATE</Text></Pressable>
+        <Pressable 
+        onPress={close}
+        style={{padding: 10}}
+        ><Text style={{fontSize: 20, fontWeight: "bold", color: "red"}}>CANCEL</Text></Pressable>
+        </View>
+      </Modal>
+        )
+      }
+      return (
+        null
+      );
+    })()}
     </View> 
   );
 }
@@ -89,6 +148,29 @@ const styles = StyleSheet.create({
         width: '40%',
         height: 50,
         marginLeft: "55%",
+      },
+      tit: {
+        fontSize: 20,
+        padding: 5,
+        color: "#064451",
+        fontWeight: "bold"
+      },
+      inpt:{
+        height: 30,
+        borderColor: "black",
+        backgroundColor: "white",
+        opacity: 1,
+        borderWidth: 0.5,
+        borderColor: "black"
+      },
+      inputText: {
+        fontSize: 20,
+        padding: 10,
+        color: "black"
+      },
+      Con: {
+        height: 35,
+        padding: 5,
       },
     UserImg: {
         width: 90,

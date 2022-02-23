@@ -4,7 +4,7 @@ import { Text,
   View, 
   StyleSheet,
  Dimensions,
- ImageBackground,
+ SafeAreaView,
  FlatList,
  TouchableOpacity,
 Image } from 'react-native';
@@ -73,7 +73,10 @@ export default function LocationScreen({ navigation }) {
   const [searchValue, onChangesearchValue] = React.useState('');
 
   return (
-  <View>
+  <SafeAreaView>
+    <View style={{height: "10%", backgroundColor: "#064451", width: width, }}>
+           <Text style={{color: "white", paddingTop: "5%", fontSize:20, fontWeight:"700", alignSelf: "center"}}>Edit Profile</Text>
+        </View>
   <Input 
     //onChangeText={event => {onChangesearchValue(event.target.value)}}
     inputContainerStyle={styles.inputContainer}
@@ -119,7 +122,7 @@ export default function LocationScreen({ navigation }) {
     onPress={() => navigation.navigate('MapScreen')}  
    />
     </View>
-  </View>
+  </SafeAreaView>
   );
 }
 
