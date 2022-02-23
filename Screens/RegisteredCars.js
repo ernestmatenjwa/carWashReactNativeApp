@@ -12,6 +12,11 @@ import Iconicons from "react-native-vector-icons/Ionicons"
 
 const { width, height } = Dimensions.get("screen");
 
+const show = () => {
+  setModalVisible(!isModalVisible);
+  setService(1)
+};
+
   const vehicle = [
     {
       id: '1',
@@ -38,18 +43,6 @@ export default function RegisteredCars({ navigation, route }) {
            <Text style={{marginTop: "-10%", color: "white", fontSize:25, fontWeight:"bold", alignSelf: "center"}}>Registered Vehicles</Text>
         </View>
         <View style={{height:"2%", }}></View>
-        <View style={{width: "95%",
-         alignSelf: "center", 
-         flexDirection: 'row', 
-         paddingTop: "2%", 
-         backgroundColor: "white", 
-         paddingTop: "5%", 
-         paddingBottom:"5%",
-         borderRadius: 10,
-         }}>
-        <Text style={{paddingLeft: 20, fontSize: 16, fontWeight: "bold", color: "grey"}}>New vehicle?</Text>
-               <Pressable style={{ marginLeft: "50%"}} onPress={() => navigation.navigate("CarBrand")}><Text style={{color: "#064451", fontSize: 16, fontWeight: "bold"}}>ADD</Text></Pressable>
-                   </View> 
     
     <FlatList 
       data={vehicle}
@@ -67,12 +60,20 @@ export default function RegisteredCars({ navigation, route }) {
                <View style={{flexDirection: 'row', paddingTop: "2%"}}>
                <Pressable><Text style={{color: "green", fontSize: 16, fontWeight: "bold"}}>EDIT</Text></Pressable>
                 <Pressable><Text style={{paddingLeft: 20, color: "red", fontSize: 16, fontWeight: "bold"}}>DELETE</Text></Pressable>
+                <Pressable onPress={() => navigation.navigate("DateSetter") }><Text style={{marginLeft: "65%", color: "#064451", fontSize: 16, fontWeight: "bold"}}>SELECT</Text></Pressable>
                    </View> 
             </View>
           </View>
           </View>
        </TouchableOpacity>
       )}
+    />
+    <Iconicons 
+    onPress={() => navigation.navigate("CarBrand")}
+    name={"add-circle"} 
+    size={80}
+    color={"#064451"}
+    style={{marginLeft: "75%"}}
     />
     </View>
     );
@@ -120,16 +121,19 @@ container: {
   },
   userInfo: {
     width: width/1.03,
-    height: 130,
+    height: 100,
     backgroundColor: COLORS.white,
     flexDirection: "row",
     justifyContent: "space-between",
     marginHorizontal: 2,
     marginBottom: 5,
-    marginTop: 15,
+    //marginTop: 1,
     borderRadius: 13,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
     padding: 2,
-    
+    borderColor: "green",
+    borderWidth: 1,
   },
   UserImg: {
     width: width/2.7,
