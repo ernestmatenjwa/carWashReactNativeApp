@@ -50,21 +50,21 @@ export default function RegisteredCars({ navigation, route }) {
       renderItem={({item}) => (
         <TouchableOpacity onPress={() => navigation.navigate("DateSetter") }>
           <View style={styles.userInfo}>
-          <View style={styles.TextSection}>
-              <View style={styles.UserInfoText}>
-                  <Text style={styles.UserName}>{item.brand} - {item.RegNumber}</Text>
-               </View>
             <View>
+            <Text style={styles.UserName}>{item.brand} - {item.RegNumber}</Text>
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Model: {item.model}</Text>
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
                <View style={{flexDirection: 'row', paddingTop: "2%"}}>
                <Pressable><Text style={{color: "green", fontSize: 16, fontWeight: "bold"}}>EDIT</Text></Pressable>
                 <Pressable><Text style={{paddingLeft: 20, color: "red", fontSize: 16, fontWeight: "bold"}}>DELETE</Text></Pressable>
-                <Pressable onPress={() => navigation.navigate("DateSetter") }><Text style={{marginLeft: "65%", color: "#064451", fontSize: 16, fontWeight: "bold"}}>SELECT</Text></Pressable>
+                <Pressable 
+                onPress={() => navigation.navigate("DateSetter")}
+                style={{marginLeft: "70%"}}
+                ><Text style={{ color: "#064451", fontSize: 16, fontWeight: "bold"}}>SELECT</Text></Pressable> 
                    </View> 
             </View>
           </View>
-          </View>
+         
        </TouchableOpacity>
       )}
     />
