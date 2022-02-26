@@ -110,7 +110,7 @@ export default function LocationScreen({ navigation }) {
    <View style={{
      marginTop:"-20%", 
      marginLeft:"85%",
-     width:1,
+     width:"100%",
   }}>
     <Icon
     size={50} 

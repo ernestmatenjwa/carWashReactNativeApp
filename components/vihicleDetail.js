@@ -15,7 +15,7 @@ function VihicleDetail ({navigation}) {
             <View style={style.header}>
             <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 13, marginLeft: 10}}/>
             <View style={{marginLeft: 35}}>
-                <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}}>Vihicle details</Text>
+                <Text style={{fontSize: 30, fontWeight: "bold", color: COLORS.white}} onPress={() => navigation.navigate('DateSetter')}  >Vihicle details</Text>
             </View>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -232,6 +232,5 @@ export default VihicleDetail;
 
 
  
-
 
 
