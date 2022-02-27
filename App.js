@@ -2,6 +2,7 @@ import "react-native-gesture-handler"
 import React from "react"
 import HomeScreen from "./Screens/HomeScreen";
 import SignupScreen from "./components/Signup";
+import ConfirmEmail from "./components/ConfirmEmailScreen.js"
 import LoginScreen from "./components/Login";
 import LocationScreen from "./Screens/locationScreen";
 import MessagesScreen from "./Screens/messagesScreen";
@@ -25,6 +26,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import VihicleDetail from "./components/vihicleDetail";
 import MapScreen from "./Screens/map";
+import ForgotPasswordScreen from "./components/ForgotPasswordScreen";
+import NewPasswordScreen from "./components/NewPasswordScreen";
 
 const Stack = createNativeStackNavigator();
 const locationStack= createNativeStackNavigator();
@@ -34,6 +37,7 @@ const Tabs = createBottomTabNavigator();
 const LocationStackScreen = () => {
   return(
     <locationStack.Navigator>
+     
         <locationStack.Screen name="Home" 
         component={LocationScreen} 
         options={{header: () => null}} />
@@ -65,6 +69,7 @@ const TabScreen = () => {
        tabBarLabel:() => {return null}
      })}
     >
+
         <Tabs.Screen name="LocationScreenStack" component={LocationStackScreen} options={{header: () => null}} />
         <locationStack.Screen 
         name="Messanger" 
@@ -120,9 +125,16 @@ export default function App() {
   return (
     <NavigationContainer>
        <Stack.Navigator>
-        <Stack.Screen name="Splash" component={HomeScreen} options={{header: () => null}} />
+       <Stack.Screen name="Splash" component={HomeScreen} options={{header: () => null}} />
+      
+
         <Stack.Screen name="SignupScreen" component={SignupScreen} options={{header: () => null}} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{header: () => null}} />
+        <Stack.Screen name="ConfirmEmail" component={ConfirmEmail}  />
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
+        <Stack.Screen name="SignIn" component={LoginScreen} options={{header: () => null}} />
+      
+      
         <Stack.Screen name="ConfirmScreen" component={ConfirmScreen} 
         options={{
              title: ""

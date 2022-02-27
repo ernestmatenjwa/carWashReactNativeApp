@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-carwashapp-dev-140036-authRole",
+      "UnauthRoleArn": "arn:aws:iam::493162465146:role/amplify-carwashapp-dev-140036-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::493162465146:role/amplify-carwashapp-dev-140036-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-carwashapp-dev-140036-deployment",
+      "UnauthRoleName": "amplify-carwashapp-dev-140036-unauthRole",
+      "StackName": "amplify-carwashapp-dev-140036",
+      "StackId": "arn:aws:cloudformation:us-east-1:493162465146:stack/amplify-carwashapp-dev-140036/e45f5580-97c4-11ec-a8b6-1293300abf73",
+      "AmplifyAppId": "d22ve41419l1t7"
+    },
+    "categories": {
+      "auth": {
+        "carwashappe56ed574": {}
+      }
+    }
+  }
+}
