@@ -1,5 +1,5 @@
 import React, {useState}from 'react';
-import { SafeAreaView, TextInput, Text, Pressable, ImageBackground, StyleSheet, View } from 'react-native';
+import { Alert,SafeAreaView, TextInput, Text, Pressable, ImageBackground, StyleSheet, View } from 'react-native';
 import gbImage from './../assets/pictures/homeBG3.jpg';
 import CustomInput from './CustomInput/CustomInput';
 import CustomButton from './CustomButton/CustomButton';
@@ -18,11 +18,11 @@ export default function ForgotPasswordScreen({ navigation }) {
     setLoading(true);
     try{
       await Auth.forgotPassword(data.username);
+      Alert.alert('Success', 'Your Password has been reset, check your email');
       navigation.navigate('NewPassword',{username});
     }
     catch(e){
-      window.alert( e.message);
-      console.log(e.message);
+      Alert.alert('Failed', e.message);
     }
     setLoading(false);
   };

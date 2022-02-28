@@ -1,5 +1,5 @@
 import React, {useState}from 'react';
-import { SafeAreaView, TextInput, Text, Pressable, ImageBackground, StyleSheet, View } from 'react-native';
+import {Alert, SafeAreaView, TextInput, Text, Pressable, ImageBackground, StyleSheet, View } from 'react-native';
 import gbImage from './../assets/pictures/homeBG3.jpg';
 import CustomInput from './CustomInput/CustomInput';
 import CustomButton from './CustomButton/CustomButton';
@@ -22,8 +22,7 @@ export default function ConfirmEmailScreen({ navigation }) {
       navigation.navigate('SignIn');  
     }
     catch(e){
-      window.alert( e.message);
-      console.log(e.message);
+      Alert.alert('Error',e.message);
     }
     setLoading(false);
   };
@@ -36,11 +35,13 @@ export default function ConfirmEmailScreen({ navigation }) {
 
     try{
       const response =await Auth.resendSignUp(username);
-      console.log(response);
+      
+      Alert.alert('Success',response);
+    navigation.navigate('SignIn');
     }
     catch(e){
-      window.alert( e.message);
-      console.log(e.message);
+     
+      Alert.alert('Error',e.message);
     }
   };
 

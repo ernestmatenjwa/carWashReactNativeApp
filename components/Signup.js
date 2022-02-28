@@ -33,7 +33,8 @@ export default function SignupScreen({ navigation }) {
         password,
         attributes: {email,name,preferred_username: username},
       });
-
+      
+      Alert.alert('Success','Hi '+ username +' your account has been created successful. \n Please check your email to verify your account!');
       navigation.navigate('ConfirmEmail',{username});
     }
     catch(e){

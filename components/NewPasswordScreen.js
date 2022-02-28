@@ -1,5 +1,5 @@
 import React, {useState}from 'react';
-import { SafeAreaView, TextInput, Text, Pressable, ImageBackground, StyleSheet, View } from 'react-native';
+import {Alert, SafeAreaView, TextInput, Text, Pressable, ImageBackground, StyleSheet, View } from 'react-native';
 import gbImage from './../assets/pictures/homeBG3.jpg';
 import CustomInput from './CustomInput/CustomInput';
 import {useForm} from 'react-hook-form';
@@ -19,11 +19,11 @@ export default function NewPasswordScreen({ navigation }) {
     setLoading(true);
     try{
       await Auth.forgotPasswordSubmit(data.username,data.code,data.password); 
+      Alert.alert('Success','Please sign in with your new password');
       navigation.navigate('SignIn');
   }
     catch(e){
-      window.alert( e.message);
-      console.log(e.message);
+      Alert.alert('Failed', e.message);
     }
     setLoading(false);
   };
