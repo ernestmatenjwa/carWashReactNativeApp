@@ -76,7 +76,7 @@ export default function ConfirmEmailScreen({ navigation }) {
           <Pressable 
                style={styles.loginG} 
                onPress={handleSubmit(onConfirmPressed)}>
-             <Text style={styles.text}>{loading ? 'Loading...': "Confirm"}</Text>
+             <Text style={styles.text}>{loading ? 'Loading...': "Confirm" }</Text>
             </Pressable>
 
             <Pressable 

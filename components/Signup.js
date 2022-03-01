@@ -39,7 +39,14 @@ export default function SignupScreen({ navigation }) {
     }
     catch(e){
       Alert.alert('Error',e.message);
+      console.log(e.message);
+      if(e.message === 'User already exists')
+      {
+        navigation.navigate('SignIn');
+      }
+
     }
+    
     setLoading(false);
   };
 
