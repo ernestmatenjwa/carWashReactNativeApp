@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "carwashapp",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Users\\CodeTribe00L\\Desktop\\Projects\\carWashAdminApp\\amplify\\backend\\api\\carwashapp\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authcarWashApp"
+    }
+  }
+}

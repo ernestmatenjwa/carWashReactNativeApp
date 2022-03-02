@@ -1,98 +1,84 @@
-import  React, {useState} from 'react';
-import { Alert,SafeAreaView, Text, Pressable, ImageBackground, StyleSheet, View } from 'react-native';
+import React, {useState}from 'react';
+import {Alert, SafeAreaView, TextInput, Text, Pressable, ImageBackground, StyleSheet, View } from 'react-native';
 import gbImage from './../assets/pictures/homeBG3.jpg';
 import CustomInput from './CustomInput/CustomInput';
-import {useForm, Controller} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
+import {useRoute } from '@react-navigation/native';
 import {Auth} from 'aws-amplify';
 
-export default function LoginScreen({ navigation }) {
+export default function NewPasswordScreen({ navigation }) {
   const [loading,setLoading] =useState(false);
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
+  const route = useRoute();
+  const {control, handleSubmit,watch} = useForm({defaultValues: {username: route?.params?.username}});
+  const username = watch('username');
 
-  const onSignInPressed = async data => {
+  const onSubmitPressed = async data => {
     if(loading){
       return;
     }
     setLoading(true);
     try{
-      await Auth.signIn(data.username, data.password)
-      Alert.alert('Success', 'Welcome back ' + data.username); 
-      navigation.navigate('LocationScreen');  
-    }
+      await Auth.forgotPasswordSubmit(data.username,data.code,data.password); 
+      Alert.alert('Success','Please sign in with your new password');
+      navigation.navigate('LoginScreen');
+  }
     catch(e){
       Alert.alert('Failed', e.message);
-      const username = data.username;
-      if(e.message === 'User is not confirmed.')
-      {
-        navigation.navigate('ConfirmEmail', {username});
-      }
     }
     setLoading(false);
   };
+
+  const onSignInPress = () => {
+    navigation.navigate('LoginScreen');
+  };  
+  
   return (
     <ImageBackground source={gbImage}  style={styles.container}>
       <View style={styles.frame}>
-          <Text style={styles.title}>Log In</Text>
-          <SafeAreaView>
-            <Text style={styles.label}>Username</Text> 
-            <CustomInput
-          name="username"
+      <Text style={styles.title}>Create new password</Text>
+        <SafeAreaView>
+          
+        <Text style={styles.label}>Username</Text> 
+        <CustomInput
           placeholder="Username"
+          name="username"
           control={control}
           rules={{required: 'Username is required'}}
           iconName='user'
         />
-            <Text style={styles.label}>Password</Text> 
-            <CustomInput
-          name="password"
-          placeholder="Password"
-          secureTextEntry
+        
+        <Text style={styles.label}>Code</Text> 
+        <CustomInput
+          placeholder="Code"
+          name="code"
           control={control}
+          rules={{required: 'Code is required'}}
           iconName='lock'
+        />
+        
+        <Text style={styles.label}>New Password</Text> 
+        <CustomInput
+          placeholder="Enter your new password"
+          name="password"
+          control={control}
+          secureTextEntry
           rules={{
             required: 'Password is required',
             minLength: {
-              value: 3,
-              message: 'Password should be minimum 3 characters long',
+              value: 8,
+              message: 'Password should be at least 8 characters long',
             },
           }}
-        />
-           <Pressable style={styles.label}
-                onPress={() => {
-                navigation.navigate("ForgotPasswordScreen");
-                }}>
-                <Text style={styles.textBody}>Forgot Password?</Text>
-          </Pressable>
-               <Pressable 
-               style={styles.login} 
-               onPress={handleSubmit(onSignInPressed)}>
-             <Text style={styles.text}>{loading ? 'Loading...': "Sign In"} </Text>
-            </Pressable> 
-            <View style={styles.space} />
-            <Pressable 
-               style={styles.loginG} 
-               onPress={() => {
-              //  Sign in with Google
-              }}>
-             <Text style={styles.text}>Log in with google+ </Text>
-            </Pressable>
-            <View style={styles.space} />     
-            <Text style={styles.label}> Don't have an account?
-             <Pressable style={styles.label}
-                onPress={() => {
-                navigation.navigate("SignupScreen");
-                }}>
-                <Text style={styles.link}>Sign up</Text>
-              </Pressable>
-            </Text> 
-            <View style={styles.space} />
-
-            {/* Social Icons */}
+          iconName='lock'
+        />   
+    
           </SafeAreaView>
+          <Pressable 
+               style={styles.loginG} 
+               onPress={handleSubmit(onSubmitPressed)}>
+             <Text style={styles.text}>{loading ? 'Loading...': "Submit"} </Text>
+            </Pressable>
+            <View style={styles.space} />
       </View>
     </ImageBackground>
   );

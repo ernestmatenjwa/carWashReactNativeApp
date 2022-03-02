@@ -74,9 +74,9 @@ export default function ProfileScreen({ navigation }) {
         {(() => {
     if (isModalVisible === true){
       return (
-      <Modal isVisible={isModalVisible} style={{backgroundColor: "white", opacity: 0.8, height: 50, marginTop: "30%", marginBottom: "30%"}}>   
+      <Modal isVisible={isModalVisible} style={{backgroundColor: "white",opacity: 0.8,}}>   
         <View
-        style={{ marginTop: "0%"}}
+        style={{height:"80%"}}
         >
         <Text style={[styles.tit, {alignSelf: "center", color:"green"}]}>UPDATE</Text>
         <Text style={styles.tit}>Name</Text>

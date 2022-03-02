@@ -75,7 +75,7 @@ export default function LocationScreen({ navigation }) {
   return (
   <SafeAreaView>
     <View style={{height: "10%", backgroundColor: "#064451", width: width, }}>
-           <Text style={{color: "white", paddingTop: "5%", fontSize:20, fontWeight:"700", alignSelf: "center"}}>Edit Profile</Text>
+           <Text style={{color: "white", paddingTop: "5%", fontSize:20, fontWeight:"700", alignSelf: "center"}}>Available car wash</Text>
         </View>
   <Input 
     //onChangeText={event => {onChangesearchValue(event.target.value)}}
@@ -92,7 +92,7 @@ export default function LocationScreen({ navigation }) {
       data={carwash}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
-        <TouchableOpacity onPress={() => navigation.navigate("VehicleScreen") }>
+        <TouchableOpacity onPress={() => navigation.navigate("VehicleScreen", {carD : item})}>
           <View style={styles.userInfo}>
           <View style={styles.UserImgWrapper}>
               <Image style={styles.UserImg} source={item.userImg} />

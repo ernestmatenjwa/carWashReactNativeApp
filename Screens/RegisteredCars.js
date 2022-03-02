@@ -35,8 +35,11 @@ const { width, height } = Dimensions.get("screen");
 export default function RegisteredCars({ navigation, route }) {
   const [carBrand, setCarBrand] = React.useState(false);
   const [isModalVisible, setModalVisible] = React.useState(false);
+  const {packg, carD} = route.params
+  //const {carD} = route.params
 const show = () => {
   setModalVisible(!isModalVisible);
+  //console.log(packg, "++++++++", carD)
 };
 const close = () => {
   setModalVisible(!isModalVisible);
@@ -75,9 +78,9 @@ const close = () => {
     {(() => {
     if (isModalVisible === true){
       return (
-        <Modal isVisible={isModalVisible} style={{backgroundColor: "white", opacity: 0.8, height: 50, marginTop: "30%", marginBottom: "30%"}}>   
+        <Modal isVisible={isModalVisible} style={{backgroundColor: "white", opacity: 0.8, }}>   
           <View
-          style={{ marginTop: "0%"}}
+          style={{ }}
           >
           <Text style={[styles.tit, {alignSelf: "center", color:"green"}]}>UPDATE</Text>
           <Text style={styles.tit}>Car Brand</Text>

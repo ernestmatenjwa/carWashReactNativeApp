@@ -1,0 +1,21 @@
+type Admin @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  email: String!
+  phone: String!
+  imageUrl: String
+  carwash: [Carwash] @hasMany
+}
+type Carwash @model @auth(rules: [{ allow: owner }]){
+  id: ID!
+  name: String
+  location: String
+  imageUrl: String
+}
+type User @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  email: String!
+  phone: String!
+  imageUrl: String
+}

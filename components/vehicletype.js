@@ -125,9 +125,12 @@ export default function VihicleScreen({ navigation, route }) {
   const [service, setService] = React.useState(0);
   const [isModalVisible, setModalVisible] = React.useState(false);
 
+  const {carD} = route.params
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
     setService(1)
+    //console.log(carD)
   };
   const toggleModal1 = () => {
     setModalVisible(!isModalVisible);
@@ -151,7 +154,7 @@ export default function VihicleScreen({ navigation, route }) {
   };
   const onSelect = () => {
     setModalVisible(!isModalVisible);
-    navigation.navigate("RegisteredCars")
+    //navigation.navigate("RegisteredCars", {item})
   };
   return(
     <View style={styles.container}>
@@ -160,7 +163,7 @@ export default function VihicleScreen({ navigation, route }) {
            <Text style={{marginTop: "-15%", color: "white", fontSize:25, fontWeight:"500", alignSelf: "center"}}>Services</Text>
         </View>
     <Text style={{paddingLeft: 15, paddingTop: 5, fontSize:20, color: "#064451", fontWeight: "bold"}}>Tab car type for to select package</Text>
-    <View style={{marginTop:"8%", 
+    <View style={{marginTop:"1%", 
                   width:'100%',
                   flexDirection:'row', 
                   flexWrap:'wrap',
@@ -176,7 +179,7 @@ export default function VihicleScreen({ navigation, route }) {
            source={carImg}
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16,  }}>2 - 7 seater </Text>
         </View>
       </TouchableOpacity>   
       <TouchableOpacity 
@@ -190,7 +193,7 @@ export default function VihicleScreen({ navigation, route }) {
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
          
-           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>30 - 200 seater</Text>
         </View>
         
       </TouchableOpacity>   
@@ -205,7 +208,7 @@ export default function VihicleScreen({ navigation, route }) {
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
           
-           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>Any</Text>
         </View>
         
       </TouchableOpacity>   
@@ -220,7 +223,7 @@ export default function VihicleScreen({ navigation, route }) {
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
           
-           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>0.5 - 10 ton</Text>
         </View>
        
       </TouchableOpacity>   
@@ -235,7 +238,7 @@ export default function VihicleScreen({ navigation, route }) {
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
           
-           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>12 - 28 seater</Text>
         </View>
         
       </TouchableOpacity>   
@@ -250,7 +253,7 @@ export default function VihicleScreen({ navigation, route }) {
            style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
            
-           <Text style={{alignSelf:"center", color: "grey", fontSize: 15 }}>( 2 - 7 seater )</Text>
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>10 - 20 ton</Text>
         </View>
         
       </TouchableOpacity>
@@ -275,8 +278,8 @@ export default function VihicleScreen({ navigation, route }) {
                    data={car}
                    keyExtractor={item=>item.id}
                    renderItem={({item}) => (
-                     <TouchableOpacity onPress={onSelect}>
-                       <View style={styles.userInfo}>
+                     <TouchableOpacity onPress={() => navigation.navigate("RegisteredCars", {packg : item, carD})}>
+                       <View onPress={onSelect} style={styles.userInfo}>
                        <View style={styles.UserImgWrapper}>
                            <Image style={styles.UserImg} source={item.userImg} />
                        </View>
