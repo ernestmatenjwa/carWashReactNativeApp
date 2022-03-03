@@ -39,7 +39,19 @@
               "userPoolId": "authcarWashApp"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 150,
+                "apiKeyExpirationDate": "2022-07-31T12:43:06.379Z",
+                "description": "alex"
+              }
+            },
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
         }
       }
     }

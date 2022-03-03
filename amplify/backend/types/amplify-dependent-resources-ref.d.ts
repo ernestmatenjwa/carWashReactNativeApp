@@ -13,6 +13,7 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "api": {
         "carwashapp": {
+            "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }

@@ -7,6 +7,17 @@
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
       "cognitoUserPoolId": "authcarWashApp"
-    }
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 150,
+        "apiKeyExpirationDate": "2022-07-31T12:43:06.379Z",
+        "keyDescription": "alex"
+      },
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
   }
 }
