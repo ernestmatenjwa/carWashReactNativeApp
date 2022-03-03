@@ -2,7 +2,6 @@ import "react-native-gesture-handler"
 import React from "react"
 import HomeScreen from "./Screens/HomeScreen";
 import SignupScreen from "./components/Signup";
-import ConfirmEmail from "./components/ConfirmEmailScreen.js"
 import LoginScreen from "./components/Login";
 import LocationScreen from "./Screens/locationScreen";
 import MessagesScreen from "./Screens/messagesScreen";
@@ -16,7 +15,10 @@ import VehicleScreen from "./components/vehicletype"
 import PaymentScreen from "./components/payment"
 import ChatScreen from "./components/chatScreen"
 import ProfileEdit from "./Screens/EditProfile"
-import More1 from "./Screens/more1";
+import ConfirmEmailScreen from "./components/ConfirmEmailScreen.js"
+import ForgotPasswordScreen from "./components/ForgotPasswordScreen"
+import NewPasswordScreen from "./components/NewPasswordScreen"
+import RegisteredCars from "./Screens/RegisteredCars";
 import More2 from "./Screens/more2";
 import More3 from "./Screens/more3";
 
@@ -26,8 +28,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import VihicleDetail from "./components/vihicleDetail";
 import MapScreen from "./Screens/map";
-import ForgotPasswordScreen from "./components/ForgotPasswordScreen";
-import NewPasswordScreen from "./components/NewPasswordScreen";
+
+import Amplify from 'aws-amplify'
+import awsconfig from './src/aws-exports'
+Amplify.configure(awsconfig)
 
 const Stack = createNativeStackNavigator();
 const locationStack= createNativeStackNavigator();
@@ -37,13 +41,21 @@ const Tabs = createBottomTabNavigator();
 const LocationStackScreen = () => {
   return(
     <locationStack.Navigator>
-     
-        <locationStack.Screen name="Home" 
-        component={LocationScreen} 
-        options={{header: () => null}} />
-        <locationStack.Screen name="Messanger" 
-        component={MessagesScreen} />
-        <locationStack.Screen name="Profile" component={ProfileScreen} />
+        <locationStack.Screen 
+        name="Home" 
+        component={
+          LocationScreen} 
+        options={{
+          header: () => null
+          }} />
+        <locationStack.Screen 
+        name="Messanger" 
+        component={
+          MessagesScreen} />
+        <locationStack.Screen 
+        name="Profile" 
+        component={ProfileScreen} 
+        />
     </locationStack.Navigator>
   )
 }
@@ -69,7 +81,6 @@ const TabScreen = () => {
        tabBarLabel:() => {return null}
      })}
     >
-
         <Tabs.Screen name="LocationScreenStack" component={LocationStackScreen} options={{header: () => null}} />
         <locationStack.Screen 
         name="Messanger" 
@@ -125,24 +136,48 @@ export default function App() {
   return (
     <NavigationContainer>
        <Stack.Navigator>
-       <Stack.Screen name="Splash" component={HomeScreen} options={{header: () => null}} />
-      
-
-        <Stack.Screen name="SignupScreen" component={SignupScreen} options={{header: () => null}} />
-        <Stack.Screen name="ConfirmEmail" component={ConfirmEmail}  />
-        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-        <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
-        <Stack.Screen name="SignIn" component={LoginScreen} options={{header: () => null}} />
-      
-      
-        <Stack.Screen name="ConfirmScreen" component={ConfirmScreen} 
+        <Stack.Screen 
+        name="Splash" 
+        component={HomeScreen} 
         options={{
-             title: ""
+          header: () => null}} />
+          <Stack.Screen 
+       name="ForgotPasswordScreen" 
+       component={ForgotPasswordScreen} 
+       options={{
+         header: () => null}} />
+       <Stack.Screen 
+       name="ConfirmEmailScreen" 
+       component={ConfirmEmailScreen} 
+       options={{header: () => null}} />
+        <Stack.Screen 
+        name="NewPasswordScreen" 
+        component={NewPasswordScreen} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="SignupScreen" 
+        component={SignupScreen} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="LoginScreen" 
+        component={LoginScreen} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="ConfirmScreen" 
+        component={ConfirmScreen} 
+        options={{
+          header: () => null
         }}
         />
-        <Stack.Screen name="LocationScreen" component={TabScreen}
-        options={({route}) => ({
-          title: "Carwash Registered",
+        <Stack.Screen 
+        name="LocationScreen" 
+        component={TabScreen}
+        options={({route}) => ({ 
+          header: () => null,
+          title: "Location Screen",
           headerBackTitleVisible: false,
           headerTitleAlign: 'center',
           headerTitleStyle: {
@@ -155,8 +190,12 @@ export default function App() {
             elevation: 0,
           },
         })}/>
-        <Stack.Screen name="CarBrand" component={CarBrand} options={{header: () => null}} />
-        <Stack.Screen name="MapScreen" 
+        <Stack.Screen 
+        name="CarBrand" 
+        component={CarBrand} 
+        options={{header: () => null}} />
+        <Stack.Screen 
+        name="MapScreen" 
         component={MapScreen} 
         options={({route}) => ({
           title: "Map Search",
@@ -172,16 +211,56 @@ export default function App() {
             elevation: 0,
           },
         })} />
-        <Stack.Screen name="DateSetter" component={DateSetter} options={{header: () => null}} />
-        <Stack.Screen name="SearchCarWash" component={SearchCarWash} options={{header: () => null}} />
-        <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{header: () => null}} />
-        <Stack.Screen name="VehicleScreen" component={VehicleScreen} options={{header: () => null}} />
-        <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{header: () => null}} />
-        <Stack.Screen name="VihicleDetail" component={VihicleDetail} options={{header: () => null}} />
-        <Stack.Screen name="ProfileEdit" component={ProfileEdit} options={{header: () => null}} />
-        <Stack.Screen name="More1" component={More1} options={{header: () => null}} />
-        <Stack.Screen name="More2" component={More2} options={{header: () => null}} />
-        <Stack.Screen name="More3" component={More3} options={{header: () => null}} />
+        <Stack.Screen 
+        name="DateSetter" 
+        component={DateSetter} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="SearchCarWash" 
+        component={SearchCarWash} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="CheckoutScreen" 
+        component={CheckoutScreen} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="VehicleScreen" 
+        component={VehicleScreen} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="PaymentScreen" 
+        component={PaymentScreen} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="VihicleDetail" 
+        component={VihicleDetail} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="ProfileEdit" 
+        component={ProfileEdit} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="RegisteredCars" 
+        component={RegisteredCars} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="More2" 
+        component={More2} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="More3" 
+        component={More3} 
+        options={{
+          header: () => null}} />
         <Stack.Screen 
         name="ChatScreen"
         component={ChatScreen} 

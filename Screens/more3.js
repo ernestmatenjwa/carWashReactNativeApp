@@ -12,6 +12,23 @@ import Icon1 from 'react-native-vector-icons/MaterialIcons';
 
 const { width, height } = Dimensions.get("screen");
 
+const Abnormal = [
+  {
+    id: '1',
+    package: 'Full Body wash',
+    userImg: require('../assets/pictures/serImgs/abnormal.jpg'),
+    tmstimated: '30min-40min',
+    price: '512',
+    Description: 'Exterior wash, Interior clean up and vaccum',
+  },
+  {
+    id: '2',
+    package: 'Half Body wash',
+    userImg: require('../assets/pictures/serImgs/abnomal.jpg'),
+    tmstimated: '15min-30min',
+    price: '488',
+    Description: 'Exterior wash only!',
+  },]
   const Motorcycle = [
     {
       id: '1',
@@ -24,15 +41,40 @@ const { width, height } = Dimensions.get("screen");
   ]
 
 export default function More3({ navigation, route }) {
+
   return(
     <View style={styles.container}>
         <View style={{height: "10%", backgroundColor: "#064451", width: width, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
         <Icon1 name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: "white", margin: "5%"}}/>
            <Text style={{marginTop: "-10%", color: "white", fontSize:25, fontWeight:"500", alignSelf: "center"}}>More Services</Text>
         </View>
+      <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>A b n o r m a l</Text>
+      <FlatList 
+      data={Abnormal}
+      keyExtractor={item=>item.id}
+      renderItem={({item}) => (
+        <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
+          <View style={styles.userInfo}>
+          <View style={styles.UserImgWrapper}>
+              <Image style={styles.UserImg} source={item.userImg} />
+          </View>
+          <View style={styles.TextSection}>
+              <View style={styles.UserInfoText}>
+                  <Text style={styles.UserName}>{item.package}</Text>
+                  <Text style={[styles.price, {color: "green", paddingTop: "2%"}]}>R{item.price}</Text>
+               </View>
+            
+            <View>
+                <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{item.Description}</Text>
+                <Text style={styles.MessageText}>{item.tmstimated}</Text>
+            </View>
+          </View>
+          </View>
+       </TouchableOpacity>
+      )}
+    />
     <Text style={{ color: "#064451", marginTop: "-30%", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>M o t o r c y c l e</Text>
     <FlatList 
-    showsVerticalScrollIndicator={false}
       data={Motorcycle}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (

@@ -20,7 +20,6 @@ export default function LoginScreen({ navigation }) {
     setLoading(true);
     try{
       await Auth.signIn(data.username, data.password)
-      Alert.alert('Success', 'Welcome back ' + data.username); 
       navigation.navigate('LocationScreen');  
     }
     catch(e){
@@ -63,7 +62,7 @@ export default function LoginScreen({ navigation }) {
         />
            <Pressable style={styles.label}
                 onPress={() => {
-                navigation.navigate("ForgotPassword");
+                navigation.navigate("ForgotPasswordScreen");
                 }}>
                 <Text style={styles.textBody}>Forgot Password?</Text>
           </Pressable>

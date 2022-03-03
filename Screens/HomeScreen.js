@@ -15,7 +15,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.space} />
      <Pressable 
       style={styles.login} 
-      onPress={() =>  navigation.push("SignIn")}
+      onPress={() =>  navigation.push("LoginScreen")}
      ><Text style={styles.text}>Log in</Text></Pressable>
   </ImageBackground>
   );

@@ -20,7 +20,7 @@ export default function NewPasswordScreen({ navigation }) {
     try{
       await Auth.forgotPasswordSubmit(data.username,data.code,data.password); 
       Alert.alert('Success','Please sign in with your new password');
-      navigation.navigate('SignIn');
+      navigation.navigate('LoginScreen');
   }
     catch(e){
       Alert.alert('Failed', e.message);
@@ -29,7 +29,7 @@ export default function NewPasswordScreen({ navigation }) {
   };
 
   const onSignInPress = () => {
-    navigation.navigate('SignIn');
+    navigation.navigate('LoginScreen');
   };  
   
   return (

@@ -5,16 +5,19 @@ import { View,
   Image, 
   Dimensions, 
   FlatList, 
-  TouchableOpacity } from "react-native";
+  TouchableOpacity,
+  ImageBackground  } from "react-native";
 import COLORS from '../consts/colors';
 import Icon1 from 'react-native-vector-icons/MaterialIcons';
 import Iconicons from "react-native-vector-icons/Ionicons"
+import Modal from "react-native-modal";
+
 import carImg from "../assets/pictures/serImgs/bmw.jpg"
 import taxImg from "../assets/pictures/serImgs/taxi.jpg"
 import busImg from "../assets/pictures/serImgs/bus2.jpg"
 import truckImg from "../assets/pictures/serImgs/truck.jpg"
 import bikeImg from "../assets/pictures/serImgs/motob1.jpg"
-import abnImg from "../assets/pictures/serImgs/abnomal.jpg"
+import abnImg from "../assets/pictures/serImgs/ab.jpg"
 
 const { width, height } = Dimensions.get("screen");
 
@@ -120,14 +123,47 @@ const car = [
 
 export default function VihicleScreen({ navigation, route }) {
   const [service, setService] = React.useState(0);
+  const [isModalVisible, setModalVisible] = React.useState(false);
+
+  const {carD} = route.params
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+    setService(1)
+    //console.log(carD)
+  };
+  const toggleModal1 = () => {
+    setModalVisible(!isModalVisible);
+    setService(2)
+  };
+  const toggleModal2 = () => {
+    setModalVisible(!isModalVisible);
+    setService(3)
+  };
+  const toggleModal3 = () => {
+    setModalVisible(!isModalVisible);
+    setService(4)
+  };
+  const toggleModal4 = () => {
+    setModalVisible(!isModalVisible);
+    setService(5)
+  };
+  const toggleModal5 = () => {
+    setModalVisible(!isModalVisible);
+    setService(6)
+  };
+  const onSelect = () => {
+    setModalVisible(!isModalVisible);
+    //navigation.navigate("RegisteredCars", {item})
+  };
   return(
     <View style={styles.container}>
        <View style={{height: "10%", backgroundColor: "#064451", width: width, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
         <Iconicons name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: "white", margin: "5%"}}/>
            <Text style={{marginTop: "-15%", color: "white", fontSize:25, fontWeight:"500", alignSelf: "center"}}>Services</Text>
         </View>
-    <Text style={{paddingLeft: 15, paddingTop: 5, fontSize:18, color: "#064451"}}>Tab car type for more infomation</Text>
-    <View style={{marginTop:10, 
+    <Text style={{paddingLeft: 15, paddingTop: 5, fontSize:20, color: "#064451", fontWeight: "bold"}}>Tab car type for to select package</Text>
+    <View style={{marginTop:"1%", 
                   width:'100%',
                   flexDirection:'row', 
                   flexWrap:'wrap',
@@ -135,79 +171,89 @@ export default function VihicleScreen({ navigation, route }) {
                   }}>
     <TouchableOpacity
      style={[styles.inner, {}]}
-     onPress={() =>  setService(1)}
+     onPress={toggleModal}
      >
-        <View style={{width: "120%", height: "80%", borderRadius:10, marginTop:30, alignItems:"center"}}>
-           <Image 
+          <View>
+          <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Car</Text>
+        <Image 
            source={carImg}
-           style={{marginTop: "-20%", width:90, height:70, borderRadius: 5}}
+           style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{color: "#064451", fontWeight: "bold", fontSize: 15 }}>Car</Text>
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16,  }}>2 - 7 seater </Text>
         </View>
-        
       </TouchableOpacity>   
       <TouchableOpacity 
       style={styles.inner}
-      onPress={() =>  setService(2)}
+      onPress={toggleModal1}
       >
-        <View style={{width: 100, height: 80, borderRadius:10, marginTop:30, alignItems:"center"}}>
+        <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Bus</Text>
         <Image 
            source={busImg}
-           style={{marginTop: "-20%", width:90, height:70, borderRadius: 5}}
+           style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{color: "#064451", fontWeight: "bold", fontSize: 15 }}>Bus</Text>
+         
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>30 - 200 seater</Text>
         </View>
         
       </TouchableOpacity>   
       <TouchableOpacity 
       style={styles.inner}
-      onPress={() =>  setService(3)}
+      onPress={toggleModal2}
       >
-        <View style={{width: 100, height: 80, borderRadius:10, marginTop:30, alignItems:"center"}}>
+        <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Motorcycle</Text>
         <Image 
            source={bikeImg}
-           style={{marginTop: "-20%", width:90, height:70, borderRadius: 5}}
+           style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{color: "#064451", fontWeight: "bold", fontSize: 15, padding: 5, textAlign: "center" }}>Motorcycle</Text>
+          
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>Any</Text>
         </View>
         
       </TouchableOpacity>   
       <TouchableOpacity 
       style={styles.inner}
-      onPress={() =>  setService(4)}
+      onPress={toggleModal3}
       >
-        <View style={{width: 100, height: 80, borderRadius:10, marginTop:30, alignItems:"center"}}>
+        <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Truck </Text>
         <Image 
            source={truckImg}
-           style={{marginTop: "-20%", width:90, height:70, borderRadius: 5}}
+           style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{color: "#064451", fontWeight: "bold", fontSize: 15 }}>Truck </Text>
+          
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>0.5 - 10 ton</Text>
         </View>
        
       </TouchableOpacity>   
       <TouchableOpacity 
       style={styles.inner}
-      onPress={() =>  setService(5)}
+      onPress={toggleModal4}
       >
-        <View style={{width: 100, height: 80, borderRadius:10, marginTop:30, alignItems:"center"}}>
+        <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Taxi</Text>
         <Image 
            source={taxImg}
-           style={{marginTop: "-20%", width:90, height:70, borderRadius: 5}}
+           style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{color: "#064451", fontWeight: "bold", fontSize: 15 }}>Taxi</Text>
+          
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>12 - 28 seater</Text>
         </View>
         
       </TouchableOpacity>   
       <TouchableOpacity 
       style={styles.inner}
-      onPress={() =>  setService(6)}
+      onPress={toggleModal5}
       >
-        <View style={{width: 100, height: 80, borderRadius:10, marginTop:30, alignItems:"center"}}>
+        <View>
+        <Text style={{alignSelf:"center", color: "#064451", fontWeight: "bold", fontSize: 18 }}>Abnormal</Text>
         <Image 
            source={abnImg}
-           style={{marginTop: "-20%", width:90, height:70, borderRadius: 5}}
+           style={{marginTop: "2%", width:150, height:100, borderRadius: 5}}
            />
-           <Text style={{color: "#064451", fontWeight: "bold", fontSize: 15 }}>Abnormal</Text>
+           
+           <Text style={{alignSelf:"center", color: "green", fontSize: 16 }}>10 - 20 ton</Text>
         </View>
         
       </TouchableOpacity>
@@ -215,26 +261,35 @@ export default function VihicleScreen({ navigation, route }) {
     {(() => {
               if (service === 1){
                   return (
-                    <>
-                    <Text style={{fontSize:20, fontWeight: "bold", alignSelf:"center", color: "#064451"}}>Car  packages</Text>
+                    <View >
+                    <Modal isVisible={isModalVisible}>
+                      <View>
+                      <View>
+                      <Iconicons name={"close"} size={50} color={"red"}
+                        onPress={toggleModal}
+                        style={{marginLeft: "85%", marginTop: "-55%"}}
+                        />
+                      </View>
+   
+                      <Text style={{fontSize:30, fontWeight: "bold", alignSelf:"center", color: "white"}}>Vehicle Pachage</Text>
                     <FlatList
+                    //style={{width: "99%"}}
                     showsVerticalScrollIndicator={false}
                    data={car}
                    keyExtractor={item=>item.id}
                    renderItem={({item}) => (
-                     <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
-                       <View style={styles.userInfo}>
+                     <TouchableOpacity onPress={() => navigation.navigate("RegisteredCars", {packg : item, carD})}>
+                       <View onPress={onSelect} style={styles.userInfo}>
                        <View style={styles.UserImgWrapper}>
                            <Image style={styles.UserImg} source={item.userImg} />
                        </View>
                        <View style={styles.TextSection}>
                            <View style={styles.UserInfoText}>
                                <Text style={styles.UserName}>{item.package}</Text>
-                               <Text style={[styles.price, {color: "green", paddingTop: "2%"}]}>R{item.price}</Text>
                             </View>
                          
-                         <View>
-                             <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{item.Description}</Text>
+                         <View style={{flex: 1, width: "60%"}}>
+                             <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
                              <Text style={styles.MessageText}>{item.tmstimated}</Text>
                          </View>
                        </View>
@@ -242,169 +297,255 @@ export default function VihicleScreen({ navigation, route }) {
                     </TouchableOpacity>
                    )}
                  />
-                 </>
+                      </View>
+                    </Modal>
+                  </View>
+                //     <>
+                //     <Text style={{fontSize:20, fontWeight: "bold", alignSelf:"center", color: "#064451"}}>Car  packages</Text>
+                //     <FlatList
+                //     showsVerticalScrollIndicator={false}
+                //    data={car}
+                //    keyExtractor={item=>item.id}
+                //    renderItem={({item}) => (
+                //      <TouchableOpacity onPress={() => navigation.navigate("RegisteredCars") }>
+                //        <View style={styles.userInfo}>
+                //        <View style={styles.UserImgWrapper}>
+                //            <Image style={styles.UserImg} source={item.userImg} />
+                //        </View>
+                //        <View style={styles.TextSection}>
+                //            <View style={styles.UserInfoText}>
+                //                <Text style={styles.UserName}>{item.package}</Text>
+                //                <Text style={[styles.price, {color: "green", paddingTop: "2%"}]}>R{item.price}</Text>
+                //             </View>
+                         
+                //          <View>
+                //              <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{item.Description}</Text>
+                //              <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                //          </View>
+                //        </View>
+                //        </View>
+                //     </TouchableOpacity>
+                //    )}
+                //  />
+                //  </>
                   )
               }
               if (service === 2){
                 return (
-                  <>
-                  <Text style={{fontSize:20, fontWeight: "bold", alignSelf:"center", color: "#064451"}}>Bus packages</Text>
+                  <View >
+                  <Modal isVisible={isModalVisible}>
+                    <View>
+                    <View>
+                    <Iconicons name={"close"} size={50} color={"red"}
+                      onPress={toggleModal}
+                      style={{marginLeft: "85%", marginTop: "-55%"}}
+                      />
+                    </View>
+ 
+                    <Text style={{fontSize:30, fontWeight: "bold", alignSelf:"center", color: "white"}}>Vehicle Pachage</Text>
                   <FlatList
-       showsVerticalScrollIndicator={false}
-      data={bus}
-      keyExtractor={item=>item.id}
-      renderItem={({item}) => (
-        <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
-          <View style={styles.userInfo}>
-          <View style={styles.UserImgWrapper}>
-              <Image style={styles.UserImg} source={item.userImg} />
-          </View>
-          <View style={styles.TextSection}>
-              <View style={styles.UserInfoText}>
-                  <Text style={styles.UserName}>{item.package}</Text>
-                  <Text style={[styles.price, {color: "green", paddingTop: "2%"}]}>R{item.price}</Text>
-               </View>
-            
-            <View>
-                <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{item.Description}</Text>
-                <Text style={styles.MessageText}>{item.tmstimated}</Text>
-            </View>
-          </View>
-          </View>
-       </TouchableOpacity>
-      )}
-    />
-    </>
+                  //style={{width: "99%"}}
+                  showsVerticalScrollIndicator={false}
+                 data={bus}
+                 keyExtractor={item=>item.id}
+                 renderItem={({item}) => (
+                   <TouchableOpacity onPress={onSelect}>
+                     <View style={styles.userInfo}>
+                     <View style={styles.UserImgWrapper}>
+                         <Image style={styles.UserImg} source={item.userImg} />
+                     </View>
+                     <View style={styles.TextSection}>
+                         <View style={styles.UserInfoText}>
+                             <Text style={styles.UserName}>{item.package}</Text>
+                          </View>
+                       
+                          <View style={{flex: 1, width: "60%"}}>
+                             <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
+                             <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                         </View>
+                     </View>
+                     </View>
+                  </TouchableOpacity>
+                 )}
+               />
+                    </View>
+                  </Modal>
+                </View>
                 )
             }
             if (service === 3){
               return (
-                <>
-                <Text style={{fontSize:20, fontWeight: "bold", alignSelf:"center", color: "#064451"}}>Motorcycle packages</Text>
-                <FlatList
-     showsVerticalScrollIndicator={false}
-    data={Motorcycle}
-    keyExtractor={item=>item.id}
-    renderItem={({item}) => (
-      <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
-        <View style={styles.userInfo}>
-        <View style={styles.UserImgWrapper}>
-            <Image style={styles.UserImg} source={item.userImg} />
-        </View>
-        <View style={styles.TextSection}>
-            <View style={styles.UserInfoText}>
-                <Text style={styles.UserName}>{item.package}</Text>
-                <Text style={[styles.price, {color: "green", paddingTop: "2%"}]}>R{item.price}</Text>
-             </View>
-          
-          <View>
-              <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{item.Description}</Text>
-              <Text style={styles.MessageText}>{item.tmstimated}</Text>
-          </View>
-        </View>
-        </View>
-     </TouchableOpacity>
-    )}
-  /></>
+                <View >
+                    <Modal isVisible={isModalVisible}>
+                      <View>
+                      <View>
+                      <Iconicons name={"close"} size={50} color={"red"}
+                        onPress={toggleModal}
+                        style={{marginLeft: "85%", marginTop: "-55%"}}
+                        />
+                      </View>
+   
+                      <Text style={{fontSize:30, fontWeight: "bold", alignSelf:"center", color: "white"}}>Vehicle Pachage</Text>
+                    <FlatList
+                    //style={{width: "99%"}}
+                    showsVerticalScrollIndicator={false}
+                   data={Motorcycle}
+                   keyExtractor={item=>item.id}
+                   renderItem={({item}) => (
+                     <TouchableOpacity onPress={onSelect}>
+                       <View style={styles.userInfo}>
+                       <View style={styles.UserImgWrapper}>
+                           <Image style={styles.UserImg} source={item.userImg} />
+                       </View>
+                       <View style={styles.TextSection}>
+                           <View style={styles.UserInfoText}>
+                               <Text style={styles.UserName}>{item.package}</Text>
+                            </View>
+                         
+                            <View style={{flex: 1, width: "60%"}}>
+                             <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
+                             <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                         </View>
+                       </View>
+                       </View>
+                    </TouchableOpacity>
+                   )}
+                 />
+                      </View>
+                    </Modal>
+                  </View>
               )
           }
           if (service === 4){
             return (
-              <>
-              <Text style={{fontSize:20, fontWeight: "bold", alignSelf:"center", color: "#064451"}}>Truck  packages</Text>
-              <FlatList
-   showsVerticalScrollIndicator={false}
-  data={truck}
-  keyExtractor={item=>item.id}
-  renderItem={({item}) => (
-    <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
-      <View style={styles.userInfo}>
-      <View style={styles.UserImgWrapper}>
-          <Image style={styles.UserImg} source={item.userImg} />
-      </View>
-      <View style={styles.TextSection}>
-          <View style={styles.UserInfoText}>
-              <Text style={styles.UserName}>{item.package}</Text>
-              <Text style={[styles.price, {color: "green", paddingTop: "2%"}]}>R{item.price}</Text>
-           </View>
-        
-        <View>
-            <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{item.Description}</Text>
-            <Text style={styles.MessageText}>{item.tmstimated}</Text>
-        </View>
-      </View>
-      </View>
-   </TouchableOpacity>
-  )}
-/></>
+              <View >
+                    <Modal isVisible={isModalVisible}>
+                      <View>
+                      <View>
+                      <Iconicons name={"close"} size={50} color={"red"}
+                        onPress={toggleModal}
+                        style={{marginLeft: "85%", marginTop: "-55%"}}
+                        />
+                      </View>
+   
+                      <Text style={{fontSize:30, fontWeight: "bold", alignSelf:"center", color: "white"}}>Vehicle Pachage</Text>
+                    <FlatList
+                    //style={{width: "99%"}}
+                    showsVerticalScrollIndicator={false}
+                   data={truck}
+                   keyExtractor={item=>item.id}
+                   renderItem={({item}) => (
+                     <TouchableOpacity onPress={onSelect}>
+                       <View style={styles.userInfo}>
+                       <View style={styles.UserImgWrapper}>
+                           <Image style={styles.UserImg} source={item.userImg} />
+                       </View>
+                       <View style={styles.TextSection}>
+                           <View style={styles.UserInfoText}>
+                               <Text style={styles.UserName}>{item.package}</Text>
+                            </View>
+                            <View style={{flex: 1, width: "60%"}}>
+                             <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
+                             <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                         </View>
+                       </View>
+                       </View>
+                    </TouchableOpacity>
+                   )}
+                 />
+                      </View>
+                    </Modal>
+                  </View>
             )
         }
         if (service === 5){
           return (
-            <>
-            <Text style={{fontSize:20, fontWeight: "bold", alignSelf:"center", color: "#064451"}}>Taxi  packages</Text>
-            <FlatList
- showsVerticalScrollIndicator={false}
-data={taxi}
-keyExtractor={item=>item.id}
-renderItem={({item}) => (
-  <TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
-    <View style={styles.userInfo}>
-    <View style={styles.UserImgWrapper}>
-        <Image style={styles.UserImg} source={item.userImg} />
-    </View>
-    <View style={styles.TextSection}>
-        <View style={styles.UserInfoText}>
-            <Text style={styles.UserName}>{item.package}</Text>
-            <Text style={[styles.price, {color: "green", paddingTop: "2%"}]}>R{item.price}</Text>
-         </View>
-      
-      <View>
-          <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{item.Description}</Text>
-          <Text style={styles.MessageText}>{item.tmstimated}</Text>
-      </View>
-    </View>
-    </View>
- </TouchableOpacity>
-)}
-/></>
+            <View >
+                    <Modal isVisible={isModalVisible}>
+                      <View>
+                      <View>
+                      <Iconicons name={"close"} size={50} color={"red"}
+                        onPress={toggleModal}
+                        style={{marginLeft: "85%", marginTop: "-55%"}}
+                        />
+                      </View>
+   
+                      <Text style={{fontSize:30, fontWeight: "bold", alignSelf:"center", color: "white"}}>Vehicle Pachage</Text>
+                    <FlatList
+                    //style={{width: "99%"}}
+                    showsVerticalScrollIndicator={false}
+                   data={taxi}
+                   keyExtractor={item=>item.id}
+                   renderItem={({item}) => (
+                     <TouchableOpacity onPress={onSelect}>
+                       <View style={styles.userInfo}>
+                       <View style={styles.UserImgWrapper}>
+                           <Image style={styles.UserImg} source={item.userImg} />
+                       </View>
+                       <View style={styles.TextSection}>
+                           <View style={styles.UserInfoText}>
+                               <Text style={styles.UserName}>{item.package}</Text>
+                            </View>
+                         
+                            <View style={{flex: 1, width: "60%"}}>
+                             <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
+                             <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                         </View>
+                       </View>
+                       </View>
+                    </TouchableOpacity>
+                   )}
+                 />
+                      </View>
+                    </Modal>
+                  </View>
           )
       }
       if (service === 6){
         return (
-          <>
-          <Text style={{fontSize:20, fontWeight: "bold", alignSelf:"center", color: "#064451"}}>Abnormal  packages</Text>
+          <View >
+          <Modal isVisible={isModalVisible}>
+            <View>
+            <View>
+            <Iconicons name={"close"} size={50} color={"red"}
+              onPress={toggleModal}
+              style={{marginLeft: "85%", marginTop: "-55%"}}
+              />
+            </View>
+
+            <Text style={{fontSize:30, fontWeight: "bold", alignSelf:"center", color: "white"}}>Vehicle Pachage</Text>
           <FlatList
-showsVerticalScrollIndicator={false}
-data={Abnormal}
-keyExtractor={item=>item.id}
-renderItem={({item}) => (
-<TouchableOpacity onPress={() => navigation.navigate("CarBrand") }>
-  <View style={styles.userInfo}>
-  <View style={styles.UserImgWrapper}>
-      <Image style={styles.UserImg} source={item.userImg} />
-  </View>
-  <View style={styles.TextSection}>
-      <View style={styles.UserInfoText}>
-          <Text style={styles.UserName}>{item.package}</Text>
-          <Text style={[styles.price, {color: "green", paddingTop: "2%"}]}>R{item.price}</Text>
-       </View>
-    
-    <View>
-        <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>{item.Description}</Text>
-        <Text style={styles.MessageText}>{item.tmstimated}</Text>
-    </View>
-  </View>
-  </View>
-</TouchableOpacity>
-)}
-/></>
+          //style={{width: "99%"}}
+          showsVerticalScrollIndicator={false}
+         data={Abnormal}
+         keyExtractor={item=>item.id}
+         renderItem={({item}) => (
+           <TouchableOpacity onPress={onSelect}>
+             <View style={styles.userInfo}>
+             <View style={styles.UserImgWrapper}>
+                 <Image style={styles.UserImg} source={item.userImg} />
+             </View>
+             <View style={styles.TextSection}>
+                 <View style={styles.UserInfoText}>
+                     <Text style={styles.UserName}>{item.package}</Text>
+                  </View>
+               
+                  <View style={{flex: 1, width: "60%"}}>
+                             <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
+                             <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                         </View>
+             </View>
+             </View>
+          </TouchableOpacity>
+         )}
+       />
+            </View>
+          </Modal>
+        </View>
         )
     }
               return (
-                <View>
-                  <Text style={{alignSelf: "center", color:"red", fontWeight: "700", marginTop:"30%", fontSize: 20}}>Service package will show here</Text>
-                </View>
+                null
               );
             })()}
     <View>
@@ -454,23 +595,21 @@ container: {
   },
   price:{
     fontSize: 15,
-    marginRight: -85,
+    //marginRight: -85,
     marginTop: -23,
     fontWeight: 'bold',
-    marginRight: 100
+    marginRight: "50%"
   },
   userInfo: {
-    width: width/1.03,
+    width: width/1.122,
     height: 130,
     backgroundColor: COLORS.white,
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginHorizontal: 2,
-    marginBottom: 5,
-    marginTop: 15,
-    borderRadius: 13,
-    padding: 2,
-    
+    //justifyContent: "space-between",
+    //marginHorizontal: 2,
+    //marginBottom: 0,
+    marginTop: 3,
+    borderRadius: 5,
   },
   UserImg: {
     width: width/2.7,
@@ -494,7 +633,7 @@ container: {
   UserName: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "grey",
+    color: "#064451",
   },
   MessageText:{
     fontWeight: 'bold',
@@ -503,18 +642,19 @@ container: {
   },
 
   UserImgWrapper: {
-    paddingTop: 10,
-    paddingBottom: 15,
+    paddingTop: 12,
+    paddingBottom: 2,
+    paddingLeft: 2,
   },
   inner:{
-
-    
-      backgroundColor:'#ffffff',
-  alignItems:'center',
-     height:110,
-      borderRadius:10,
-      margin:4,
-      padding:5,
+    backgroundColor:'#ffffff',
+    alignItems:'center',
+    height:"35%",
+    width: "45%",
+    //borderRadius:100,
+    margin:4,
+    marginTop: "3%"
+    //padding:5,
       
   },
   inner2:{

@@ -22,7 +22,7 @@ export default function SignupScreen({ navigation }) {
   const pwd = watch('password');
 
   const onRegisterPressed = async (data) => {
-    const {username,password,email,name} = data;
+    const {username,password,email,name, phone_number} = data;
     if(loading){
       return;
     }
@@ -31,18 +31,18 @@ export default function SignupScreen({ navigation }) {
         await Auth.signUp({
         username,
         password,
-        attributes: {email,name,preferred_username: username},
+        attributes: {email,name,phone_number, preferred_username: username},
       });
       
-      Alert.alert('Success','Hi '+ username +' your account has been created successful. \n Please check your email to verify your account!');
-      navigation.navigate('ConfirmEmail',{username});
+      Alert.alert('Hi '+ username +' your account has been created successful. \n Please check your email to verify your account!');
+      navigation.navigate('ConfirmEmailScreen',{username});
     }
     catch(e){
       Alert.alert('Error',e.message);
       console.log(e.message);
       if(e.message === 'User already exists')
       {
-        navigation.navigate('SignIn');
+        navigation.navigate('LoginScreen');
       }
 
     }
@@ -99,6 +99,21 @@ export default function SignupScreen({ navigation }) {
           }}
           iconName='envelope'
         />
+        <Text style={styles.label}>Phone</Text> 
+        <CustomInput
+          name="phone"
+          control={control}
+          placeholder="Enter phone"
+          //secureTextEntry
+          rules={{
+            required: 'Phone is required',
+            minLength: {
+              value: 13,
+              message: 'Phone should be at least 13 characters long',
+            },
+          }}
+          iconName='phone'
+        />
         <Text style={styles.label}>Password</Text> 
         <CustomInput
           name="password"
@@ -130,7 +145,7 @@ export default function SignupScreen({ navigation }) {
              Already have an account?
              <Pressable style={styles.label}
                onPress={() => {
-               navigation.navigate("SignIn");
+               navigation.navigate("LoginScreen");
               }}>
              <Text style={styles.link}>Sign In</Text>
              </Pressable>

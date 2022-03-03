@@ -4,7 +4,7 @@ import { Text,
   View, 
   StyleSheet,
  Dimensions,
- ImageBackground,
+ SafeAreaView,
  FlatList,
  TouchableOpacity,
 Image } from 'react-native';
@@ -13,95 +13,68 @@ import { LinearGradient } from 'expo-linear-gradient';
 import mapImage from "../assets/pictures/map.jpg"
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
+import { listCarwashes } from "../src/graphql/queries";
+import {
+  Auth, 
+  API,
+  graphqlOperation,
+} from 'aws-amplify';
 
 import COLORS from '../consts/colors';
 
 const { width, height } = Dimensions.get("screen");
 
 export default function LocationScreen({ navigation }) {
-  const [carwash, SetCarwash] = React.useState([
-    {
-      id: '1',
-      userName: 'Alex Car wash',
-      userImg: require('../assets/pictures/car.jpg'),
-      location: 'Johannesburg',
-      Desc: 'We have provide good service',
-    },
-    {
-      id: '2',
-      userName: 'Mpho Car wash',
-      userImg: require('../assets/pictures/car.jpg'),
-      location: 'Pretoria',
-      Desc: 'We have provide good service',
-    },
-    {
-      id: '3',
-      userName: 'Shaun',
-      userImg: require('../assets/pictures/car.jpg'),
-      location: 'Mbombela',
-      Desc: 'We have provide good service',
-    },
-    {
-      id: '4',
-      userName: 'Alex Car wash',
-      userImg: require('../assets/pictures/car.jpg'),
-      location: 'Johannesburg',
-      Desc: 'We have provide good service',
-    },
-    {
-      id: '5',
-      userName: 'Mpho Car wash',
-      userImg: require('../assets/pictures/car.jpg'),
-      location: 'Pretoria',
-      Desc: 'We have provide good service',
-    },
-    {
-      id: '6',
-      userName: 'Shaun',
-      userImg: require('../assets/pictures/car.jpg'),
-      location: 'Mbombela',
-      Desc: 'We have provide good service',
-    },
-    {
-      id: '7',
-      userName: 'Shaun',
-      userImg: require('../assets/pictures/car.jpg'),
-      location: 'Mbombela',
-      Desc: 'We have provide good service',
-    },
-  ]);
+  const [businesses, setBusinesses] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchBusineses = async () => {
+      try {
+        const usersData = await API.graphql(
+          graphqlOperation(
+            listCarwashes
+          )
+        )
+        setBusinesses(usersData.data.listCarwashes.items);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchBusineses();
+  }, [])
+
   const [searchValue, onChangesearchValue] = React.useState('');
 
   return (
-  <View>
+  <SafeAreaView>
+    <View style={{height: "15%", backgroundColor: "#064451", width: width, }}>
+        <Text style={{color: "white", paddingTop: "4%", fontSize:20, fontWeight:"700", alignSelf: "center"}}>Available car wash</Text>
+    </View>
   <Input 
-    onChangeText={event => {onChangesearchValue(event.target.value)}}
+    //onChangeText={event => {onChangesearchValue(event.target.value)}}
     inputContainerStyle={styles.inputContainer}
     inputStyle ={[styles.inputText, {padding: 10}]}
     placeholder="Search..."
     rightIcon={ <Icon size={24} 
     style={styles.icon} name='search'/>}
   />
-  <Text style={{color: "#064451", paddingLeft: 10, fontSize: 15, fontWeight: "800"}}>Select a carwash closer to you</Text>
-     
+  <View style={{marginTop: "-4%"}}>
+    <Text style={{color: "#064451", paddingLeft: 10, fontSize: 20, }}>Select a carwash closer to you</Text>
+  </View>
  <FlatList 
- style={{height:height/1.54}}
-      data={carwash}
+ //style={{height:height/1.54}}
+      data={businesses}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
-        <TouchableOpacity onPress={() => navigation.navigate("VehicleScreen") }>
+        <TouchableOpacity onPress={() => navigation.navigate("VehicleScreen", {carD : item})}>
           <View style={styles.userInfo}>
           <View style={styles.UserImgWrapper}>
-              <Image style={styles.UserImg} source={item.userImg} />
+              <Image style={styles.UserImg} source={{uri: item.imageUrl}} />
           </View>
           <View style={styles.TextSection}>
-              <View style={styles.UserInfoText}>
-                  <Text style={[styles.UserName, {marginTop: "-10%", color: "#064451", textTransform: "uppercase" }]}>{item.userName}</Text>
-               </View>
-            <View style={{marginTop: "-5%", }}>
-                <Text style={styles.MessageText}>Location:   {item.location}</Text>
-                <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
-            </View>
+              <Text style={[styles.UserName, {marginTop: "-10%", color: "#064451", textTransform: "capitalize",  }]}>{item.name}</Text>
+              <Text style={styles.MessageText}>Location:   {item.location}</Text>
+              <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
           </View> 
           </View>
        </TouchableOpacity>
@@ -119,7 +92,7 @@ export default function LocationScreen({ navigation }) {
     onPress={() => navigation.navigate('MapScreen')}  
    />
     </View>
-  </View>
+  </SafeAreaView>
   );
 }
 
@@ -160,30 +133,31 @@ container: {
   },
   userInfo: {
     width: width/1.03,
-    height: 130,
+    //height: "60%",
     backgroundColor: COLORS.white,
     flexDirection: "row",
     justifyContent: "space-between",
     marginHorizontal: 2,
     marginBottom: 5,
-    marginTop: 15,
+    marginTop: 2,
     borderRadius: 13,
     padding: 2,
     
   },
   UserImg: {
-    width: width/2.7,
-    height: height/8,
+    width: 60,
+    height: 50,
     borderRadius: 13,
     marginBottom: 15,
   },
   TextSection: {
     flexDirection: "column",
     justifyContent: "center",
-    padding: 15,
-    paddingLeft: 0,
+    paddingTop: 25,
+    //paddingLeft: 0,
     marginLeft: 10,
     width: 300,
+    //height: "50%"
   },
   UserInfoText: {
     flexDirection: "row",
@@ -202,6 +176,7 @@ container: {
   },
 
   UserImgWrapper: {
+    height: "60%",
     paddingTop: 10,
     paddingBottom: 15,
   },

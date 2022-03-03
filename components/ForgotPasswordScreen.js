@@ -19,7 +19,7 @@ export default function ForgotPasswordScreen({ navigation }) {
     try{
       await Auth.forgotPassword(data.username);
       Alert.alert('Success', 'Your Password has been reset, check your email');
-      navigation.navigate('NewPassword',{username});
+      navigation.navigate('NewPasswordScreen',{username});
     }
     catch(e){
       Alert.alert('Failed', e.message);
@@ -28,7 +28,7 @@ export default function ForgotPasswordScreen({ navigation }) {
   };
 
   const onSignInPress = () => {
-    navigation.navigate('SignIn');
+    navigation.navigate('LoginScreen');
   }; 
   return (
     <ImageBackground source={gbImage}  style={styles.container}>

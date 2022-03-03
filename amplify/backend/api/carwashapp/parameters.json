@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "carwashapp",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authcarWashApp",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
