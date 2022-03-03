@@ -36,7 +36,6 @@ export default function LocationScreen({ navigation }) {
           )
         )
         setBusinesses(usersData.data.listCarwashes.items);
-        console.log(usersData.data.listCarwashes.items)
       } catch (e) {
         console.log(e);
       }
