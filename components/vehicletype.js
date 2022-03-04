@@ -349,7 +349,7 @@ export default function VihicleScreen({ navigation, route }) {
                  data={bus}
                  keyExtractor={item=>item.id}
                  renderItem={({item}) => (
-                   <TouchableOpacity onPress={onSelect}>
+                  <TouchableOpacity onPress={() => navigation.navigate("RegisteredCars", {packg : item, carD})}>
                      <View style={styles.userInfo}>
                      <View style={styles.UserImgWrapper}>
                          <Image style={styles.UserImg} source={item.userImg} />
@@ -392,7 +392,7 @@ export default function VihicleScreen({ navigation, route }) {
                    data={Motorcycle}
                    keyExtractor={item=>item.id}
                    renderItem={({item}) => (
-                     <TouchableOpacity onPress={onSelect}>
+                    <TouchableOpacity onPress={() => navigation.navigate("RegisteredCars", {packg : item, carD})}>
                        <View style={styles.userInfo}>
                        <View style={styles.UserImgWrapper}>
                            <Image style={styles.UserImg} source={item.userImg} />
@@ -435,7 +435,7 @@ export default function VihicleScreen({ navigation, route }) {
                    data={truck}
                    keyExtractor={item=>item.id}
                    renderItem={({item}) => (
-                     <TouchableOpacity onPress={onSelect}>
+                    <TouchableOpacity onPress={() => navigation.navigate("RegisteredCars", {packg : item, carD})}>
                        <View style={styles.userInfo}>
                        <View style={styles.UserImgWrapper}>
                            <Image style={styles.UserImg} source={item.userImg} />
@@ -477,7 +477,7 @@ export default function VihicleScreen({ navigation, route }) {
                    data={taxi}
                    keyExtractor={item=>item.id}
                    renderItem={({item}) => (
-                     <TouchableOpacity onPress={onSelect}>
+                    <TouchableOpacity onPress={() => navigation.navigate("RegisteredCars", {packg : item, carD})}>
                        <View style={styles.userInfo}>
                        <View style={styles.UserImgWrapper}>
                            <Image style={styles.UserImg} source={item.userImg} />
@@ -520,7 +520,7 @@ export default function VihicleScreen({ navigation, route }) {
          data={Abnormal}
          keyExtractor={item=>item.id}
          renderItem={({item}) => (
-           <TouchableOpacity onPress={onSelect}>
+          <TouchableOpacity onPress={() => navigation.navigate("RegisteredCars", {packg : item, carD})}>
              <View style={styles.userInfo}>
              <View style={styles.UserImgWrapper}>
                  <Image style={styles.UserImg} source={item.userImg} />
