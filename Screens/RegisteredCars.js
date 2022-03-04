@@ -128,6 +128,18 @@ const close = () => {
         null
         );
       })()}
+      <View style={{
+     marginTop:"-20%", 
+     marginLeft:"80%",
+     width: "100%",
+  }}>
+    <Iconicons
+    size={70} 
+    color={"#064451"}
+    name="add-circle" 
+    onPress={() => navigation.navigate('CarBrand')}  
+   />
+    </View>
     </View>
     );
 }
