@@ -7,9 +7,11 @@ import { Text,
  SafeAreaView,
  FlatList,
  TouchableOpacity,
-Image } from 'react-native';
+Image, 
+Pressable} from 'react-native';
 import Iconicons from "react-native-vector-icons/Ionicons"
-import { LinearGradient } from 'expo-linear-gradient';
+import { FloatingAction } from "react-native-floating-action";
+import ActionButton from 'react-native-action-button';
 import mapImage from "../assets/pictures/map.jpg"
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
@@ -87,7 +89,10 @@ export default function LocationScreen({ navigation }) {
 
   return (
   <SafeAreaView>
-    <View style={{height: "15%", backgroundColor: "#064451", width: width, }}>
+    <View>
+      
+    </View>
+    <View style={{height: "8%", backgroundColor: "#064451", width: width, }}>
         <Text style={{color: "white", paddingTop: "4%", fontSize:20, fontWeight:"700", alignSelf: "center"}}>Available car wash</Text>
     </View>
   <Input 
@@ -115,23 +120,12 @@ export default function LocationScreen({ navigation }) {
               <Text style={[styles.UserName, {marginTop: "-10%", color: "#064451", textTransform: "capitalize",  }]}>{item.name}</Text>
               <Text style={styles.MessageText}>Location:   {item.location}</Text>
               <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
+
           </View> 
           </View>
        </TouchableOpacity>
       )}
     />
-   <View style={{
-     marginTop:"-20%", 
-     marginLeft:"85%",
-     width:"100%",
-  }}>
-    <Icon
-    size={50} 
-    color={"#064451"}
-    name="map-marker" 
-    onPress={() => navigation.navigate('MapScreen')}  
-   />
-    </View>
   </SafeAreaView>
   );
 }
@@ -141,6 +135,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     flexDirection: 'row',
     marginBottom: 20,
+},
+actionButtonIcon: {
+  fontSize: 20,
+  height: 22,
+  color: 'white',
 },
 container: {
     backgroundColor: COLORS.gray,
