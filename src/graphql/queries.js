@@ -118,6 +118,43 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
+export const getRegisteredCars = /* GraphQL */ `
+  query GetRegisteredCars($id: ID!) {
+    getRegisteredCars(id: $id) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listRegisteredCars = /* GraphQL */ `
+  query ListRegisteredCars(
+    $filter: ModelRegisteredCarsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRegisteredCars(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        brand
+        regNO
+        model
+        Desc
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getVehicleType = /* GraphQL */ `
   query GetVehicleType($id: ID!) {
     getVehicleType(id: $id) {

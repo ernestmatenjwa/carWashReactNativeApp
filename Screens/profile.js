@@ -5,6 +5,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {LinearGradient} from 'expo-linear-gradient';
 import Modal from "react-native-modal";
 import { Input } from 'react-native-elements';
+import { API, graphqlOperation, Auth } from "aws-amplify";
+import { getUser } from '../src/graphql/queries';
 
 import img from "../assets/pictures/person.png"
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -14,6 +16,8 @@ const { width, height }= Dimensions.get("screen");
 
 export default function ProfileScreen({ navigation }) {
   const [name, setName] = React.useState('Alex Mathenjwa');
+  const [user, setUser] = React.useState([]);
+  const [profile, setProfile] = React.useState([]);
   const [email, setEmail] = React.useState('alexmatenjwa@gmail.com');
   const [phone, setPhone] = React.useState('0729476167');
   const [isModalVisible, setModalVisible] = React.useState(false);
@@ -24,18 +28,48 @@ export default function ProfileScreen({ navigation }) {
   const close = () => {
     setModalVisible(!isModalVisible);
   };
+  React.useEffect(() => {
+    const getProfile = async (e) => {
+      const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+      const ID = userInfo.attributes.sub
+         //e.preventDefault();
+         console.log('called1111111========', ID);
+         try{
+           //console.log('try');
+          const userData = await API.graphql(graphqlOperation(getUser, {id: ID}));
+          //console.log('yes22 ', userData);
+         // console.log('>> ', profile.data?.data.getUserByEmail.name, '<<');
+          setProfile({data: userData})
+          console.log(profile)
+            } catch (e) {
+                console.log('error getting user 22', e);  
+            } 
+   }
+       function loadUser() { 
+           return Auth.currentAuthenticatedUser({bypassCache: true});
+       }
+       async function onLoad() {
+           try {
+               const user = await loadUser();
+               setUser(user.attributes);
+           }catch (e) {
+               alert(e)
+           }
+       }
+       onLoad();
+       getProfile();
+   }, []);
   return (
     <View style = {styles.container}>
     <View style = {{justifyContent:'center',alignItems:'center', width:"100%", }}>          
-       <Image source={img} style={styles.UserImg} /> 
+       <Image source={{uri:profile.data?.data.getUser.imageUrl}} style={styles.UserImg} /> 
     </View>
-    <Text style = {styles.text_header}>Alex Mathenjwa </Text>
     <Text style={[styles.text_footer, {marginTop:"-10%"}]}>Full Name</Text>
     <Input 
-        value={name}
+        value={profile.data?.data.getUser.name}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle ={[styles.inputText, {paddingLeft: 15}]}                
-        placeholder="Alex Mathenjwa"
+        //placeholder="Alex Mathenjwa"
         rightIcon={ <Icon size={24} 
         style={styles.icon} name='user'/>}
         disabled
@@ -43,20 +77,20 @@ export default function ProfileScreen({ navigation }) {
     
     <Text style={styles.text_footer}>Email Address</Text>
     <Input 
-        onChangeText={setEmail} value={email}
+        value={profile.data?.data.getUser.email}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle = {[styles.inputText, {paddingLeft: 15}]}
-        placeholder="alexmatenjwa@gmail.com"
+        //placeholder="alexmatenjwa@gmail.com"
         rightIcon={ <Icon size={24} 
         style={styles.icon} name='envelope'/>}
         disabled
     />
     <Text style={styles.text_footer}>Phone</Text>
     <Input 
-        onChangeText={setPhone} value={phone}
+        value={profile.data?.data.getUser.phone}
         inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
         inputStyle = {[styles.inputText, {paddingLeft: 15}]}               
-        placeholder="0729476167"
+        //placeholder="0729476167"
         rightIcon={ <Icon size={24} 
         style={styles.icon} name='phone'/>}
         disabled
@@ -85,7 +119,7 @@ export default function ProfileScreen({ navigation }) {
           inputContainerStyle={styles.Con}
           inputStyle ={styles.inputText}
           onChangeText={setName}
-          value={name}
+          value={profile.data?.data.getUser.name}
         />
           <Text style={styles.tit}>Email</Text>
         <Input
@@ -93,7 +127,7 @@ export default function ProfileScreen({ navigation }) {
           inputContainerStyle={styles.Con}
           inputStyle ={styles.inputText}
           onChangeText={setEmail}
-          value={email}
+          value={profile.data?.data.getUser.email}
         />
         <Text style={styles.tit}>Phone Number</Text>
         <Input
@@ -101,7 +135,7 @@ export default function ProfileScreen({ navigation }) {
           inputContainerStyle={styles.Con}
           inputStyle ={styles.inputText}
           onChangeText={setPhone}
-          value={phone}
+          value={profile.data?.data.getUser.phone}
         />
         </View>
         <View style={{flexDirection:"row", alignContent: "center"}}>
@@ -173,9 +207,9 @@ const styles = StyleSheet.create({
         padding: 5,
       },
     UserImg: {
-        width: 90,
-        height: 90,
-        borderRadius: 25,
+      width: 90,
+      height: 90,
+      borderRadius: 25,
       },
     header: {
         flex: 1,
