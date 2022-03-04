@@ -7,9 +7,6 @@ import CustomButton from './CustomButton/CustomButton';
 import {useForm} from 'react-hook-form';
 import {Auth} from 'aws-amplify';
 
-import Amplify from 'aws-amplify';
-import awsconfig from './../src/aws-exports';
-Amplify.configure(awsconfig);
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;

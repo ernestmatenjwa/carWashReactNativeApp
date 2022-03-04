@@ -33,14 +33,14 @@ export default function ProfileScreen({ navigation }) {
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
       const ID = userInfo.attributes.sub
          //e.preventDefault();
-         console.log('called1111111========', ID);
+        // console.log('called1111111========', ID);
          try{
            //console.log('try');
           const userData = await API.graphql(graphqlOperation(getUser, {id: ID}));
           //console.log('yes22 ', userData);
          // console.log('>> ', profile.data?.data.getUserByEmail.name, '<<');
           setProfile({data: userData})
-          console.log(profile)
+          // console.log(profile)
             } catch (e) {
                 console.log('error getting user 22', e);  
             } 

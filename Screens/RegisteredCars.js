@@ -33,9 +33,10 @@ const { width, height } = Dimensions.get("screen");
   ]
 
 export default function RegisteredCars({ navigation, route }) {
-  const [carBrand, setCarBrand] = React.useState(false);
+  //const [carBrand, setCarBrand] = React.useState(false);
   const [isModalVisible, setModalVisible] = React.useState(false);
-  const {packg, carD} = route.params
+  const {packg, carD} = route?.params || {};
+  //const { input } = route?.params || {};
   //const {carD} = route.params
 const show = () => {
   setModalVisible(!isModalVisible);

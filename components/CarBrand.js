@@ -71,7 +71,7 @@ function CarBrand ({navigation}) {
     } else {
       setSelectedOption(options[item.key]);
     }
-    //console.log(selectedOption.text);
+    
   };
   
 
@@ -90,7 +90,7 @@ function CarBrand ({navigation}) {
         </View>
         <View style={style.currentCar}>
              <Image style={style.UserImg} source={selectedOption.imageURL}/>
-             <Text onPress={() =>  navigation.push("VihicleDetail")} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Continue with {selectedOption.text} {selectedOption.regNumber}</Text>
+             <Text onPress={() =>  navigation.push("VihicleDetail", {Brand : selectedOption.text})} style={{color: COLORS.white, fontWeight: 'bold', marginTop: -35, marginLeft: 90}}>Click here for {selectedOption.text} </Text>
         </View>
     </View>
             {/* <View style={{flexDirection: 'row', alignItems: 'center'}}>

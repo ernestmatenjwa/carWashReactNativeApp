@@ -1,13 +1,67 @@
 import React, { useState } from 'react';
-import { View, Text,TextInput, SafeAreaView, StyleSheet, ScrollView, Image,Pressable} from 'react-native';
+import { View, Text,Alert, SafeAreaView, StyleSheet, ScrollView, Image,Pressable} from 'react-native';
 import COLORS from '../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Input } from 'react-native-elements';
+import {
+  Auth, 
+  API,
+  graphqlOperation,
+} from 'aws-amplify';
 import Iconicons from "react-native-vector-icons/Ionicons"
+import CustomInput from './CustomInput/CustomInput';
+import {useForm, Controller} from 'react-hook-form';
+import { createRegisteredCars } from '../src/graphql/mutations';
 
-function VihicleDetail ({navigation}) {
+const randomImages = [
+  'https://tse2.mm.bing.net/th?id=OIP.e1KNYwnuhNwNj7_-98yTRwHaF7&pid=Api&P=0&w=221&h=178',
+  'https://tse1.mm.bing.net/th?id=OIP.Q_-11kM22YOL505PnecHqgHaI9&pid=Api&P=0&w=300&h=300',
+]
+
+function VihicleDetail ({navigation, route}) {
   const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
+  const [loading,setLoading] = useState(false);
+  const getRandomImage = () => {
+    return randomImages[Math.floor(Math.random() * randomImages.length)];
+  }
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+
+  const {Brand} = route.params
+  const register = async (data) => {
+    const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+    const { reg_no, model, Desc } = data;
+    if(loading){
+      return;
+    }
+    setLoading(true);
+    const car = {
+      userID: userInfo.attributes.sub,
+      brand: Brand,
+      regNO: data.reg_no,
+      model: data.model,
+      Desc: data.Desc,
+      imageUrl: getRandomImage(),
+    }
+    try{
+      await API.graphql(
+        graphqlOperation(
+          createRegisteredCars,
+          { input: car }
+        )
+      ) 
+      Alert.alert('You have succesfully added a vehicle');
+      navigation.navigate("RegisteredCars");
+  }
+  catch(e){
+    Alert.alert('Error',e.message);
+    console.log(e.message);
+  }
+    setLoading(false);
+  }
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -23,35 +77,35 @@ function VihicleDetail ({navigation}) {
         </View>
         <View>
         <Text style={[style.label, {paddingTop: "5%"}]}>Registration Number</Text> 
-          <Input 
-            onChangeText={onChangeEmail} value={email}
-            inputContainerStyle={style.inputContainer}
-            inputStyle ={style.inputText}                
-            placeholder="Enter reg..."
-            rightIcon={<Iconicons size={24} style={style.icon} name='pencil'/>}
-          />
-          <Text style={style.label}>Car Model</Text> 
-          <Input 
-            onChangeText={onChangeEmail} value={email}
-            inputContainerStyle={style.inputContainer}
-            inputStyle ={style.inputText}                
-            placeholder="Enter model"
-            rightIcon={<Iconicons size={24} style={style.icon} name='pencil'/>}
-          />
+        <CustomInput
+          name="reg_no"
+          placeholder="Enter registration"
+          control={control}
+          rules={{required: 'Registration is required'}}
+          iconName='pencil'
+        />
+          <Text style={style.label}>Car Model</Text>
+          <CustomInput
+          name="model"
+          placeholder="Enter model"
+          control={control}
+          rules={{required: 'Model is required'}}
+          iconName='pencil'
+        /> 
           <Text style={style.label}>Discription</Text> 
-          <Input 
-            onChangeText={onChangeEmail} value={email}
-            inputContainerStyle={style.inputContainer}
-            inputStyle ={style.inputText}                
-            placeholder="Enter description"
-            rightIcon={<Iconicons size={24} style={style.icon} name='pencil'/>}
-          />
+          <CustomInput
+          name="Desc"
+          placeholder="Enter description"
+          control={control}
+          rules={{required: 'Username is required'}}
+          iconName='pencil'
+        />
         </View>
-    <Pressable style={style.bookbtn}
-      onPress={() => {
-        navigation.navigate("DateSetter");
-      }}>
-        <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Proceed</Text>
+    <Pressable 
+      style={style.bookbtn}
+      onPress={handleSubmit(register)}
+    >
+        <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>{loading ? 'Loading...': "Submit"}</Text>
       </Pressable>
         
     </SafeAreaView>
