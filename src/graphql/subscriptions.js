@@ -160,6 +160,51 @@ export const onDeleteUser = /* GraphQL */ `
     }
   }
 `;
+export const onCreateRegisteredCars = /* GraphQL */ `
+  subscription OnCreateRegisteredCars {
+    onCreateRegisteredCars {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRegisteredCars = /* GraphQL */ `
+  subscription OnUpdateRegisteredCars {
+    onUpdateRegisteredCars {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRegisteredCars = /* GraphQL */ `
+  subscription OnDeleteRegisteredCars {
+    onDeleteRegisteredCars {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateVehicleType = /* GraphQL */ `
   subscription OnCreateVehicleType {
     onCreateVehicleType {

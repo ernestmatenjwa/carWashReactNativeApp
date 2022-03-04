@@ -187,6 +187,60 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
+export const createRegisteredCars = /* GraphQL */ `
+  mutation CreateRegisteredCars(
+    $input: CreateRegisteredCarsInput!
+    $condition: ModelRegisteredCarsConditionInput
+  ) {
+    createRegisteredCars(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateRegisteredCars = /* GraphQL */ `
+  mutation UpdateRegisteredCars(
+    $input: UpdateRegisteredCarsInput!
+    $condition: ModelRegisteredCarsConditionInput
+  ) {
+    updateRegisteredCars(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteRegisteredCars = /* GraphQL */ `
+  mutation DeleteRegisteredCars(
+    $input: DeleteRegisteredCarsInput!
+    $condition: ModelRegisteredCarsConditionInput
+  ) {
+    deleteRegisteredCars(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createVehicleType = /* GraphQL */ `
   mutation CreateVehicleType(
     $input: CreateVehicleTypeInput!

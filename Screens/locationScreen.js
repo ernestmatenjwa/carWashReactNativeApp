@@ -14,19 +14,29 @@ import mapImage from "../assets/pictures/map.jpg"
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 import { listCarwashes } from "../src/graphql/queries";
+import { getUser } from "../src/graphql/queries";
+import { createUser } from './../src/graphql/mutations';
 import {
   Auth, 
   API,
   graphqlOperation,
 } from 'aws-amplify';
-
 import COLORS from '../consts/colors';
+const randomImages = [
+  'https://tse2.mm.bing.net/th?id=OIP.e1KNYwnuhNwNj7_-98yTRwHaF7&pid=Api&P=0&w=221&h=178',
+  'https://tse1.mm.bing.net/th?id=OIP.Q_-11kM22YOL505PnecHqgHaI9&pid=Api&P=0&w=300&h=300',
+]
 
 const { width, height } = Dimensions.get("screen");
 
 export default function LocationScreen({ navigation }) {
   const [businesses, setBusinesses] = React.useState([]);
+  const [searchValue, onChangesearchValue] = React.useState('');
 
+
+  const getRandomImage = () => {
+    return randomImages[Math.floor(Math.random() * randomImages.length)];
+  }
   React.useEffect(() => {
     const fetchBusineses = async () => {
       try {
@@ -43,7 +53,37 @@ export default function LocationScreen({ navigation }) {
     fetchBusineses();
   }, [])
 
-  const [searchValue, onChangesearchValue] = React.useState('');
+  React.useEffect( () => {
+    const fetchUser = async () => {
+      const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+      if(userInfo){
+        const userData = await API.graphql(
+          graphqlOperation(
+            getUser,
+            { id: userInfo.attributes.sub }
+            )
+        )
+        if (userData.data.getUser) {
+          //console.log("User is already registered in database");
+          return;
+        }
+        const newUser = {
+          id: userInfo.attributes.sub,
+          name: userInfo.username,
+          email: userInfo.attributes.email,
+          phone: userInfo.attributes.phone_number,
+          imageUrl: getRandomImage(),
+        }
+        await API.graphql(
+          graphqlOperation(
+            createUser,
+            { input: newUser }
+          )
+        )
+      }
+    }
+    fetchUser();
+  }, []) 
 
   return (
   <SafeAreaView>
