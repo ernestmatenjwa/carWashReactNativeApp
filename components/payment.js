@@ -15,17 +15,84 @@ import { McText, McIcon } from '../component';
 import 'react-native-gesture-handler';
 import { ScrollView } from 'react-native-gesture-handler';
 import bankCard from './../assets/pictures/bankCard.jpg';
+import { createOders } from '../src/graphql/mutations';
+import {
+  Auth, 
+  API,
+  graphqlOperation,
+} from 'aws-amplify';
+import { getUser } from '../src/graphql/queries';
 
 const Payment = ({ navigation, route }) => {
+  const [loading,setLoading] = useState(false);
+  const {packg, carD, carOpt, t, d, subtotal} = route?.params || {};
+  const [date, setDate] = useState(new Date());
+  const [name, setName] = React.useState([]);
+  
+  const test = () => {
+    var today = new Date();
+    let fDate =  (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+    setDate(fDate)
+  }
+  const order = async (data) => {
+    var today = new Date();
+    let fDate =  (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+    setDate(fDate)
+    const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+    const ID = userInfo.attributes.sub
+    console.log(carOpt.brand);
+    try{
+      console.log('try');
+     const userData = await API.graphql(graphqlOperation(getUser, {id: ID}));
+     //console.log('yes22 ', userData);
+    // console.log('>> ', profile.data?.data.getOrders.name, '<<');
+     setName(userData.data.getUser.name)
+     //console.log(userData.data.getUser.name)
+       } catch (e) {
+           console.log('error getting user 22', e);  
+       }
+    // if(loading){
+    //   return;
+    // }
+    // setLoading(true);
+    //return
+    console.log(name + '123');
+    //return
+    
+    try{
+      const oderr = {
+      userID: userInfo.attributes.sub,
+      brand: carOpt.brand,
+      regNO: carOpt.regNO,
+      userName: name,
+      package: packg.package,
+      o_date: date,
+    }
+    //console.log(oderr)
+    //return
+      await API.graphql(
+        graphqlOperation(
+          createOders,
+          { input: oderr }
+        )
+      ) 
+      //navigation.navigate("RegisteredCars");
+  }
+  catch(e){
+    Alert.alert('Error',e.message);
+    console.log(e.message);
+  }
+    navigation.navigate('ConfirmScreen')
+    setLoading(false);
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={{width: '100%'}}>
           <SectionHeader>
             <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('CheckoutScreen')
-              }}>
+             onPress={() => navigation.goBack()}>
               <McIcon 
                 source={icons.back_arrow} 
                 size={24} marginRight={5} 
@@ -43,7 +110,7 @@ const Payment = ({ navigation, route }) => {
         </View>
 
         <View>
-          <McText h3 style={{color: '#064451', paddingLeft: 25}}>Select your payment method</McText>
+          <McText onPress={test} h3 style={{color: '#064451', paddingLeft: 25}}>Select your payment method</McText>
         </View>
 
         <View 
@@ -194,13 +261,11 @@ const Payment = ({ navigation, route }) => {
           <CardBottom>
             <Subtotal>
               <McText body3 style={{color: '#064451', paddingLeft: 25, left: '-15%'}}> subtotal </McText>
-              <McText h2 style={{color: '#064451', paddingLeft: 25, left: '-15%'}}> R210.00 </McText>
+              <McText h2 style={{color: '#064451', paddingLeft: 25, left: '-15%'}}>R {subtotal}</McText>
             </Subtotal>
             <PayButton>
               <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('ConfirmScreen')
-                }}
+                onPress={order}
               >
                 <LinearGradient
                   colors={COLORS.btnLinear}

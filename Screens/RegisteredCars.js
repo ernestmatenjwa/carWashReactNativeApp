@@ -60,13 +60,19 @@ export default function RegisteredCars({ navigation, route }) {
             listRegisteredCars
           )
         )
-        setCar(usersData.data.listRegisteredCars.items);
+        if(usersData.data.listRegisteredCars.items.length === 0)
+        {
+          navigation.navigate("CarBrand")
+        }else{
+          setCar(usersData.data.listRegisteredCars.items);
+        }
       } catch (e) {
         console.log(e);
       }
+   
     }
     fetchCars();
-  }, [])
+  }, [car])
 const show = () => {
   setModalVisible(!isModalVisible);
   //console.log(packg, "++++++++", carD)
@@ -86,7 +92,7 @@ const close = () => {
       data={car}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
-        <TouchableOpacity onPress={() => navigation.navigate("DateSetter") }>
+        <TouchableOpacity onPress={() => navigation.navigate("DateSetter", {carOpt : item, packg, carD}) }>
           <View style={styles.userInfo}>
             <View>
                 <Text style={styles.UserName}>{item.brand} - {item.regNO}</Text>

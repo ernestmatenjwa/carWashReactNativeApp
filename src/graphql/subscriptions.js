@@ -161,8 +161,8 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateRegisteredCars = /* GraphQL */ `
-  subscription OnCreateRegisteredCars {
-    onCreateRegisteredCars {
+  subscription OnCreateRegisteredCars($owner: String) {
+    onCreateRegisteredCars(owner: $owner) {
       id
       userID
       brand
@@ -172,12 +172,13 @@ export const onCreateRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateRegisteredCars = /* GraphQL */ `
-  subscription OnUpdateRegisteredCars {
-    onUpdateRegisteredCars {
+  subscription OnUpdateRegisteredCars($owner: String) {
+    onUpdateRegisteredCars(owner: $owner) {
       id
       userID
       brand
@@ -187,12 +188,13 @@ export const onUpdateRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteRegisteredCars = /* GraphQL */ `
-  subscription OnDeleteRegisteredCars {
-    onDeleteRegisteredCars {
+  subscription OnDeleteRegisteredCars($owner: String) {
+    onDeleteRegisteredCars(owner: $owner) {
       id
       userID
       brand
@@ -200,6 +202,52 @@ export const onDeleteRegisteredCars = /* GraphQL */ `
       model
       Desc
       imageUrl
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateOders = /* GraphQL */ `
+  subscription OnCreateOders {
+    onCreateOders {
+      id
+      userID
+      brand
+      regNO
+      userName
+      package
+      o_date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateOders = /* GraphQL */ `
+  subscription OnUpdateOders {
+    onUpdateOders {
+      id
+      userID
+      brand
+      regNO
+      userName
+      package
+      o_date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOders = /* GraphQL */ `
+  subscription OnDeleteOders {
+    onDeleteOders {
+      id
+      userID
+      brand
+      regNO
+      userName
+      package
+      o_date
       createdAt
       updatedAt
     }

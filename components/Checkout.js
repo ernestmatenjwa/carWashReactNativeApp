@@ -13,6 +13,8 @@ import { dummyData, FONTS, SIZES, COLORS, icons, images } from '../constants';
 import { McText, McIcon } from '../component';
 
 const Checkout = ({ navigation, route }) => {
+  const [subTotal, setSubTotal] = useState("");
+  const {packg, carD, carOpt, t, d} = route?.params || {};
 //   const [selectedEvent, setSelectedEvent] = useState(null);
 
 //   useEffect(() => {
@@ -24,9 +26,7 @@ return (
     <View style={styles.container}>
      <SectionHeader>
         <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('VihicleDetail')
-          }}>
+          onPress={() => navigation.goBack()}>
           <McIcon 
             source={icons.back_arrow} 
             size={24} marginRight={5} 
@@ -34,8 +34,7 @@ return (
             style = {{
               color:'#064451'
             }}
-            top={30}
-            
+            top={30}  
           />
           <McText h1 style={{left: '120%', color: 'white', marginBottom: 10 }}>
             Checkout
@@ -81,9 +80,7 @@ return (
                 </HeadingBox>
 
                 <TitleBox >
-                    <McText h3 style={{color: COLORS.teal}}>Full Body Wash</McText>
-                    <McText h3 style={{color: COLORS.teal}}> - </McText>
-                    <McText h3 style={{color: COLORS.teal}}>BMW X1</McText>
+                    <McText h3 style={{color: COLORS.teal}}>{packg.package} - {carOpt.model}</McText>
                 </TitleBox>
 
                 <TimeBox >
@@ -101,17 +98,17 @@ return (
 
                     <DateBox >
                         <Time marginleft={2} padding={0}>
-                            <McText body6 style={{color: COLORS.txt, marginRight: 2}}> 30 to 40 minutes</McText>
+                            <McText body6 style={{color: COLORS.txt, marginRight: 2}}> {packg.tmstimated}</McText>
                         </Time>
                         <Date marginleft={2} padding={0}>
-                            <McText body6 style={{color: COLORS.txt, marginRight: 2}}>   27 Mar 2015 12:00</McText>
+                            <McText body6 style={{color: COLORS.txt, marginRight: 2}}>  {d} {t}</McText>
                         </Date>
                     </DateBox>   
                 </TimeBox>
 
                 <FooterBox>
-                    <McText h3 style={{color: COLORS.txt}}> R 200.00</McText>
-                    {/*<McText style={{Price}}> R ${price}</McText>*/}
+                    <McText h3 style={{color: COLORS.txt}}> R {(packg.price*1.15).toFixed(2)}</McText>
+                    {/* {setSubTotal((packg.price*1.15).toFixed(2))} */}
                     <McText body6 style={{color: COLORS.txt}}> Tax Rate Of 15% Applies</McText>
                     {/* <Button
                         title="Press me"
@@ -120,7 +117,7 @@ return (
                     /> */}
                     <TouchableOpacity 
                         onPress={() => {
-                        navigation.navigate('PaymentScreen')
+                        navigation.navigate('PaymentScreen', {subtotal: (packg.price*1.15).toFixed(2), packg, carD, carOpt, t, d})
                       }}>
                         <LinearGradient
                             colors={COLORS.btnLinear}

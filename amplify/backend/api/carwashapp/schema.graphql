@@ -20,7 +20,7 @@ type User @model @auth(rules: [{ allow: private }]) {
   phone: String!
   imageUrl: String
 }
-type registeredCars @model @auth(rules: [{ allow: private }]) {
+type registeredCars @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   userID: String!
   brand: String!
@@ -28,6 +28,15 @@ type registeredCars @model @auth(rules: [{ allow: private }]) {
   model: String!
   Desc: String!
   imageUrl: String
+}
+type oders @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  userID: String!
+  brand: String!
+  regNO: String!
+  userName: String!
+  package: String!
+  o_date: String
 }
 type vehicleType @model @auth(rules: [{ allow: private }]) {
   id: ID!

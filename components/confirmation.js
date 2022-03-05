@@ -13,7 +13,12 @@ const { width, height } = Dimensions.get("screen");
 export default function ConfirmScreen({ navigation }) {
   return (
  <View style={styles.container}>
-   <Iconicons name="checkmark-circle" size={300} color={"#064451"}/>
+   <Iconicons 
+   name="checkmark-circle" 
+   size={300} 
+   color={"#064451"}
+   style={{marginTop: "40%", alignSelf: "center"}}
+   />
    <View style={{marginTop: height / 20}}>
     <Text style={{textAlign: "center", color: "#064451", fontSize: 18}}>Your order is successfull!</Text>
     <Text style={{textAlign: "center", fontSize: 20, fontWeight: "bold", color: "#064451"}}>Now You Can Seat And Relax</Text>

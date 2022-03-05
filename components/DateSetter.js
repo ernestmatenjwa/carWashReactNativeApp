@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Button,Platform,Pressable,TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, Button,Platform,Pressable,TouchableOpacity, Alert } from 'react-native';
 import COLORS from '../consts/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -7,13 +7,15 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 
-function DateSetter({navigation}) {
+function DateSetter({navigation, route}) {
   const [mode,setMode] = useState('date');
   const [show,setShow] = useState(false);
   const [text,setText] = useState('Empty');
+  const {packg, carD, carOpt} = route?.params || {};
+  const [t,setT] = useState('Empty');
+  const [d,setD] = useState('Empty');
 
   const [date, setDate] = useState(new Date());
- 
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -22,9 +24,10 @@ function DateSetter({navigation}) {
 
     let tempDate = new Date(currentDate);
     let fDate = tempDate.getDay() + (tempDate.getMonth() +1) + '/'+ tempDate.getFullYear();
-    let fTime = 'Hours' + tempDate.getHours()+' | Minutes' + tempDate.getMinutes();
-    setText(fDate + '\n' + fTime)
-    
+    let fTime = tempDate.getHours()+':' + tempDate.getMinutes();
+    setText('Date: ' + fDate + '\n Time: ' + fTime)
+    setD(fDate)
+    setT(fTime)
     console.log(fDate + '(' + fTime +')')
   };
 
@@ -46,7 +49,6 @@ function DateSetter({navigation}) {
       <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 9, marginLeft: 0}}/>
        <View style={{marginLeft: 35}}>
          <Text style={{fontSize: 40, marginTop: "40%", fontWeight: "bold", alignSelf: "center", color: COLORS.white}}>Date & Time</Text>
-
        </View>
       </View>
       <Text style={{fontSize: 18, paddingLeft: "5%", marginTop: "3%", fontWeight: "bold", color: COLORS.tial}}>Select time and date</Text>
@@ -80,27 +82,43 @@ function DateSetter({navigation}) {
    />
    <Text style={{marginTop:"10%", fontSize: 15, marginLeft: "-7%", fontWeight: "bold"}}>Date</Text>
     </View>
-
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
           mode={mode}
           is24Hour={true}
-          display="default"
+          //display="default"
           onChange={onChange}
           display="spinner"
           themeVariant="dark" 
         />
       )}
     </View>
+    {(() => {
+              if (t === "Empty" && d ==="Empty"){
+                  return (
+                    <Pressable style={[style.bookbtn, {backgroundColor: "red"}]}
+                     onPress={() => {
+                      Alert.alert("Please choose time/Date before you submit")
+                    }}>
+                    <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Submit</Text>
+                    </Pressable>
+                  )
+              }
+              return (
+                <Pressable  style={[style.bookbtn, {}]}
+                 onPress={() => {
+                 navigation.navigate("CheckoutScreen", {packg, carD, carOpt, t, d});
+                }}>
+                <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Submit</Text>
+                </Pressable>
+              );
+            })()}
+        
    
-      <Pressable style={style.bookbtn}
-      onPress={() => {
-        navigation.navigate("CheckoutScreen");
-      }}>
-        <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Proceed</Text>
-      </Pressable>
+   
+    
    
     </SafeAreaView>
   );

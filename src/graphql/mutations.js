@@ -202,6 +202,7 @@ export const createRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -220,6 +221,7 @@ export const updateRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -236,6 +238,61 @@ export const deleteRegisteredCars = /* GraphQL */ `
       model
       Desc
       imageUrl
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createOders = /* GraphQL */ `
+  mutation CreateOders(
+    $input: CreateOdersInput!
+    $condition: ModelOdersConditionInput
+  ) {
+    createOders(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      userName
+      package
+      o_date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateOders = /* GraphQL */ `
+  mutation UpdateOders(
+    $input: UpdateOdersInput!
+    $condition: ModelOdersConditionInput
+  ) {
+    updateOders(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      userName
+      package
+      o_date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteOders = /* GraphQL */ `
+  mutation DeleteOders(
+    $input: DeleteOdersInput!
+    $condition: ModelOdersConditionInput
+  ) {
+    deleteOders(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      userName
+      package
+      o_date
       createdAt
       updatedAt
     }
