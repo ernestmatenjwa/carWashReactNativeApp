@@ -25,7 +25,7 @@ import { getUser } from '../src/graphql/queries';
 
 const Payment = ({ navigation, route }) => {
   const [loading,setLoading] = useState(false);
-  const {packg, carD, carOpt, t, d, subtotal} = route?.params || {};
+  const {packg, carD, carOpt, t, d,global, subtotal} = route?.params || {};
   const [date, setDate] = useState(new Date());
   const [name, setName] = React.useState([]);
   
@@ -35,6 +35,10 @@ const Payment = ({ navigation, route }) => {
     setDate(fDate)
   }
   const order = async (data) => {
+    if(loading){
+      return;
+    }
+    setLoading(true);
     var today = new Date();
     let fDate =  (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
     setDate(fDate)
@@ -58,13 +62,13 @@ const Payment = ({ navigation, route }) => {
     //return
     console.log(name + '123');
     //return
-    
+   
     try{
       const oderr = {
       userID: userInfo.attributes.sub,
       brand: carOpt.brand,
       regNO: carOpt.regNO,
-      userName: name,
+      userName: global,
       package: packg.package,
       o_date: date,
     }
@@ -279,7 +283,7 @@ const Payment = ({ navigation, route }) => {
                     alignItems: 'center'
                   }}
                 >
-                  <McText>PAY</McText>
+                  <McText>{loading ? 'Loading...': "PAY"}</McText>
                 </LinearGradient>
               </TouchableOpacity>
             </PayButton>

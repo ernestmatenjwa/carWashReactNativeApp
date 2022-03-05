@@ -32,6 +32,7 @@ const { width, height } = Dimensions.get("screen");
 export default function LocationScreen({ navigation }) {
   const [businesses, setBusinesses] = React.useState([]);
   const [searchValue, onChangesearchValue] = React.useState('');
+  const [global, setGlobal] = React.useState('');
 
 
   const getRandomImage = () => {
@@ -63,6 +64,8 @@ export default function LocationScreen({ navigation }) {
             { id: userInfo.attributes.sub }
             )
         )
+        console.log(userData.data.getUser.name);
+        setGlobal(userData.data.getUser.name)
         if (userData.data.getUser) {
           //console.log("User is already registered in database");
           return;
@@ -106,7 +109,7 @@ export default function LocationScreen({ navigation }) {
       data={businesses}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
-        <TouchableOpacity onPress={() => navigation.navigate("VehicleScreen", {carD : item})}>
+        <TouchableOpacity onPress={() => navigation.navigate("VehicleScreen", {carD : item, global})}>
           <View style={styles.userInfo}>
           <View style={styles.UserImgWrapper}>
               <Image style={styles.UserImg} source={{uri: item.imageUrl}} />

@@ -46,7 +46,7 @@ const { width, height } = Dimensions.get("screen");
 export default function RegisteredCars({ navigation, route }) {
   const [car, setCar] = React.useState([]);
   const [isModalVisible, setModalVisible] = React.useState(false);
-  const {packg, carD} = route?.params || {};
+  const {packg, carD, global} = route?.params || {};
   //const { input } = route?.params || {};
   //const {carD} = route.params
   const getRandomImage = () => {
@@ -92,7 +92,7 @@ const close = () => {
       data={car}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
-        <TouchableOpacity onPress={() => navigation.navigate("DateSetter", {carOpt : item, packg, carD}) }>
+        <TouchableOpacity onPress={() => navigation.navigate("DateSetter", {carOpt : item, packg, carD, global}) }>
           <View style={styles.userInfo}>
             <View>
                 <Text style={styles.UserName}>{item.brand} - {item.regNO}</Text>

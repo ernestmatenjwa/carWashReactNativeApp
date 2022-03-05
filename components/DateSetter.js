@@ -11,7 +11,7 @@ function DateSetter({navigation, route}) {
   const [mode,setMode] = useState('date');
   const [show,setShow] = useState(false);
   const [text,setText] = useState('Empty');
-  const {packg, carD, carOpt} = route?.params || {};
+  const {packg, carD, carOpt, global} = route?.params || {};
   const [t,setT] = useState('Empty');
   const [d,setD] = useState('Empty');
 
@@ -109,7 +109,7 @@ function DateSetter({navigation, route}) {
               return (
                 <Pressable  style={[style.bookbtn, {}]}
                  onPress={() => {
-                 navigation.navigate("CheckoutScreen", {packg, carD, carOpt, t, d});
+                 navigation.navigate("CheckoutScreen", {packg, carD, carOpt, t, d, global});
                 }}>
                 <Text style={{color: COLORS.white, fontSize: 18, fontWeight: 'bold'}}>Submit</Text>
                 </Pressable>

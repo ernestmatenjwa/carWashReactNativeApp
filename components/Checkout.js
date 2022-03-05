@@ -14,7 +14,7 @@ import { McText, McIcon } from '../component';
 
 const Checkout = ({ navigation, route }) => {
   const [subTotal, setSubTotal] = useState("");
-  const {packg, carD, carOpt, t, d} = route?.params || {};
+  const {packg, carD, carOpt, global, t, d} = route?.params || {};
 //   const [selectedEvent, setSelectedEvent] = useState(null);
 
 //   useEffect(() => {
@@ -117,7 +117,7 @@ return (
                     /> */}
                     <TouchableOpacity 
                         onPress={() => {
-                        navigation.navigate('PaymentScreen', {subtotal: (packg.price*1.15).toFixed(2), packg, carD, carOpt, t, d})
+                        navigation.navigate('PaymentScreen', {subtotal: (packg.price*1.15).toFixed(2), packg, carD, carOpt, global, t, d})
                       }}>
                         <LinearGradient
                             colors={COLORS.btnLinear}
