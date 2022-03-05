@@ -59,8 +59,6 @@ const options = [
   
 ];
 
-
-
 function CarBrand ({navigation}) {
   const [selectedOption, setSelectedOption] = React.useState(options[0]);
 

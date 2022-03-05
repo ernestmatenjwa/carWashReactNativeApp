@@ -8,10 +8,21 @@ import {
     FlatList, 
     TouchableOpacity,
     InputText } from "react-native";
+    import {
+      Auth, 
+      API,
+      graphqlOperation,
+    } from 'aws-amplify';
+import { listRegisteredCars } from "../src/graphql/queries";
 import COLORS from '../consts/colors';
 import Iconicons from "react-native-vector-icons/Ionicons"
 import Modal from "react-native-modal";
 import { Input } from 'react-native-elements';
+
+const randomImages = [
+  'https://tse2.mm.bing.net/th?id=OIP.e1KNYwnuhNwNj7_-98yTRwHaF7&pid=Api&P=0&w=221&h=178',
+  'https://tse1.mm.bing.net/th?id=OIP.Q_-11kM22YOL505PnecHqgHaI9&pid=Api&P=0&w=300&h=300',
+]
 
 const { width, height } = Dimensions.get("screen");
 
@@ -33,11 +44,29 @@ const { width, height } = Dimensions.get("screen");
   ]
 
 export default function RegisteredCars({ navigation, route }) {
-  //const [carBrand, setCarBrand] = React.useState(false);
+  const [car, setCar] = React.useState([]);
   const [isModalVisible, setModalVisible] = React.useState(false);
   const {packg, carD} = route?.params || {};
   //const { input } = route?.params || {};
   //const {carD} = route.params
+  const getRandomImage = () => {
+    return randomImages[Math.floor(Math.random() * randomImages.length)];
+  }
+  React.useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const usersData = await API.graphql(
+          graphqlOperation(
+            listRegisteredCars
+          )
+        )
+        setCar(usersData.data.listRegisteredCars.items);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchCars();
+  }, [])
 const show = () => {
   setModalVisible(!isModalVisible);
   //console.log(packg, "++++++++", carD)
@@ -54,13 +83,13 @@ const close = () => {
         <View style={{height:"2%", }}></View>
     
     <FlatList 
-      data={vehicle}
+      data={car}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
         <TouchableOpacity onPress={() => navigation.navigate("DateSetter") }>
           <View style={styles.userInfo}>
             <View>
-                <Text style={styles.UserName}>{item.brand} - {item.RegNumber}</Text>
+                <Text style={styles.UserName}>{item.brand} - {item.regNO}</Text>
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Model: {item.model}</Text>
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
                <View style={{flexDirection: 'row', paddingTop: "2%"}}>
