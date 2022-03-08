@@ -208,79 +208,52 @@ export const onDeleteRegisteredCars = /* GraphQL */ `
     }
   }
 `;
-export const onCreateOders = /* GraphQL */ `
-  subscription OnCreateOders {
-    onCreateOders {
+export const onCreateRequests = /* GraphQL */ `
+  subscription OnCreateRequests {
+    onCreateRequests {
       id
-      userID
       brand
       regNO
       userName
       package
+      totalDue
+      status
+      carwash
       o_date
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateOders = /* GraphQL */ `
-  subscription OnUpdateOders {
-    onUpdateOders {
+export const onUpdateRequests = /* GraphQL */ `
+  subscription OnUpdateRequests {
+    onUpdateRequests {
       id
-      userID
       brand
       regNO
       userName
       package
+      totalDue
+      status
+      carwash
       o_date
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteOders = /* GraphQL */ `
-  subscription OnDeleteOders {
-    onDeleteOders {
+export const onDeleteRequests = /* GraphQL */ `
+  subscription OnDeleteRequests {
+    onDeleteRequests {
       id
-      userID
       brand
       regNO
       userName
       package
+      totalDue
+      status
+      carwash
       o_date
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateVehicleType = /* GraphQL */ `
-  subscription OnCreateVehicleType {
-    onCreateVehicleType {
-      id
-      name
-      imageUrl
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateVehicleType = /* GraphQL */ `
-  subscription OnUpdateVehicleType {
-    onUpdateVehicleType {
-      id
-      name
-      imageUrl
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteVehicleType = /* GraphQL */ `
-  subscription OnDeleteVehicleType {
-    onDeleteVehicleType {
-      id
-      name
-      imageUrl
       createdAt
       updatedAt
     }

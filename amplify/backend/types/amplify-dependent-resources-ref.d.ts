@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "auth": {
-        "carWashApp": {
+        "newBackend": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -12,7 +12,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "api": {
-        "carwashapp": {
+        "newbackend": {
             "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"

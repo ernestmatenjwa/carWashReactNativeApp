@@ -1,6 +1,6 @@
 {
   "auth": {
-    "carWashApp": {
+    "newBackend": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -10,8 +10,8 @@
         "usernameAttributes": [],
         "signupAttributes": [
           "PREFERRED_USERNAME",
-          "EMAIL",
-          "PHONE_NUMBER"
+          "PHONE_NUMBER",
+          "EMAIL"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -28,28 +28,23 @@
     }
   },
   "api": {
-    "carwashapp": {
+    "newbackend": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authcarWashApp"
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 150,
-                "apiKeyExpirationDate": "2022-07-31T12:43:06.379Z",
-                "description": "alex"
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authnewBackend"
               }
-            },
-            {
-              "authenticationType": "AWS_IAM"
             }
           ]
         }

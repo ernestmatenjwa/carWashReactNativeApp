@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "carWashUserApp",
-    "slug": "carWashUserApp",
+    "name": "carwashU",
+    "slug": "carwashU",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

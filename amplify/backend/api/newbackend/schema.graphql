@@ -1,0 +1,42 @@
+type Admin @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  name: String!
+  email: String!
+  phone: String!
+  imageUrl: String
+  carwash: [Carwash] @hasMany
+}
+type Carwash @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  name: String
+  location: String
+  Desc: String
+  imageUrl: String
+}
+type User @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  name: String!
+  email: String!
+  phone: String!
+  imageUrl: String
+}
+type RegisteredCars @model @auth(rules: [{ allow: owner }]){
+  id: ID!
+  userID: String!
+  brand: String!
+  regNO: String!
+  model: String!
+  Desc: String!
+  imageUrl: String
+}
+type Requests @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  brand: String!
+  regNO: String!
+  userName: String!
+  package: String!
+  totalDue: String!
+  status: String!
+  carwash: String!
+  o_date: String
+}
