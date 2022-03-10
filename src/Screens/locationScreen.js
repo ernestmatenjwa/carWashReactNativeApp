@@ -38,6 +38,7 @@ export default function LocationScreen({ navigation }) {
   React.useEffect(() => {
     const fetchBusineses = async () => {
       try {
+        console.log('alex123')
         const usersData = await API.graphql(
           graphqlOperation(
             listCarwashes
@@ -55,18 +56,23 @@ export default function LocationScreen({ navigation }) {
     const fetchUser = async () => {
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
       if(userInfo){
+        console.log('alex123')
         const userData = await API.graphql(
           graphqlOperation(
             getUser,
             { id: userInfo.attributes.sub }
             )
         )
-        console.log(userData.data.getUser.name);
-        setGlobal(userData.data.getUser.name)
+        console.log('alex1234')
+        //return
+        //console.log(userData.data.getUser.name);
+        //setGlobal(userData.data.getUser.name)
         if (userData.data.getUser) {
           //console.log("User is already registered in database");
           return;
         }
+        console.log('alex123')
+        //return
         const newUser = {
           id: userInfo.attributes.sub,
           name: userInfo.username,

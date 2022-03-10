@@ -291,6 +291,7 @@ export default function VihicleScreen({ navigation, route }) {
                          <View style={{flex: 1, width: "60%"}}>
                              <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
                              <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                             <Text style={[styles.MessageText, {color: "green"}]}>R {item.price}.00</Text>
                          </View>
                        </View>
                        </View>
@@ -362,6 +363,7 @@ export default function VihicleScreen({ navigation, route }) {
                           <View style={{flex: 1, width: "60%"}}>
                              <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
                              <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                             <Text style={[styles.MessageText, {color: "green"}]}>R {item.price}.00</Text>
                          </View>
                      </View>
                      </View>
@@ -405,6 +407,7 @@ export default function VihicleScreen({ navigation, route }) {
                             <View style={{flex: 1, width: "60%"}}>
                              <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
                              <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                             <Text style={[styles.MessageText, {color: "green"}]}>R {item.price}.00</Text>
                          </View>
                        </View>
                        </View>
@@ -447,6 +450,7 @@ export default function VihicleScreen({ navigation, route }) {
                             <View style={{flex: 1, width: "60%"}}>
                              <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
                              <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                             <Text style={[styles.MessageText, {color: "green"}]}>R {item.price}.00</Text>
                          </View>
                        </View>
                        </View>
@@ -490,6 +494,7 @@ export default function VihicleScreen({ navigation, route }) {
                             <View style={{flex: 1, width: "60%"}}>
                              <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
                              <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                             <Text style={[styles.MessageText, {color: "green"}]}>R {item.price}.00</Text>
                          </View>
                        </View>
                        </View>
@@ -533,6 +538,7 @@ export default function VihicleScreen({ navigation, route }) {
                   <View style={{flex: 1, width: "60%"}}>
                              <Text style={{fontWeight: 'bold', fontSize: 12, color: "grey"}}>{item.Description}</Text>
                              <Text style={styles.MessageText}>{item.tmstimated}</Text>
+                             <Text style={[styles.MessageText, {color: "green"}]}>R {item.price}.00</Text>
                          </View>
              </View>
              </View>

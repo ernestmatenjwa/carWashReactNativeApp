@@ -130,7 +130,6 @@ export const getRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -151,7 +150,43 @@ export const listRegisteredCars = /* GraphQL */ `
         imageUrl
         createdAt
         updatedAt
-        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getCars = /* GraphQL */ `
+  query GetCars($id: ID!) {
+    getCars(id: $id) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCars = /* GraphQL */ `
+  query ListCars(
+    $filter: ModelCarsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCars(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        brand
+        regNO
+        model
+        Desc
+        imageUrl
+        createdAt
+        updatedAt
       }
       nextToken
     }

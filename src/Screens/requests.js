@@ -4,7 +4,7 @@ import { Text,
   View, 
   StyleSheet,
  Dimensions,
- Pressable,
+ Alert,
  FlatList,
  TouchableOpacity,
 Image } from 'react-native';
@@ -150,7 +150,11 @@ export default function RequestScreen({ navigation }) {
           return
         }
         setReq(usersData.data.listRequests.items);
-        console.log(req)
+        for (let step = 0; step < 5; step++) {
+          
+          //console.log('Walking east one step ', req.items.brand);
+        }
+        //console.log(req)
       } catch (e) {
         console.log(e);
       }
@@ -172,7 +176,7 @@ export default function RequestScreen({ navigation }) {
           <View style={styles.userInfo}>
             <View style={styles.TextSection}>
               <View style={styles.UserInfoText}>
-                <Text style={styles.packagee}>{item.package} - {item.carwash}</Text>
+                <Text style={styles.packagee}>{item.package} | {item.carwash}</Text>
               </View>
               <Text style={styles.carbranndd}>{item.brand} - {item.regNO}</Text>
               

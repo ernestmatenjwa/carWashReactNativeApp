@@ -51,7 +51,7 @@ function DateSetter({navigation, route}) {
          <Text style={{fontSize: 40, marginTop: "40%", fontWeight: "bold", alignSelf: "center", color: COLORS.white}}>Date & Time</Text>
        </View>
       </View>
-      <Text style={{fontSize: 18, paddingLeft: "5%", marginTop: "3%", fontWeight: "bold", color: COLORS.tial}}>Select time and date</Text>
+      <Text onPress={() => navigation.navigate("CheckoutScreen", {packg, carD, carOpt, t, d, global})} style={{fontSize: 18, paddingLeft: "5%", marginTop: "3%", fontWeight: "bold", color: COLORS.tial}}>Select time and date</Text>
         <View>
         
       <View  style={{width:"90%", alignItems:'center',padding:50, borderColor:COLORS.tial, borderWidth:2, margin:25}}>
@@ -145,9 +145,6 @@ const style = StyleSheet.create({
     marginBottom: 50,
     marginTop:"40%"
   },
-
-  
-
 });
 
 

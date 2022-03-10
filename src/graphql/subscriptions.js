@@ -161,8 +161,8 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateRegisteredCars = /* GraphQL */ `
-  subscription OnCreateRegisteredCars($owner: String) {
-    onCreateRegisteredCars(owner: $owner) {
+  subscription OnCreateRegisteredCars {
+    onCreateRegisteredCars {
       id
       userID
       brand
@@ -172,13 +172,12 @@ export const onCreateRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateRegisteredCars = /* GraphQL */ `
-  subscription OnUpdateRegisteredCars($owner: String) {
-    onUpdateRegisteredCars(owner: $owner) {
+  subscription OnUpdateRegisteredCars {
+    onUpdateRegisteredCars {
       id
       userID
       brand
@@ -188,13 +187,12 @@ export const onUpdateRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteRegisteredCars = /* GraphQL */ `
-  subscription OnDeleteRegisteredCars($owner: String) {
-    onDeleteRegisteredCars(owner: $owner) {
+  subscription OnDeleteRegisteredCars {
+    onDeleteRegisteredCars {
       id
       userID
       brand
@@ -204,7 +202,51 @@ export const onDeleteRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
-      owner
+    }
+  }
+`;
+export const onCreateCars = /* GraphQL */ `
+  subscription OnCreateCars {
+    onCreateCars {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCars = /* GraphQL */ `
+  subscription OnUpdateCars {
+    onUpdateCars {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCars = /* GraphQL */ `
+  subscription OnDeleteCars {
+    onDeleteCars {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
     }
   }
 `;

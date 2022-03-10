@@ -26,6 +26,13 @@ export default function ProfileScreen({ navigation }) {
   const close = () => {
     setModalVisible(!isModalVisible);
   };
+  const editProfile = async (data) => {
+    try {
+      
+    } catch (e) {
+      console.log(e);
+    }
+  }
   React.useEffect(() => {
     const getProfile = async (e) => {
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });

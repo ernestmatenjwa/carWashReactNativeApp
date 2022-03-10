@@ -10,7 +10,7 @@ import {
 import styled from 'styled-components/native';
 import {LinearGradient} from 'expo-linear-gradient'
 import { SIZES, COLORS, icons, images } from '../constants';
-import { McText, McIcon } from '../components/component';
+import { McText, McIcon } from '../component';
 
 const Checkout = ({ navigation, route }) => {
   const [subTotal, setSubTotal] = useState("");
@@ -117,7 +117,7 @@ return (
                     /> */}
                     <TouchableOpacity 
                         onPress={() => {
-                        navigation.navigate('RegisteredCars', {subtotal: (packg.price*1.15).toFixed(2), packg, carD, carOpt, global, t, d})
+                        navigation.navigate('PaymentScreen', {subtotal: (packg.price*1.15).toFixed(2), packg, carD, carOpt, global, t, d})
                       }}>
                         <LinearGradient
                             colors={COLORS.btnLinear}

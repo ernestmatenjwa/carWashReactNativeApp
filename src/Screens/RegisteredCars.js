@@ -26,6 +26,7 @@ const randomImages = [
 
 const { width, height } = Dimensions.get("screen");
 
+
   const vehicle = [
     {
       id: '1',
@@ -82,10 +83,7 @@ const close = () => {
 };
   return(
     <View style={styles.container}>
-        <View style={{height: "12%", backgroundColor: "#064451", width: width, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
-        <Iconicons name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: "white", margin: "5%"}}/>
-           <Text style={{marginTop: "-10%", color: "white", fontSize:25, fontWeight:"bold", alignSelf: "center"}}>Registered Vehicles</Text>
-        </View>
+        
         <View style={{height:"2%", }}></View>
     
     <FlatList 
@@ -99,7 +97,7 @@ const close = () => {
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Model: {item.model}</Text>
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
                <View style={{flexDirection: 'row', paddingTop: "2%"}}>
-               <Pressable onPress={show}><Text style={{color: "green", fontSize: 16, fontWeight: "bold"}}>EDIT</Text></Pressable>
+               <Pressable onPress={() => navigation.navigate("ResgistEdit", {carOpt : item}) }><Text style={{color: "green", fontSize: 16, fontWeight: "bold"}}>EDIT</Text></Pressable>
                 <Pressable><Text style={{paddingLeft: 20, color: "red", fontSize: 16, fontWeight: "bold"}}>DELETE</Text></Pressable>
                 <Pressable 
                 onPress={() => navigation.navigate("DateSetter")}
@@ -111,60 +109,7 @@ const close = () => {
        </TouchableOpacity>
       )}
     />
-    {(() => {
-    if (isModalVisible === true){
-      return (
-        <Modal isVisible={isModalVisible} style={{backgroundColor: "white", opacity: 0.8, }}>   
-          <View
-          style={{ }}
-          >
-          <Text style={[styles.tit, {alignSelf: "center", color:"green"}]}>UPDATE</Text>
-          <Text style={styles.tit}>Car Brand</Text>
-          <Input
-          style={styles.inpt}
-            inputContainerStyle={styles.Con}
-            inputStyle ={styles.inputText}
-            value="BMW"
-          />
-            <Text style={styles.tit}>Car Model</Text>
-          <Input
-          style={styles.inpt}
-            inputContainerStyle={styles.Con}
-            inputStyle ={styles.inputText}
-            value="4series"
-          />
-          <Text style={styles.tit}>Registration Number</Text>
-          <Input
-            style={styles.inpt}
-            inputContainerStyle={styles.Con}
-            inputStyle ={styles.inputText}
-            value="425 42C"
-          />
-          <Text style={styles.tit}>Discription</Text>
-          <Input
-          style={styles.inpt}
-          inputContainerStyle={styles.Con}
-          inputStyle ={styles.inputText}
-          value="Red"
-          />
-          </View>
-          <View style={{flexDirection:"row", alignContent: "center"}}>
-          <Pressable
-          style={{padding: 10}}
-          ><Text style={{fontSize: 20, fontWeight: "bold", color: "green"}}>UPDATE</Text></Pressable>
-          <Pressable 
-          onPress={close}
-          style={{padding: 10}}
-          ><Text style={{fontSize: 20, fontWeight: "bold", color: "red"}}>CANCEL</Text></Pressable>
-          </View>
-        </Modal>
-        )
-      }
-      return (
-        null
-        );
-      })()}
-        <View style={{
+    <View style={{
      marginTop:"-20%", 
      marginLeft:"80%",
      width: "100%",

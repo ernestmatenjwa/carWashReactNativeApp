@@ -7,21 +7,20 @@ import {
     Alert,
     TouchableOpacity,
     TextInput,
-    ScrollView
 } from 'react-native';
-import Input from "../components/custumized"
 import styled from 'styled-components/native';
 import {LinearGradient} from 'expo-linear-gradient';
-import { COLORS, icons } from '../../constants';
-import { McText, McIcon } from '../../component';
-import bankCard from '../../assets/pictures/bankCard.jpg';
-import { createRequests } from '../graphql/mutations';
+import { COLORS, icons } from '../constants';
+import { McText, McIcon } from '../component';
+import 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
+import bankCard from '../assets/pictures/bankCard.jpg';
+import { createRequests } from '../src/graphql/mutations';
 import {
   Auth, 
   API,
   graphqlOperation,
 } from 'aws-amplify';
-import {useForm, Controller} from 'react-hook-form';
 //import { getUser } from '../src/graphql/queries';
 
 const Payment = ({ navigation, route }) => {
@@ -29,11 +28,6 @@ const Payment = ({ navigation, route }) => {
   const {packg, carD, carOpt, t, d,global, subtotal} = route?.params || {};
   const [date, setDate] = useState(new Date());
   const [name, setName] = React.useState([]);
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
   
   const test = () => {
     var today = new Date();
@@ -71,9 +65,10 @@ const Payment = ({ navigation, route }) => {
     //return
     const s = "Pending";
     const reqq = {
+      id: userInfo.attributes.sub,
       brand: carOpt.brand,
       regNO: carOpt.regNO,
-      userName: userInfo.username,
+      userName: global+'|'+userInfo.username,
       status: s,
       totalDue: subtotal,
       package: packg.package,
@@ -87,7 +82,7 @@ const Payment = ({ navigation, route }) => {
           { input: reqq }
         )
       ) 
-      Alert.alert('You have succesfully booked to wash a car');
+      Alert.alert('You have succesfully added a vehicle');
       //navigation.navigate("RegisteredCars");
   }
   catch(e){
@@ -113,15 +108,39 @@ const Payment = ({ navigation, route }) => {
   //   Alert.alert('Error',e.message);
   //   console.log(e.message);
   // }
+  console.log("we here")
+  return
     navigation.navigate('ConfirmScreen')
     setLoading(false);
   }
 
   return (
     <View style={styles.container}>
+      <ScrollView>
+        <View style={{width: '100%'}}>
+          <SectionHeader>
+            <TouchableOpacity
+             onPress={() => navigation.goBack()}>
+              <McIcon 
+                source={icons.back_arrow} 
+                size={24} marginRight={5} 
+                marginHorizontal={20}
+                style = {{
+                  color:'#064451'
+                }}
+                top={30}
+              />
+              <McText h1 style={{left: '120%', color: '#064451', marginBottom: 10 }}>
+                Payment
+              </McText>
+            </TouchableOpacity>
+          </SectionHeader>
+        </View>
+
         <View>
           <McText h3 style={{color: '#064451', paddingLeft: 25}}>Select your payment method</McText>
         </View>
+
         <View 
           style={{
             width: '100%', 
@@ -156,12 +175,10 @@ const Payment = ({ navigation, route }) => {
             </TouchableOpacity>
           </PaymentSection>
         </View>
-        <View style={{alignItems: "center", padding: 10}}>
-           <Image 
-           source={bankCard} 
-           style={{
-             width:300,
-             height:190}} />
+        <View style={{width:100,height:100}}>
+
+       
+      <Image source={bankCard} />
         </View>
 
         {/* <View style={{width: '100%'}}>
@@ -173,32 +190,43 @@ const Payment = ({ navigation, route }) => {
             />
           </CardSection>
         </View> */}
+
+        <View style={{width: '100%'}}>
+          <CardNumber>
             <McText h4 style={{color: '#064451', paddingLeft: 25}}>Card Number</McText>
-            <Input
-              name="cardnumber"
-              placeholder="Enter card number"
-              control={control}
-              rules={{
-                required: 'Card number is required',
-                minLength: {
-                  value: 10,
-                  message: 'Card number should be minimum 10 characters long',
-                },
-              }}
+              <TextInput
+                style={{
+                  height: 40,
+                  borderRadius: 20,
+                  marginHorizontal: 10,
+                  paddingHorizontal: 30,
+                  borderBottomColor: '#C9C9C9',
+                  borderBottomWidth: 3,
+                }}
+                defaultValue="1234 5689 1011 1213"
+                color="#C9C9C9"
               />
-            <McText h4 style={{color: '#064451', paddingLeft: 25}}>Card Name</McText>
-            <Input
-              name="cardname"
-              placeholder="Enter card name"
-              control={control}
-              rules={{
-                required: 'Card name is required',
-                minLength: {
-                  value: 3,
-                  message: 'Card name should be minimum 10 characters long',
-                },
+          </CardNumber>
+        </View>
+
+        <View style={{width: '100%'}}>
+          <CardName>
+            <McText h4 style={{color: '#064451', paddingLeft: 25}}>Name on Card</McText>
+            <TextInput
+              style={{
+                height: 40,
+                borderRadius: 20,
+                marginHorizontal: 10,
+                paddingHorizontal: 30,
+                borderBottomColor: '#C9C9C9',
+                borderBottomWidth: 3,
               }}
-              />
+              defaultValue="Karabo Molepo"
+              color="#C9C9C9"
+            />
+          </CardName>
+        </View>
+
         <View style={{width: '100%'}}>
           <CardBackDetails>
             <ExpirationDate style={{paddingLeft: 25}}>
@@ -210,21 +238,13 @@ const Payment = ({ navigation, route }) => {
                       height: 40,
                       width: 75,
                       borderColor: 'gray',
-                      borderRadius: 5,
-                      paddingHorizontal: 20,
-                      borderColor: '#C9C9C9',
-                      borderWidth: 3,
+                      borderRadius: 20,
+                      paddingHorizontal: 30,
+                      borderBottomColor: '#C9C9C9',
+                      borderBottomWidth: 3,
                     }}
-                    placeholder="MM"
-                    name="mm"
-                    control={control}
-                    rules={{
-                      required: 'date is required',
-                      minLength: {
-                        value: 10,
-                        message: 'date should be minimum 1 characters long',
-                      },
-                    }}
+                    defaultValue="11"
+                    color="#C9C9C9"
                   />
                 </Month>
                 <Day>
@@ -233,25 +253,35 @@ const Payment = ({ navigation, route }) => {
                       height: 40,
                       width: 75,
                       borderColor: 'gray',
-                      borderRadius: 5,
-                      paddingHorizontal: 15,
-                      borderColor: '#C9C9C9',
-                      borderWidth: 3,
+                      borderRadius: 20,
+                      paddingHorizontal: 30,
+                      borderBottomColor: '#C9C9C9',
+                      borderBottomWidth: 3,
                     }}
-                    placeholder="YYYY"
-                    name="cardnumber"
-                    control={control}
-                    rules={{
-                      required: 'Date is required',
-                      minLength: {
-                        value: 10,
-                        message: 'date should be minimum 4 characters long',
-                      },
-                    }}
+                    defaultValue="27"
+                    color="#C9C9C9"
                   />
                 </Day>
               </ExpirationDates>
             </ExpirationDate>
+
+            <SecurityCode>
+              <McText h4 style={{color: '#064451', paddingLeft: 25}}> Security Code </McText>
+                <TextInput
+                  style={{
+                    height: 40,
+                    width: 85,
+                    borderColor: 'gray',
+                    borderRadius: 20,
+                    paddingHorizontal: 30,
+                    borderBottomColor: '#C9C9C9',
+                    borderBottomWidth: 3,
+                  }}
+                  left="20%"
+                  defaultValue="250"
+                  color="#C9C9C9"
+                />
+            </SecurityCode>
           </CardBackDetails>
         </View>
 
@@ -263,7 +293,7 @@ const Payment = ({ navigation, route }) => {
             </Subtotal>
             <PayButton>
               <TouchableOpacity
-                onPress={handleSubmit(order)}
+                onPress={order}
               >
                 <LinearGradient
                   colors={COLORS.btnLinear}
@@ -283,6 +313,7 @@ const Payment = ({ navigation, route }) => {
             </PayButton>
           </CardBottom>
         </View>
+      </ScrollView>
     </View>
   );
 };

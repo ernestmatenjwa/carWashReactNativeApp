@@ -202,7 +202,6 @@ export const createRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -221,7 +220,6 @@ export const updateRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -240,7 +238,60 @@ export const deleteRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
-      owner
+    }
+  }
+`;
+export const createCars = /* GraphQL */ `
+  mutation CreateCars(
+    $input: CreateCarsInput!
+    $condition: ModelCarsConditionInput
+  ) {
+    createCars(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCars = /* GraphQL */ `
+  mutation UpdateCars(
+    $input: UpdateCarsInput!
+    $condition: ModelCarsConditionInput
+  ) {
+    updateCars(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCars = /* GraphQL */ `
+  mutation DeleteCars(
+    $input: DeleteCarsInput!
+    $condition: ModelCarsConditionInput
+  ) {
+    deleteCars(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
     }
   }
 `;

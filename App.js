@@ -9,8 +9,8 @@ import ProfileScreen from "./src/Screens/profile";
 import ConfirmScreen from "./src/Screens/confirmation";
 import CarBrand from "./src/Screens/CarBrand";
 import DateSetter from "./src/Screens/DateSetter";
-//import SearchCarWash from "./src/Screens/SearchCarWash";
-import CheckoutScreen from "./src/Screens/Checkout"
+import ResgistEdit from "./src/Screens/registEdit";
+import CheckoutScreen from "./screens/Checkout"
 import VehicleScreen from "./src/Screens/vehicletype"
 import PaymentScreen from "./src/Screens/payment"
 import RequestScreen from "./src/Screens/requests"
@@ -169,11 +169,32 @@ export default function App() {
   return (
     <NavigationContainer>
        <Stack.Navigator>
+
         <Stack.Screen 
         name="Splash" 
         component={HomeScreen} 
         options={{
           header: () => null}} />
+                 <Stack.Screen 
+        name="RegisteredCars" 
+        component={RegisteredCars} 
+        options={({route}) => ({ 
+          //header: () => null,
+          title: "Registered vehicles",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "700",
+            fontSize: 30,
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            height: 100,
+            elevation: 0,
+          },
+        })} />
           <Stack.Screen 
        name="ForgotPasswordScreen" 
        component={ForgotPasswordScreen} 
@@ -186,6 +207,11 @@ export default function App() {
         <Stack.Screen 
         name="NewPasswordScreen" 
         component={NewPasswordScreen} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="ResgistEdit" 
+        component={ResgistEdit} 
         options={{
           header: () => null}} />
         <Stack.Screen 
@@ -264,11 +290,24 @@ export default function App() {
         component={VehicleScreen} 
         options={{
           header: () => null}} />
-        <Stack.Screen 
+          <Stack.Screen 
         name="PaymentScreen" 
         component={PaymentScreen} 
-        options={{
-          header: () => null}} />
+        options={({route}) => ({
+          title: "Payment",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "700",
+            fontSize: 30
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+          },
+        })} />
         <Stack.Screen 
         name="VihicleDetail" 
         component={VihicleDetail} 
@@ -279,11 +318,7 @@ export default function App() {
         component={ProfileEdit} 
         options={{
           header: () => null}} />
-        <Stack.Screen 
-        name="RegisteredCars" 
-        component={RegisteredCars} 
-        options={{
-          header: () => null}} />
+        
         <Stack.Screen 
         name="ChatScreen"
         component={ChatScreen} 
