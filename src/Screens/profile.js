@@ -1,25 +1,40 @@
 import * as React from 'react';
-import { Text,  Dimensions, StyleSheet, View, Image,Pressable } from 'react-native';
+import { Text,  
+  Dimensions, 
+  StyleSheet, 
+  View, 
+  Image,
+  Pressable,
+  Alert } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {LinearGradient} from 'expo-linear-gradient';
 import Modal from "react-native-modal";
-import { Input } from 'react-native-elements';
+import CustomInput from '../components/CustomInput/CustomInput';
 import { API, graphqlOperation, Auth } from "aws-amplify";
 import { getUser } from '../graphql/queries';
+import { updateUser } from "../graphql/mutations";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useForm} from 'react-hook-form';
 
 
 const { width, height }= Dimensions.get("screen");
 
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+
 export default function ProfileScreen({ navigation }) {
-  const [name, setName] = React.useState('Alex Mathenjwa');
+  const [name, setName] = React.useState('');
   const [user, setUser] = React.useState([]);
   const [profile, setProfile] = React.useState([]);
-  const [email, setEmail] = React.useState('alexmatenjwa@gmail.com');
-  const [phone, setPhone] = React.useState('0729476167');
+  const [email, setEmail] = React.useState('');
+  const [phone, setPhone] = React.useState('');
+  const [id, setID] = React.useState('');
   const [isModalVisible, setModalVisible] = React.useState(false);
   
+  const {control, handleSubmit, watch} = useForm();
+
   const show = () => {
     setModalVisible(!isModalVisible);
   };
@@ -45,6 +60,10 @@ export default function ProfileScreen({ navigation }) {
           //console.log('yes22 ', userData);
          // console.log('>> ', profile.data?.data.getUserByEmail.name, '<<');
           setProfile({data: userData})
+          setName(userData.data.getUser.name)
+              setEmail(userData.data.getUser.email)
+              setPhone(userData.data.getUser.phone)
+              setID(userData.data.getUser.id)
           // console.log(profile)
             } catch (e) {
                 console.log('error getting user 22', e);  
@@ -63,43 +82,50 @@ export default function ProfileScreen({ navigation }) {
        }
        onLoad();
        getProfile();
-   }, []);
+   }, [profile]);
+   const apd = async data => {
+    const {email: email, name: name, phone: phone} = data;
+    //const {  location: b_location, name: bname, Desc : Desc, imageUrl: imageUrl } = data;
+    console.log(data.name)
+    try{
+        const user = {
+            id: id,
+            name: data.name,
+            email: data.email,
+            phone: data.phone
+        }
+        console.log(user)
+        const apdm = await API.graphql({query: updateUser, variables: {input: user}});
+        console.log("You have successfully apdated your profile")
+        Alert.alert("You have successfully apdated your profile")
+        setModalVisible(!isModalVisible);
+    } catch (e) {
+      console.log(e)
+        Alert.alert(e)
+    } 
+    
+ }
   return (
     <View style = {styles.container}>
     <View style = {{justifyContent:'center',alignItems:'center', width:"100%", }}>          
        <Image source={{uri:profile.data?.data.getUser.imageUrl}} style={styles.UserImg} /> 
+    <View>
+    <Text style={[styles.text_footer, {}]}>Full Name</Text>
+    <View>
+    <Text>{name}</Text>
     </View>
-    <Text style={[styles.text_footer, {marginTop:"-10%"}]}>Full Name</Text>
-    <Input 
-        value={profile.data?.data.getUser.name}
-        inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
-        inputStyle ={[styles.inputText, {paddingLeft: 15}]}                
-        //placeholder="Alex Mathenjwa"
-        rightIcon={ <Icon size={24} 
-        style={styles.icon} name='user'/>}
-        disabled
-    />
-    
     <Text style={styles.text_footer}>Email Address</Text>
-    <Input 
-        value={profile.data?.data.getUser.email}
-        inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
-        inputStyle = {[styles.inputText, {paddingLeft: 15}]}
-        //placeholder="alexmatenjwa@gmail.com"
-        rightIcon={ <Icon size={24} 
-        style={styles.icon} name='envelope'/>}
-        disabled
-    />
+    <View>
+    <Text>{email}</Text>
+    </View>
     <Text style={styles.text_footer}>Phone</Text>
-    <Input 
-        value={profile.data?.data.getUser.phone}
-        inputContainerStyle={[styles.inputContainer, {backgroundColor: "white", borderRadius: 10}]}
-        inputStyle = {[styles.inputText, {paddingLeft: 15}]}               
-        //placeholder="0729476167"
-        rightIcon={ <Icon size={24} 
-        style={styles.icon} name='phone'/>}
-        disabled
-    />
+    <View>
+    <Text>{phone}</Text>
+    </View>
+    </View>
+   
+    
+    </View>
     
         <Pressable 
         style={styles.loginG} 
@@ -119,32 +145,64 @@ export default function ProfileScreen({ navigation }) {
         >
         <Text style={[styles.tit, {alignSelf: "center", color:"green"}]}>UPDATE</Text>
         <Text style={styles.tit}>Name</Text>
-        <Input
+        <CustomInput
+        name="name"
+        control={control}
         style={styles.inpt}
           inputContainerStyle={styles.Con}
           inputStyle ={styles.inputText}
-          onChangeText={setName}
-          value={profile.data?.data.getUser.name}
+          defaultValue={name}
+          rightIcon={<Icon size={24} 
+          style={styles.icon} name='user'/>}
+          rules={{
+            required: 'Username is required',
+            minLength: {
+              value: 3,
+              message: 'Username should be at least 3 characters long',
+            },
+            maxLength: {
+              value: 24,
+              message: 'Username should be max 24 characters long',
+            },
+          }}
         />
           <Text style={styles.tit}>Email</Text>
-        <Input
+        <CustomInput
+        name="email"
+        control={control}
         style={styles.inpt}
           inputContainerStyle={styles.Con}
           inputStyle ={styles.inputText}
-          onChangeText={setEmail}
-          value={profile.data?.data.getUser.email}
+          defaultValue={email}
+          rightIcon={<Icon size={24} 
+          style={styles.icon} name='envelope'/>}
+          rules={{
+            required: 'Email is required',
+            pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
+          }}
         />
         <Text style={styles.tit}>Phone Number</Text>
-        <Input
+        <CustomInput
+        name="phone"
+        control={control}
           style={styles.inpt}
           inputContainerStyle={styles.Con}
           inputStyle ={styles.inputText}
-          onChangeText={setPhone}
-          value={profile.data?.data.getUser.phone}
+          defaultValue={phone}
+          rightIcon={<Icon size={24} 
+          style={styles.icon} name='phone'/>}
+          rules={{
+            required: 'Phone is required',
+            minLength: {
+              value: 12,
+              message: 'Phone should be at least 13 digits long',
+            },
+          }}
         />
         </View>
         <View style={{flexDirection:"row", alignContent: "center"}}>
         <Pressable
+        onPress={handleSubmit(apd)}
         style={{padding: 10}}
         ><Text style={{fontSize: 20, fontWeight: "bold", color: "green"}}>UPDATE</Text></Pressable>
         <Pressable 

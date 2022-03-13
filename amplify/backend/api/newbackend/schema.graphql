@@ -4,6 +4,7 @@ type Admin @model @auth(rules: [{ allow: public }]){
   email: String!
   phone: String!
   imageUrl: String
+  picture: AdminPic @hasOne
 }
 type Carwash @model @auth(rules: [{ allow: public }]){
   id: ID!
@@ -12,6 +13,7 @@ type Carwash @model @auth(rules: [{ allow: public }]){
   Desc: String
   imageUrl: String
   request: [Requests] @hasMany
+  logo: BusinessLogo @hasOne
 }
 type User @model @auth(rules: [{ allow: public }]){
   id: ID!
@@ -21,6 +23,7 @@ type User @model @auth(rules: [{ allow: public }]){
   imageUrl: String
   request: [Requests] @hasMany
   car: [RegisteredCars] @hasMany
+  picture: UserPic @hasOne
 }
 type RegisteredCars @model @auth(rules: [{ allow: public }]){
   id: ID!
@@ -40,4 +43,16 @@ type Requests @model @auth(rules: [{ allow: public }]){
   status: String!
   carwash: String!
   o_date: String
+}
+type AdminPic @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  url: String!
+}
+type UserPic @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  url: String!
+}
+type BusinessLogo @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  url: String!
 }

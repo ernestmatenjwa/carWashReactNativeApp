@@ -11,6 +11,9 @@ const CustomInput = ({
   rules = {},
   placeholder,
   secureTextEntry,
+  defaultValue,
+  value,
+  disabled
 }) => {
   return (
     <Controller
@@ -30,13 +33,15 @@ const CustomInput = ({
                  rightIcon={<Icon size={24} 
                  style={styles.icon} 
                  name={iconName}
+                 
                  />}
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
               placeholder={placeholder}
-              // style={styles.input}
+              defaultValue={defaultValue}
               secureTextEntry={secureTextEntry}
+              disabled={disabled}
             />
           </View>
           {error && (

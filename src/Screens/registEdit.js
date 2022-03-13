@@ -5,7 +5,7 @@ import {
     StyleSheet,
     Pressable, 
     Dimensions, 
-    FlatList, 
+    Alert, 
     TouchableOpacity,
     InputText } from "react-native";
     import {
@@ -17,14 +17,37 @@ import { listRegisteredCars } from "../graphql/queries";
 import COLORS from '../constants/consts/colors';
 import Iconicons from "react-native-vector-icons/Ionicons"
 import Modal from "react-native-modal";
-import { Input } from 'react-native-elements';
+import CustomInput from '../components/CustomInput/CustomInput';
+import {useForm} from 'react-hook-form';
+import { updateRegisteredCars } from "../graphql/mutations";
 
 
 const { width, height } = Dimensions.get("screen");
 
 export default function  ResgistEdit({ navigation, route }) {
-  
   const {carOpt} = route?.params || {};
+  const {control, handleSubmit, watch} = useForm();
+
+  const apd = async data => {
+    const {name: name, model: model, regNO: regNO, Desc: desc} = data;
+    console.log(data)
+    try{
+        const car = {
+            id: carOpt.id,
+            brand: data.name,
+            model: data.model,
+            regNO: data.regNO,
+            Desc: data.desc
+        }
+        const apdm = await API.graphql({query: updateRegisteredCars, variables: {input: car}});
+        console.log("You have successfully apdated your car")
+        Alert.alert("You have successfully apdated your car")
+    } catch (e) {
+      console.log(e)
+        Alert.alert(e)
+    } 
+    navigation.navigate("RegisteredCars")
+ }
     return (
     <View style={styles.container}>
       <View style={{marginTop: "30%",height:width-2, width:"90%", alignSelf: "center", flex: 1}}>
@@ -33,35 +56,77 @@ export default function  ResgistEdit({ navigation, route }) {
       >
       <Text style={[styles.tit, {alignSelf: "center", color:"green"}]}>UPDATE</Text>
       <Text style={styles.tit}>Car Brand</Text>
-      <Input
+      
+      <CustomInput
+      name="name"
+      control={control}
         style={styles.inpt}
         inputContainerStyle={styles.Con}
         inputStyle ={styles.inputText}
-        value={carOpt.brand}
+        defaultValue={carOpt.brand}
+        iconName='pencil'
+        rules={{
+          required: 'Brand name is required',
+          minLength: {
+            value: 2,
+            message: 'Brand name should be at least 2 characters long',
+          },
+        }}
       />
         <Text style={styles.tit}>Car Model</Text>
-      <Input
-      style={styles.inpt}
-        inputContainerStyle={styles.Con}
-        inputStyle ={styles.inputText}
-        value={carOpt.model}
-      />
-      <Text style={styles.tit}>Registration Number</Text>
-      <Input
+      <CustomInput
+      name="model"
+      control={control}
         style={styles.inpt}
         inputContainerStyle={styles.Con}
         inputStyle ={styles.inputText}
-        value={carOpt.regNO}
+        defaultValue={carOpt.model}
+        iconName='pencil'
+        rules={{
+          required: 'Car Model is required',
+          minLength: {
+            value: 2,
+            message: 'Car Model should be at least 2 characters long',
+          },
+        }}
+      />
+      <Text style={styles.tit}>Registration Number</Text>
+      <CustomInput
+      name="regNO"
+      control={control}
+        style={styles.inpt}
+        inputContainerStyle={styles.Con}
+        inputStyle ={styles.inputText}
+        defaultValue={carOpt.regNO}
+        iconName='pencil'
+        rules={{
+          required: 'Registration Number is required',
+          minLength: {
+            value: 3,
+            message: 'Registration Number should be at least 3 characters long',
+          },
+        }}
       />
       <Text style={styles.tit}>Discription</Text>
-      <Input
+      <CustomInput
+      name="desc"
+      control={control}
       style={styles.inpt}
       inputContainerStyle={styles.Con}
       inputStyle ={styles.inputText}
-      value={carOpt.Desc}
+      defaultValue={carOpt.Desc}
+      iconName='pencil'
+      rules={{
+        required: 'Description is required',
+        minLength: {
+          value: 3,
+          message: 'Description should be at least 3 characters long',
+        },
+      }}
       />
         <View style={{flexDirection:"row", alignContent: "center"}}>
       <Pressable
+      onPress={handleSubmit(apd)}
       style={{padding: 10}}
       ><Text style={{fontSize: 20, fontWeight: "bold", color: "green"}}>UPDATE</Text></Pressable>
       <Pressable 

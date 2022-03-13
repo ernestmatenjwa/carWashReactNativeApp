@@ -19,7 +19,7 @@ export default function ConfirmScreen({ navigation }) {
    style={{marginTop: "40%", alignSelf: "center"}}
    />
    <View style={{marginTop: height / 20}}>
-    <Text style={{textAlign: "center", color: "#064451", fontSize: 18}}>Your order is successfull!</Text>
+    <Text style={{textAlign: "center", color: "#064451", fontSize: 18}}>Your requirest is successfull!</Text>
     <Text style={{textAlign: "center", fontSize: 20, fontWeight: "bold", color: "#064451"}}>Now You Can Seat And Relax</Text>
     <Text onPress={() =>  navigation.push("LocationScreen")} style={{textAlign: "center", color: "green", fontSize: 18, fontWeight: "700"}}>Home</Text>
    </View>

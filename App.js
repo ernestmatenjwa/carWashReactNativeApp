@@ -142,7 +142,7 @@ const TabScreen = () => {
         name="Profile" 
         component={ProfileScreen}
         options={{
-          title: 'User Profile',
+          title: 'My Profile',
           headerTitleAlign: 'center',
           headerTitleStyle: {
             color: "white",
@@ -155,8 +155,8 @@ const TabScreen = () => {
             backgroundColor: '#064451',
             shadowColor: '#064451',
             elevation: 0,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
           },
           headerBackTitleVisible: false
         }}
@@ -185,8 +185,8 @@ export default function App() {
           headerTitleAlign: 'center',
           headerTitleStyle: {
             color: "white",
-            fontWeight: "700",
-            fontSize: 30,
+            fontWeight: "600",
+            fontSize: 20,
           },
           headerStyle: {
             backgroundColor: '#064451',

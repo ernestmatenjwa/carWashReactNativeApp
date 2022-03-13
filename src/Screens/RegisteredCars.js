@@ -7,13 +7,14 @@ import {
     Dimensions, 
     FlatList, 
     TouchableOpacity,
-    InputText } from "react-native";
+    Alert } from "react-native";
     import {
       Auth, 
       API,
       graphqlOperation,
     } from 'aws-amplify';
 import { listRegisteredCars } from "../graphql/queries";
+import { deleteRegisteredCars } from "../graphql/mutations";
 import COLORS from '../constants/consts/colors';
 import Iconicons from "react-native-vector-icons/Ionicons"
 import Modal from "react-native-modal";
@@ -46,6 +47,7 @@ const { width, height } = Dimensions.get("screen");
 
 export default function RegisteredCars({ navigation, route }) {
   const [car, setCar] = React.useState([]);
+  const [id, setID] = React.useState([]);
   const [isModalVisible, setModalVisible] = React.useState(false);
   const {packg, carD, global} = route?.params || {};
   //const { input } = route?.params || {};
@@ -81,6 +83,24 @@ const show = () => {
 const close = () => {
   setModalVisible(!isModalVisible);
 };
+const del = async (id) => {
+  //const {  location: b_location, name: bname, Desc : Desc, imageUrl: imageUrl } = data;
+  console.log("Clickedd", id)
+  Alert.alert("clicked", id)
+  try{
+      const car = {
+          id: id,
+      }
+      console.log(car)
+      const dedm = await API.graphql({query: deleteRegisteredCars, variables: {input: car}});
+      console.log("You have successfully deleted a car")
+      Alert.alert("You have successfully deleted a car")
+  } catch (e) {
+    console.log(e)
+      Alert.alert(e)
+  } 
+  
+}
   return(
     <View style={styles.container}>
         
@@ -98,7 +118,7 @@ const close = () => {
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
                <View style={{flexDirection: 'row', paddingTop: "2%"}}>
                <Pressable onPress={() => navigation.navigate("ResgistEdit", {carOpt : item}) }><Text style={{color: "green", fontSize: 16, fontWeight: "bold"}}>EDIT</Text></Pressable>
-                <Pressable><Text style={{paddingLeft: 20, color: "red", fontSize: 16, fontWeight: "bold"}}>DELETE</Text></Pressable>
+                <Pressable onPress={() => del(item.id)}><Text style={{paddingLeft: 20, color: "red", fontSize: 16, fontWeight: "bold"}}>DELETE</Text></Pressable>
                 <Pressable 
                 onPress={() => navigation.navigate("DateSetter")}
                 style={{marginLeft: "50%"}}
