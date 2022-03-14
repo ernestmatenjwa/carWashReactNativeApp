@@ -160,34 +160,142 @@ export const onDeleteUser = /* GraphQL */ `
     }
   }
 `;
-export const onCreateVehicleType = /* GraphQL */ `
-  subscription OnCreateVehicleType {
-    onCreateVehicleType {
+export const onCreateRegisteredCars = /* GraphQL */ `
+  subscription OnCreateRegisteredCars {
+    onCreateRegisteredCars {
       id
-      name
+      userID
+      brand
+      regNO
+      model
+      Desc
       imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateVehicleType = /* GraphQL */ `
-  subscription OnUpdateVehicleType {
-    onUpdateVehicleType {
+export const onUpdateRegisteredCars = /* GraphQL */ `
+  subscription OnUpdateRegisteredCars {
+    onUpdateRegisteredCars {
       id
-      name
+      userID
+      brand
+      regNO
+      model
+      Desc
       imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteVehicleType = /* GraphQL */ `
-  subscription OnDeleteVehicleType {
-    onDeleteVehicleType {
+export const onDeleteRegisteredCars = /* GraphQL */ `
+  subscription OnDeleteRegisteredCars {
+    onDeleteRegisteredCars {
       id
-      name
+      userID
+      brand
+      regNO
+      model
+      Desc
       imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateCars = /* GraphQL */ `
+  subscription OnCreateCars {
+    onCreateCars {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCars = /* GraphQL */ `
+  subscription OnUpdateCars {
+    onUpdateCars {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCars = /* GraphQL */ `
+  subscription OnDeleteCars {
+    onDeleteCars {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateRequests = /* GraphQL */ `
+  subscription OnCreateRequests {
+    onCreateRequests {
+      id
+      brand
+      regNO
+      userName
+      package
+      totalDue
+      status
+      carwash
+      o_date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRequests = /* GraphQL */ `
+  subscription OnUpdateRequests {
+    onUpdateRequests {
+      id
+      brand
+      regNO
+      userName
+      package
+      totalDue
+      status
+      carwash
+      o_date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRequests = /* GraphQL */ `
+  subscription OnDeleteRequests {
+    onDeleteRequests {
+      id
+      brand
+      regNO
+      userName
+      package
+      totalDue
+      status
+      carwash
+      o_date
       createdAt
       updatedAt
     }

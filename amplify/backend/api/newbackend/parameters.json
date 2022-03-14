@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "newbackend",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authnewBackend",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

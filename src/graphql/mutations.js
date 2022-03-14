@@ -187,43 +187,169 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
-export const createVehicleType = /* GraphQL */ `
-  mutation CreateVehicleType(
-    $input: CreateVehicleTypeInput!
-    $condition: ModelVehicleTypeConditionInput
+export const createRegisteredCars = /* GraphQL */ `
+  mutation CreateRegisteredCars(
+    $input: CreateRegisteredCarsInput!
+    $condition: ModelRegisteredCarsConditionInput
   ) {
-    createVehicleType(input: $input, condition: $condition) {
+    createRegisteredCars(input: $input, condition: $condition) {
       id
-      name
+      userID
+      brand
+      regNO
+      model
+      Desc
       imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const updateVehicleType = /* GraphQL */ `
-  mutation UpdateVehicleType(
-    $input: UpdateVehicleTypeInput!
-    $condition: ModelVehicleTypeConditionInput
+export const updateRegisteredCars = /* GraphQL */ `
+  mutation UpdateRegisteredCars(
+    $input: UpdateRegisteredCarsInput!
+    $condition: ModelRegisteredCarsConditionInput
   ) {
-    updateVehicleType(input: $input, condition: $condition) {
+    updateRegisteredCars(input: $input, condition: $condition) {
       id
-      name
+      userID
+      brand
+      regNO
+      model
+      Desc
       imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteVehicleType = /* GraphQL */ `
-  mutation DeleteVehicleType(
-    $input: DeleteVehicleTypeInput!
-    $condition: ModelVehicleTypeConditionInput
+export const deleteRegisteredCars = /* GraphQL */ `
+  mutation DeleteRegisteredCars(
+    $input: DeleteRegisteredCarsInput!
+    $condition: ModelRegisteredCarsConditionInput
   ) {
-    deleteVehicleType(input: $input, condition: $condition) {
+    deleteRegisteredCars(input: $input, condition: $condition) {
       id
-      name
+      userID
+      brand
+      regNO
+      model
+      Desc
       imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCars = /* GraphQL */ `
+  mutation CreateCars(
+    $input: CreateCarsInput!
+    $condition: ModelCarsConditionInput
+  ) {
+    createCars(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCars = /* GraphQL */ `
+  mutation UpdateCars(
+    $input: UpdateCarsInput!
+    $condition: ModelCarsConditionInput
+  ) {
+    updateCars(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCars = /* GraphQL */ `
+  mutation DeleteCars(
+    $input: DeleteCarsInput!
+    $condition: ModelCarsConditionInput
+  ) {
+    deleteCars(input: $input, condition: $condition) {
+      id
+      userID
+      brand
+      regNO
+      model
+      Desc
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createRequests = /* GraphQL */ `
+  mutation CreateRequests(
+    $input: CreateRequestsInput!
+    $condition: ModelRequestsConditionInput
+  ) {
+    createRequests(input: $input, condition: $condition) {
+      id
+      brand
+      regNO
+      userName
+      package
+      totalDue
+      status
+      carwash
+      o_date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateRequests = /* GraphQL */ `
+  mutation UpdateRequests(
+    $input: UpdateRequestsInput!
+    $condition: ModelRequestsConditionInput
+  ) {
+    updateRequests(input: $input, condition: $condition) {
+      id
+      brand
+      regNO
+      userName
+      package
+      totalDue
+      status
+      carwash
+      o_date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteRequests = /* GraphQL */ `
+  mutation DeleteRequests(
+    $input: DeleteRequestsInput!
+    $condition: ModelRequestsConditionInput
+  ) {
+    deleteRequests(input: $input, condition: $condition) {
+      id
+      brand
+      regNO
+      userName
+      package
+      totalDue
+      status
+      carwash
+      o_date
       createdAt
       updatedAt
     }

@@ -1,33 +1,32 @@
 import "react-native-gesture-handler"
 import React from "react"
-import HomeScreen from "./Screens/HomeScreen";
-import SignupScreen from "./components/Signup";
-import LoginScreen from "./components/Login";
-import LocationScreen from "./Screens/locationScreen";
-import MessagesScreen from "./Screens/messagesScreen";
-import ProfileScreen from "./Screens/profile";
-import ConfirmScreen from "./components/confirmation";
-import CarBrand from "./components/CarBrand";
-import DateSetter from "./components/DateSetter";
-import SearchCarWash from "./components/SearchCarWash";
-import CheckoutScreen from "./components/Checkout"
-import VehicleScreen from "./components/vehicletype"
-import PaymentScreen from "./components/payment"
-import ChatScreen from "./components/chatScreen"
-import ProfileEdit from "./Screens/EditProfile"
-import ConfirmEmailScreen from "./components/ConfirmEmailScreen.js"
-import ForgotPasswordScreen from "./components/ForgotPasswordScreen"
-import NewPasswordScreen from "./components/NewPasswordScreen"
-import RegisteredCars from "./Screens/RegisteredCars";
-import More2 from "./Screens/more2";
-import More3 from "./Screens/more3";
+import HomeScreen from "./src/Screens/HomeScreen";
+import SignupScreen from "./src/Screens/Signup";
+import LoginScreen from "./src/Screens/Login";
+import LocationScreen from "./src/Screens/locationScreen";
+import MessagesScreen from "./src/Screens/messagesScreen";
+import ProfileScreen from "./src/Screens/profile";
+import ConfirmScreen from "./src/Screens/confirmation";
+import CarBrand from "./src/Screens/CarBrand";
+import DateSetter from "./src/Screens/DateSetter";
+import ResgistEdit from "./src/Screens/registEdit";
+import CheckoutScreen from "./screens/Checkout"
+import VehicleScreen from "./src/Screens/vehicletype"
+import PaymentScreen from "./src/Screens/payment"
+import RequestScreen from "./src/Screens/requests"
+import ChatScreen from "./src/Screens/chatScreen"
+import ProfileEdit from "./src/Screens/EditProfile"
+import ConfirmEmailScreen from "./src/Screens/ConfirmEmailScreen.js"
+import ForgotPasswordScreen from "./src/Screens/ForgotPasswordScreen"
+import NewPasswordScreen from "./src/Screens/NewPasswordScreen"
+import RegisteredCars from "./src/Screens/RegisteredCars";
+import VihicleDetail from "./src/Screens/vihicleDetail";
+import MapScreen from "./src/Screens/map";
 
 import Iconicons from "react-native-vector-icons/Ionicons"
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import VihicleDetail from "./components/vihicleDetail";
-import MapScreen from "./Screens/map";
 
 import Amplify from 'aws-amplify'
 import awsconfig from './src/aws-exports'
@@ -45,6 +44,24 @@ const LocationStackScreen = () => {
         name="Home" 
         component={
           LocationScreen} 
+          options={{
+            title: 'Available car washes',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: "white",
+              fontWeight: "600"
+            },
+            headerStyle: {
+              backgroundColor: '#064451',
+              shadowColor: '#064451',
+              elevation: 0,
+            },
+            headerBackTitleVisible: false,
+          }}/>
+        <locationStack.Screen 
+        name="requests" 
+        component={
+          RequestScreen} 
         options={{
           header: () => null
           }} />
@@ -75,6 +92,9 @@ const TabScreen = () => {
          } else if (rn === 'Profile') {
           iconName = focused ? 'person' : 'person-outline'
          }
+         else if (rn === 'requests') {
+          iconName = focused ? 'list' : 'list-outline'
+         }
       
         return <Iconicons name={iconName} size={size} color={"#064451"} />
        },
@@ -82,6 +102,24 @@ const TabScreen = () => {
      })}
     >
         <Tabs.Screen name="LocationScreenStack" component={LocationStackScreen} options={{header: () => null}} />
+        <locationStack.Screen 
+        name="requests" 
+        component={RequestScreen}
+        options={{
+          title: 'My Requests',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "600"
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+          },
+          headerBackTitleVisible: false,
+        }}
+        />
         <locationStack.Screen 
         name="Messanger" 
         component={MessagesScreen}
@@ -98,18 +136,13 @@ const TabScreen = () => {
             elevation: 0,
           },
           headerBackTitleVisible: false,
-          headerBackImage: () => (
-            <View style={{marginLeft: 15}}>
-              <Ionicons name="arrow-back" size={25} color="#2e64e5" />
-            </View>
-          ),
         }}
         />
         <locationStack.Screen 
         name="Profile" 
         component={ProfileScreen}
         options={{
-          title: 'User Profile',
+          title: 'My Profile',
           headerTitleAlign: 'center',
           headerTitleStyle: {
             color: "white",
@@ -122,8 +155,8 @@ const TabScreen = () => {
             backgroundColor: '#064451',
             shadowColor: '#064451',
             elevation: 0,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
           },
           headerBackTitleVisible: false
         }}
@@ -136,11 +169,32 @@ export default function App() {
   return (
     <NavigationContainer>
        <Stack.Navigator>
+
         <Stack.Screen 
         name="Splash" 
         component={HomeScreen} 
         options={{
           header: () => null}} />
+                 <Stack.Screen 
+        name="RegisteredCars" 
+        component={RegisteredCars} 
+        options={({route}) => ({ 
+          //header: () => null,
+          title: "Registered vehicles",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "600",
+            fontSize: 20,
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            height: 100,
+            elevation: 0,
+          },
+        })} />
           <Stack.Screen 
        name="ForgotPasswordScreen" 
        component={ForgotPasswordScreen} 
@@ -153,6 +207,11 @@ export default function App() {
         <Stack.Screen 
         name="NewPasswordScreen" 
         component={NewPasswordScreen} 
+        options={{
+          header: () => null}} />
+        <Stack.Screen 
+        name="ResgistEdit" 
+        component={ResgistEdit} 
         options={{
           header: () => null}} />
         <Stack.Screen 
@@ -216,11 +275,11 @@ export default function App() {
         component={DateSetter} 
         options={{
           header: () => null}} />
-        <Stack.Screen 
+        {/* <Stack.Screen 
         name="SearchCarWash" 
         component={SearchCarWash} 
         options={{
-          header: () => null}} />
+          header: () => null}} /> */}
         <Stack.Screen 
         name="CheckoutScreen" 
         component={CheckoutScreen} 
@@ -231,11 +290,24 @@ export default function App() {
         component={VehicleScreen} 
         options={{
           header: () => null}} />
-        <Stack.Screen 
+          <Stack.Screen 
         name="PaymentScreen" 
         component={PaymentScreen} 
-        options={{
-          header: () => null}} />
+        options={({route}) => ({
+          title: "Payment",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "700",
+            fontSize: 30
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+          },
+        })} />
         <Stack.Screen 
         name="VihicleDetail" 
         component={VihicleDetail} 
@@ -246,21 +318,7 @@ export default function App() {
         component={ProfileEdit} 
         options={{
           header: () => null}} />
-        <Stack.Screen 
-        name="RegisteredCars" 
-        component={RegisteredCars} 
-        options={{
-          header: () => null}} />
-        <Stack.Screen 
-        name="More2" 
-        component={More2} 
-        options={{
-          header: () => null}} />
-        <Stack.Screen 
-        name="More3" 
-        component={More3} 
-        options={{
-          header: () => null}} />
+        
         <Stack.Screen 
         name="ChatScreen"
         component={ChatScreen} 
