@@ -7,7 +7,10 @@ import { Text,
  SafeAreaView,
  FlatList,
  TouchableOpacity,
+
 Image } from 'react-native';
+import _ from "lodash";
+import { SearchBar} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 import { listCarwashes } from "../graphql/queries";
@@ -18,7 +21,10 @@ import {
   API,
   graphqlOperation,
 } from 'aws-amplify';
+import { getCarWashes, contains } from "./api/index";
+
 import COLORS from '../constants/consts/colors';
+
 const randomImages = [
   'https://tse2.mm.bing.net/th?id=OIP.e1KNYwnuhNwNj7_-98yTRwHaF7&pid=Api&P=0&w=221&h=178',
   'https://tse1.mm.bing.net/th?id=OIP.Q_-11kM22YOL505PnecHqgHaI9&pid=Api&P=0&w=300&h=300',
@@ -28,42 +34,65 @@ const { width, height } = Dimensions.get("screen");
 
 export default function LocationScreen({ navigation }) {
   const [businesses, setBusinesses] = React.useState([]);
-  const [searchValue, onChangesearchValue] = React.useState('');
   const [global, setGlobal] = React.useState('');
   const [profile, setProfile] = React.useState([]);
 
+  // Search Properties
+  const [data, setData] = React.useState([]);
+  const [fullData, setFullData] = React.useState([]);
+  const [query,setQuery] = React.useState("");
+
+
+  const handleSearch = (text) => {
+    const formattedQuery = text.toLowerCase();
+    const data = _.filter(fullData, (user) => {
+      return contains(user, formattedQuery);
+    });
+    setQuery(text);
+    setData(data);
+   };
+   
   const getRandomImage = () => {
     return randomImages[Math.floor(Math.random() * randomImages.length)];
   }
   React.useEffect(() => {
+
     const fetchBusineses = async () => {
       try {
-        console.log('alex123')
+        console.log('alex1239')
         const usersData = await API.graphql(
           graphqlOperation(
             listCarwashes
           )
         )
+        getCarWashes(
+          usersData.data.listCarwashes.items,
+          5,
+          query
+        ).then((u)=>{
+
+          setData(u);
+          setFullData(u);
+        })
         setBusinesses(usersData.data.listCarwashes.items);
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       }
+     
     }
     fetchBusineses();
   }, [])
-
   React.useEffect( () => {
     const fetchUser = async () => {
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
       if(userInfo){
-        console.log('alex123')
         const userData = await API.graphql(
           graphqlOperation(
             getUser,
             { id: userInfo.attributes.sub }
             )
         )
-        console.log('alex1234')
+        // console.log('alex1234')
         setProfile({data: userData})
         //return
         //console.log(userData.data.getUser.name);
@@ -72,13 +101,14 @@ export default function LocationScreen({ navigation }) {
           //console.log("User is already registered in database");
           return;
         }
-        console.log('alex123')
+        console.log('alex1')
+        // console.log(businesses);
         //return
         const newUser = {
           id: userInfo.attributes.sub,
           name: userInfo.username,
           email: userInfo.attributes.email,
-          phone: userInfo.attributes.phone_number,
+          phone: "none",
           imageUrl: getRandomImage(),
         }
         await API.graphql(
@@ -92,22 +122,21 @@ export default function LocationScreen({ navigation }) {
     fetchUser();
   }, [profile]) 
 
+
+ 
+  
   return (
-  <SafeAreaView>
-  <Input 
-    //onChangeText={event => {onChangesearchValue(event.target.value)}}
-    inputContainerStyle={styles.inputContainer}
-    inputStyle ={[styles.inputText, {padding: 10}]}
-    placeholder="Search..."
-    rightIcon={ <Icon size={24} 
-    style={styles.icon} name='search'/>}
-  />
-  <View style={{marginTop: "-4%"}}>
-    <Text style={{color: "#064451", paddingLeft: 10, fontSize: 20, }}>Select a carwash closer to you</Text>
-  </View>
- <FlatList 
- //style={{height:height/1.54}}
-      data={businesses}
+    <SafeAreaView>
+     <SearchBar
+        placeholder="Type Here..."
+        lightTheme
+        round
+        value ={query}
+        onChangeText={handleSearch}
+      />
+    <FlatList 
+      style={{height:height/1.54}}
+      data={data}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
         <TouchableOpacity onPress={() => navigation.navigate("VehicleScreen", {carD : item, global})}>
@@ -124,19 +153,9 @@ export default function LocationScreen({ navigation }) {
        </TouchableOpacity>
       )}
     />
-   <View style={{
-     marginTop:"-20%", 
-     marginLeft:"85%",
-     width:"100%",
-  }}>
-    <Icon
-    size={50} 
-    color={"#064451"}
-    name="map-marker" 
-    onPress={() => navigation.navigate('MapScreen')}  
-   />
-    </View>
+    
   </SafeAreaView>
+
   );
 }
 

@@ -5,6 +5,7 @@ import { Text,
   View, 
   Image,
   Pressable,
+  TouchableOpacity,
   Alert } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -106,37 +107,66 @@ export default function ProfileScreen({ navigation }) {
     
  }
   return (
-    <View style = {styles.container}>
-    <View style = {{justifyContent:'center',alignItems:'center', width:"100%", }}>          
-       <Image source={{uri:profile.data?.data.getUser.imageUrl}} style={styles.UserImg} /> 
-    <View>
-    <Text style={[styles.text_footer, {}]}>Full Name</Text>
-    <View>
-    <Text>{name}</Text>
-    </View>
-    <Text style={styles.text_footer}>Email Address</Text>
-    <View>
-    <Text>{email}</Text>
-    </View>
-    <Text style={styles.text_footer}>Phone</Text>
-    <View>
-    <Text>{phone}</Text>
-    </View>
+    <View style={styles.container}  >
+    <View style={styles.header}>
+       <Text style={styles.HeaderText}>Welcome back, <br></br> {name}!</Text>
     </View>
    
-    
+    <Image style={styles.avatar} source={{uri:profile.data?.data.getUser.imageUrl}}/>
+    <View style={styles.viewAl}>
+    <Pressable 
+      onPress={show}
+      style={[styles.text_footer, {}]}>
+      <Icon
+          style={styles.iconZb}
+          size={38}
+          name="camera"
+       />
+      </Pressable> 
+      <Pressable 
+      // style={styles.iconZb} 
+      onPress={show}>        
+      <Icon
+        style={styles.iconZb}
+        size={38}
+        name="edit"
+      />
+      </Pressable>
     </View>
-    
-        <Pressable 
-        style={styles.loginG} 
-        onPress={show}
-        >
-        <Text 
-        style={{
-            fontSize: 15, 
-            color: "white"}}>Edit</Text>
-        </Pressable>
-        {(() => {
+    <View style={styles.body}>
+        <View style={styles.bodyContent}>
+        <View style={styles.items}>
+          <Icon
+          
+          style={styles.icon}
+            size={28}
+            name="user"
+          />
+           <Text style={styles.name}>{name ? name: "FullName"}</Text>              
+          
+          </View>
+          <View style={styles.items}>
+          <Icon
+          style={styles.icon}
+            size={24}
+            name="envelope"
+          />
+          <Text style={styles.info}>{email ? email : "example@gmail.com"}</Text>
+      
+          </View>
+          <View style={styles.items} >
+          <Icon
+          
+          style={styles.icon}
+            size={24}
+            name="phone"
+          />
+  <Text style={styles.description}>{phone ? phone: "+27 122 510 995"}</Text>
+        
+          </View>
+         </View>
+    </View>
+     {(() => {
     if (isModalVisible === true){
       return (
       <Modal isVisible={isModalVisible} style={{backgroundColor: "white",opacity: 0.8,}}>   
@@ -217,11 +247,113 @@ export default function ProfileScreen({ navigation }) {
         null
       );
     })()}
-    </View> 
+</View>
+
+
   );
 }
-
 const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    width: width,
+    backgroundColor: "white",
+    padding: 10,
+  },
+  viewAl: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  iconZb: {
+    height: 30,
+    width: 30,
+    margin:40,
+    color:"#064451"
+  },
+  header:{
+    backgroundColor: "#064451",
+    height:200,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius:25
+  },
+  HeaderText:{
+    color: "white",
+    marginBottom:10,
+    alignSelf:'center',
+    position: 'absolute',
+    marginTop:50,
+    fontSize:22,
+    color:"#FFFFFF",
+    fontWeight:'600',
+  },
+  avatar: {
+    width: 130,
+    height: 130,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: "white",
+    marginBottom:10,
+    alignSelf:'center',
+    position: 'absolute',
+    marginTop:130
+  },
+ 
+  body:{
+    marginTop: -15,
+    backgroundColor: "transparent!",
+    borderColor: "#064451",
+    borderWidth: 2,
+    borderTopWidth:0,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius:25,
+    padding: 5
+  },
+  bodyContent: {
+    flex: 1,
+    alignItems: 'start',
+    padding:30,
+  },
+  items:{
+    marginTop: 15,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  name:{
+    fontSize:22,
+    color:"#064451",
+    fontWeight:'600',
+    textAlign: 'start',
+  },
+  icon:{
+    color: "#064451",
+    marginRight: 20,
+  },
+  info:{
+    fontSize:20,
+    color: "#064451",
+    fontWeight:'400',
+  },
+  description:{
+    fontSize:22,
+    color: "#696969",
+    fontWeight:'500',
+  },
+  buttonContainer: {
+    marginTop:10,
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+    backgroundColor: "#064451",
+  },
+  buttonText:{
+    color: "#ffffff",
+  }
+});
+
+const style = StyleSheet.create({
     container: {
       flex: 1, 
       width: width,
