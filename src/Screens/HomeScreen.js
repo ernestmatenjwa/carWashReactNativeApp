@@ -3,7 +3,8 @@ import { Text, Pressable, ImageBackground, StyleSheet, View, StatusBar } from 'r
 import gbImage from '../../assets/pictures/homeBG3.jpg';
 import COLORS from '../constants/consts/colors';
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
+  //const {data} = route?.params || {};
   return (
     <ImageBackground source={gbImage} style={styles.container}>
       <StatusBar backgroundColor={COLORS.tial}/>

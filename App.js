@@ -10,9 +10,9 @@ import ConfirmScreen from "./src/Screens/confirmation";
 import CarBrand from "./src/Screens/CarBrand";
 import DateSetter from "./src/Screens/DateSetter";
 import ResgistEdit from "./src/Screens/registEdit";
-import CheckoutScreen from "./screens/Checkout"
+import CheckoutScreen from "./src/Screens/check"
 import VehicleScreen from "./src/Screens/vehicletype"
-import PaymentScreen from "./src/Screens/payment"
+import PaymentScreen from "./src/Screens/pay"
 import RequestScreen from "./src/Screens/requests"
 import ChatScreen from "./src/Screens/chatScreen"
 import ProfileEdit from "./src/Screens/EditProfile"
@@ -142,42 +142,57 @@ const TabScreen = () => {
         name="Profile" 
         component={ProfileScreen}
         options={{
-          header: () => null}} 
-        // options={{
-        //   title: 'My Profile',
-        //   headerTitleAlign: 'center',
-        //   headerTitleStyle: {
-        //     color: "white",
-        //     fontWeight: "700",
-        //     fontSize: 40,
-        //     padding: 20,
-        //   },
-        //   headerStyle: {
-        //     height: 170,
-        //     backgroundColor: '#064451',
-        //     shadowColor: '#064451',
-        //     elevation: 0,
-        //     borderBottomLeftRadius: 10,
-        //     borderBottomRightRadius: 10,
-        //   },
-        //   headerBackTitleVisible: false
-        // }}
+          title: 'My Profile',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "700",
+            fontSize: 40,
+            padding: 20,
+          },
+          headerStyle: {
+            height: 170,
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
+          },
+          headerBackTitleVisible: false
+        }}
         />
     </Tabs.Navigator>
-  )
+  ) 
 }
-
 export default function App() {
   return (
     <NavigationContainer>
        <Stack.Navigator>
-
-        <Stack.Screen 
+       <Stack.Screen 
         name="Splash" 
         component={HomeScreen} 
         options={{
           header: () => null}} />
-                 <Stack.Screen 
+       <Stack.Screen 
+        name="CheckoutScreen" 
+        component={CheckoutScreen} 
+        options={({route}) => ({
+          title: "Checkout",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "600",
+            fontSize: 30
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+          },
+        })} />
+      
+       <Stack.Screen 
         name="RegisteredCars" 
         component={RegisteredCars} 
         options={({route}) => ({ 
@@ -197,6 +212,45 @@ export default function App() {
             elevation: 0,
           },
         })} />
+       <Stack.Screen 
+        name="CarBrand" 
+        component={CarBrand} 
+        options={({route}) => ({ 
+          //header: () => null,
+          title: "Vehicle Brand",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "600", 
+            fontSize: 30,
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            height: 100,
+            elevation: 0,
+          },
+        })} />
+       
+       <Stack.Screen 
+        name="LocationScreen" 
+        component={TabScreen}
+        options={({route}) => ({ 
+          header: () => null,
+          title: "Location Screen",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "600"
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+          },
+        })}/>
           <Stack.Screen 
        name="ForgotPasswordScreen" 
        component={ForgotPasswordScreen} 
@@ -233,28 +287,8 @@ export default function App() {
           header: () => null
         }}
         />
-        <Stack.Screen 
-        name="LocationScreen" 
-        component={TabScreen}
-        options={({route}) => ({ 
-          header: () => null,
-          title: "Location Screen",
-          headerBackTitleVisible: false,
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: "white",
-            fontWeight: "600"
-          },
-          headerStyle: {
-            backgroundColor: '#064451',
-            shadowColor: '#064451',
-            elevation: 0,
-          },
-        })}/>
-        <Stack.Screen 
-        name="CarBrand" 
-        component={CarBrand} 
-        options={{header: () => null}} />
+       
+       
         <Stack.Screen 
         name="MapScreen" 
         component={MapScreen} 
@@ -275,23 +309,47 @@ export default function App() {
         <Stack.Screen 
         name="DateSetter" 
         component={DateSetter} 
-        options={{
-          header: () => null}} />
+        options={({route}) => ({ 
+          //header: () => null,
+          title: "Date and time",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "200",
+            fontSize: 20,
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            height: 100,
+            elevation: 0,
+          },
+        })} />
         {/* <Stack.Screen 
         name="SearchCarWash" 
         component={SearchCarWash} 
         options={{
           header: () => null}} /> */}
-        <Stack.Screen 
-        name="CheckoutScreen" 
-        component={CheckoutScreen} 
-        options={{
-          header: () => null}} />
+       
         <Stack.Screen 
         name="VehicleScreen" 
         component={VehicleScreen} 
-        options={{
-          header: () => null}} />
+        options={({route}) => ({
+          title: "Payment",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            //fontWeight: "700",
+            fontSize: 30
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            elevation: 0,
+          },
+        })} />
           <Stack.Screen 
         name="PaymentScreen" 
         component={PaymentScreen} 
@@ -313,8 +371,23 @@ export default function App() {
         <Stack.Screen 
         name="VihicleDetail" 
         component={VihicleDetail} 
-        options={{
-          header: () => null}} />
+        options={({route}) => ({ 
+          //header: () => null,
+          title: "Vehicle Brand",
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "600", 
+            fontSize: 30,
+          },
+          headerStyle: {
+            backgroundColor: '#064451',
+            shadowColor: '#064451',
+            height: 100,
+            elevation: 0,
+          },
+        })}/>
         <Stack.Screen 
         name="ProfileEdit" 
         component={ProfileEdit} 

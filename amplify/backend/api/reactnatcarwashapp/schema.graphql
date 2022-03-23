@@ -5,7 +5,26 @@ type Admin @model @auth(rules: [{ allow: public }]){
   phone: String!
   imageUrl: String
   picture: AdminPic @hasOne
-  request: [Carwash] @hasMany
+  request: [AdminRequests] @hasMany
+  carwash: [Carwash] @hasMany
+}
+type AdminRequests @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  brand: String!
+  regNO: String!
+  model: String!
+  Desc: String!
+  package: String!
+  packDesc: String!
+  totalDue: String!
+  status: String!
+  serTime: String
+  userName: String!
+  carUrl: String
+}
+type AdminPic @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  imageUrl: String!
 }
 type Carwash @model @auth(rules: [{ allow: public }]){
   id: ID!
@@ -13,8 +32,11 @@ type Carwash @model @auth(rules: [{ allow: public }]){
   location: String
   Desc: String
   imageUrl: String
-  request: [Requests] @hasMany
   logo: BusinessLogo @hasOne
+}
+type BusinessLogo @model @auth(rules: [{ allow: public }]){
+  id: ID!
+  imageUrl: String!
 }
 type User @model @auth(rules: [{ allow: public }]){
   id: ID!
@@ -22,7 +44,7 @@ type User @model @auth(rules: [{ allow: public }]){
   email: String!
   phone: String!
   imageUrl: String
-  request: [Requests] @hasMany
+  request: [UserRequests] @hasMany
   car: [RegisteredCars] @hasMany
   picture: UserPic @hasOne
 }
@@ -34,26 +56,23 @@ type RegisteredCars @model @auth(rules: [{ allow: public }]){
   Desc: String!
   imageUrl: String
 }
-type Requests @model @auth(rules: [{ allow: public }]){
+type UserRequests @model @auth(rules: [{ allow: public }]){
   id: ID!
   brand: String!
   regNO: String!
-  userName: String!
+  model: String!
+  Desc: String!
+  location: String!
   package: String!
+  packDesc: String!
   totalDue: String!
   status: String!
-  carwash: String!
-  o_date: String
-}
-type AdminPic @model @auth(rules: [{ allow: public }]){
-  id: ID!
-  url: String!
+  carwashName: String!
+  serTime: String
+  userName: String!
+  carUrl: String
 }
 type UserPic @model @auth(rules: [{ allow: public }]){
   id: ID!
-  url: String!
-}
-type BusinessLogo @model @auth(rules: [{ allow: public }]){
-  id: ID!
-  url: String!
+  imageUrl: String!
 }

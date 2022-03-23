@@ -1,6 +1,6 @@
 {
   "auth": {
-    "newBackend": {
+    "reactNatCarwashApp": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -9,7 +9,6 @@
         "socialProviders": [],
         "usernameAttributes": [],
         "signupAttributes": [
-          "PREFERRED_USERNAME",
           "PHONE_NUMBER",
           "EMAIL"
         ],
@@ -28,7 +27,7 @@
     }
   },
   "api": {
-    "newbackend": {
+    "reactnatcarwashapp": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -39,14 +38,7 @@
               "apiKeyExpirationDays": 7
             }
           },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authnewBackend"
-              }
-            }
-          ]
+          "additionalAuthenticationProviders": []
         }
       }
     }

@@ -69,8 +69,9 @@ const Payment = ({ navigation, route }) => {
     //return
     console.log('alexxx123111111111111');
     //return
-    const s = "Pending";
+    const s = "PENDING WASH...";
     const reqq = {
+      id: userInfo.attributes.sub,
       brand: carOpt.brand,
       regNO: carOpt.regNO,
       userName: userInfo.username,
@@ -88,7 +89,7 @@ const Payment = ({ navigation, route }) => {
         )
       ) 
       Alert.alert('You have succesfully booked to wash a car');
-      //navigation.navigate("RegisteredCars");
+      //navigation.navigate("RegisteredCars"); marginTop: "10%",<ion-icon name="calendar-clear-outline"></ion-icon>
   }
   catch(e){
     Alert.alert('Error',e.message);

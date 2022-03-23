@@ -5,7 +5,7 @@ const Messages = [
   {
     id: '1',
     userName: 'Innocent',
-    userImg: require('../../assets/users/user-3.jpg'),
+    userImg: require('../../assets/pictures/person.png'),
     messageTime: '4 mins ago',
     messageText:
       'Hey there, this is my test for a post of my social app in React Native.',
@@ -13,7 +13,7 @@ const Messages = [
   {
     id: '2',
     userName: 'Mpho',
-    userImg: require('../../assets/users/user-1.jpg'),
+    userImg: require('../../assets/pictures/person.png'),
     messageTime: '2 hours ago',
     messageText:
       'Hey there, this is my test for a post of my social app in React Native.',
@@ -21,7 +21,7 @@ const Messages = [
   {
     id: '3',
     userName: 'Shaun',
-    userImg: require('../../assets/users/user-4.jpg'),
+    userImg: require('../../assets/pictures/person.png'),
     messageTime: '1 hours ago',
     messageText:
       'Hey there, this is my test for a post of my social app in React Native.',
@@ -29,7 +29,7 @@ const Messages = [
   {
     id: '4',
     userName: 'Karabo',
-    userImg: require('../../assets/users/user-6.jpg'),
+    userImg: require('../../assets/pictures/person.png'),
     messageTime: '1 day ago',
     messageText:
       'Hey there, this is my test for a post of my social app in React Native.',
@@ -37,7 +37,7 @@ const Messages = [
   {
     id: '5',
     userName: 'Alex',
-    userImg: require('../../assets/users/user-7.jpg'),
+    userImg: require('../../assets/pictures/person.png'),
     messageTime: '2 days ago',
     messageText:
       'Hey there, this is my test for a post of my social app in React Native.',
@@ -73,11 +73,9 @@ export default function MessagesScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
-    alignItems: 'center', 
-    paddingLeft: 20,
-    paddingRight: 20,
-    backgroundColor: "#ffffff"
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   card: {
     width: "100%",
