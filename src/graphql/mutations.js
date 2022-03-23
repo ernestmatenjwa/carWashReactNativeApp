@@ -12,6 +12,32 @@ export const createAdmin = /* GraphQL */ `
       email
       phone
       imageUrl
+      picture {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      request {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          package
+          packDesc
+          totalDue
+          status
+          serTime
+          userName
+          carUrl
+          createdAt
+          updatedAt
+          adminRequestId
+        }
+        nextToken
+      }
       carwash {
         items {
           id
@@ -22,11 +48,13 @@ export const createAdmin = /* GraphQL */ `
           createdAt
           updatedAt
           adminCarwashId
+          carwashLogoId
         }
         nextToken
       }
       createdAt
       updatedAt
+      adminPictureId
     }
   }
 `;
@@ -41,6 +69,32 @@ export const updateAdmin = /* GraphQL */ `
       email
       phone
       imageUrl
+      picture {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      request {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          package
+          packDesc
+          totalDue
+          status
+          serTime
+          userName
+          carUrl
+          createdAt
+          updatedAt
+          adminRequestId
+        }
+        nextToken
+      }
       carwash {
         items {
           id
@@ -51,11 +105,13 @@ export const updateAdmin = /* GraphQL */ `
           createdAt
           updatedAt
           adminCarwashId
+          carwashLogoId
         }
         nextToken
       }
       createdAt
       updatedAt
+      adminPictureId
     }
   }
 `;
@@ -70,6 +126,32 @@ export const deleteAdmin = /* GraphQL */ `
       email
       phone
       imageUrl
+      picture {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      request {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          package
+          packDesc
+          totalDue
+          status
+          serTime
+          userName
+          carUrl
+          createdAt
+          updatedAt
+          adminRequestId
+        }
+        nextToken
+      }
       carwash {
         items {
           id
@@ -80,9 +162,122 @@ export const deleteAdmin = /* GraphQL */ `
           createdAt
           updatedAt
           adminCarwashId
+          carwashLogoId
         }
         nextToken
       }
+      createdAt
+      updatedAt
+      adminPictureId
+    }
+  }
+`;
+export const createAdminRequests = /* GraphQL */ `
+  mutation CreateAdminRequests(
+    $input: CreateAdminRequestsInput!
+    $condition: ModelAdminRequestsConditionInput
+  ) {
+    createAdminRequests(input: $input, condition: $condition) {
+      id
+      brand
+      regNO
+      model
+      Desc
+      package
+      packDesc
+      totalDue
+      status
+      serTime
+      userName
+      carUrl
+      createdAt
+      updatedAt
+      adminRequestId
+    }
+  }
+`;
+export const updateAdminRequests = /* GraphQL */ `
+  mutation UpdateAdminRequests(
+    $input: UpdateAdminRequestsInput!
+    $condition: ModelAdminRequestsConditionInput
+  ) {
+    updateAdminRequests(input: $input, condition: $condition) {
+      id
+      brand
+      regNO
+      model
+      Desc
+      package
+      packDesc
+      totalDue
+      status
+      serTime
+      userName
+      carUrl
+      createdAt
+      updatedAt
+      adminRequestId
+    }
+  }
+`;
+export const deleteAdminRequests = /* GraphQL */ `
+  mutation DeleteAdminRequests(
+    $input: DeleteAdminRequestsInput!
+    $condition: ModelAdminRequestsConditionInput
+  ) {
+    deleteAdminRequests(input: $input, condition: $condition) {
+      id
+      brand
+      regNO
+      model
+      Desc
+      package
+      packDesc
+      totalDue
+      status
+      serTime
+      userName
+      carUrl
+      createdAt
+      updatedAt
+      adminRequestId
+    }
+  }
+`;
+export const createAdminPic = /* GraphQL */ `
+  mutation CreateAdminPic(
+    $input: CreateAdminPicInput!
+    $condition: ModelAdminPicConditionInput
+  ) {
+    createAdminPic(input: $input, condition: $condition) {
+      id
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAdminPic = /* GraphQL */ `
+  mutation UpdateAdminPic(
+    $input: UpdateAdminPicInput!
+    $condition: ModelAdminPicConditionInput
+  ) {
+    updateAdminPic(input: $input, condition: $condition) {
+      id
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAdminPic = /* GraphQL */ `
+  mutation DeleteAdminPic(
+    $input: DeleteAdminPicInput!
+    $condition: ModelAdminPicConditionInput
+  ) {
+    deleteAdminPic(input: $input, condition: $condition) {
+      id
+      imageUrl
       createdAt
       updatedAt
     }
@@ -99,9 +294,16 @@ export const createCarwash = /* GraphQL */ `
       location
       Desc
       imageUrl
+      logo {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
       adminCarwashId
+      carwashLogoId
     }
   }
 `;
@@ -116,9 +318,16 @@ export const updateCarwash = /* GraphQL */ `
       location
       Desc
       imageUrl
+      logo {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
       adminCarwashId
+      carwashLogoId
     }
   }
 `;
@@ -133,9 +342,55 @@ export const deleteCarwash = /* GraphQL */ `
       location
       Desc
       imageUrl
+      logo {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
       adminCarwashId
+      carwashLogoId
+    }
+  }
+`;
+export const createBusinessLogo = /* GraphQL */ `
+  mutation CreateBusinessLogo(
+    $input: CreateBusinessLogoInput!
+    $condition: ModelBusinessLogoConditionInput
+  ) {
+    createBusinessLogo(input: $input, condition: $condition) {
+      id
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateBusinessLogo = /* GraphQL */ `
+  mutation UpdateBusinessLogo(
+    $input: UpdateBusinessLogoInput!
+    $condition: ModelBusinessLogoConditionInput
+  ) {
+    updateBusinessLogo(input: $input, condition: $condition) {
+      id
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteBusinessLogo = /* GraphQL */ `
+  mutation DeleteBusinessLogo(
+    $input: DeleteBusinessLogoInput!
+    $condition: ModelBusinessLogoConditionInput
+  ) {
+    deleteBusinessLogo(input: $input, condition: $condition) {
+      id
+      imageUrl
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -150,8 +405,51 @@ export const createUser = /* GraphQL */ `
       email
       phone
       imageUrl
+      request {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          location
+          package
+          packDesc
+          totalDue
+          status
+          carwashName
+          serTime
+          userName
+          carUrl
+          createdAt
+          updatedAt
+          userRequestId
+        }
+        nextToken
+      }
+      car {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          imageUrl
+          createdAt
+          updatedAt
+          userCarId
+        }
+        nextToken
+      }
+      picture {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
+      userPictureId
     }
   }
 `;
@@ -166,8 +464,51 @@ export const updateUser = /* GraphQL */ `
       email
       phone
       imageUrl
+      request {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          location
+          package
+          packDesc
+          totalDue
+          status
+          carwashName
+          serTime
+          userName
+          carUrl
+          createdAt
+          updatedAt
+          userRequestId
+        }
+        nextToken
+      }
+      car {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          imageUrl
+          createdAt
+          updatedAt
+          userCarId
+        }
+        nextToken
+      }
+      picture {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
+      userPictureId
     }
   }
 `;
@@ -182,8 +523,51 @@ export const deleteUser = /* GraphQL */ `
       email
       phone
       imageUrl
+      request {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          location
+          package
+          packDesc
+          totalDue
+          status
+          carwashName
+          serTime
+          userName
+          carUrl
+          createdAt
+          updatedAt
+          userRequestId
+        }
+        nextToken
+      }
+      car {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          imageUrl
+          createdAt
+          updatedAt
+          userCarId
+        }
+        nextToken
+      }
+      picture {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
+      userPictureId
     }
   }
 `;
@@ -194,7 +578,6 @@ export const createRegisteredCars = /* GraphQL */ `
   ) {
     createRegisteredCars(input: $input, condition: $condition) {
       id
-      userID
       brand
       regNO
       model
@@ -202,6 +585,7 @@ export const createRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      userCarId
     }
   }
 `;
@@ -212,7 +596,6 @@ export const updateRegisteredCars = /* GraphQL */ `
   ) {
     updateRegisteredCars(input: $input, condition: $condition) {
       id
-      userID
       brand
       regNO
       model
@@ -220,6 +603,7 @@ export const updateRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      userCarId
     }
   }
 `;
@@ -230,7 +614,6 @@ export const deleteRegisteredCars = /* GraphQL */ `
   ) {
     deleteRegisteredCars(input: $input, condition: $condition) {
       id
-      userID
       brand
       regNO
       model
@@ -238,118 +621,122 @@ export const deleteRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      userCarId
     }
   }
 `;
-export const createCars = /* GraphQL */ `
-  mutation CreateCars(
-    $input: CreateCarsInput!
-    $condition: ModelCarsConditionInput
+export const createUserRequests = /* GraphQL */ `
+  mutation CreateUserRequests(
+    $input: CreateUserRequestsInput!
+    $condition: ModelUserRequestsConditionInput
   ) {
-    createCars(input: $input, condition: $condition) {
+    createUserRequests(input: $input, condition: $condition) {
       id
-      userID
       brand
       regNO
       model
       Desc
-      imageUrl
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateCars = /* GraphQL */ `
-  mutation UpdateCars(
-    $input: UpdateCarsInput!
-    $condition: ModelCarsConditionInput
-  ) {
-    updateCars(input: $input, condition: $condition) {
-      id
-      userID
-      brand
-      regNO
-      model
-      Desc
-      imageUrl
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteCars = /* GraphQL */ `
-  mutation DeleteCars(
-    $input: DeleteCarsInput!
-    $condition: ModelCarsConditionInput
-  ) {
-    deleteCars(input: $input, condition: $condition) {
-      id
-      userID
-      brand
-      regNO
-      model
-      Desc
-      imageUrl
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createRequests = /* GraphQL */ `
-  mutation CreateRequests(
-    $input: CreateRequestsInput!
-    $condition: ModelRequestsConditionInput
-  ) {
-    createRequests(input: $input, condition: $condition) {
-      id
-      brand
-      regNO
-      userName
+      location
       package
+      packDesc
       totalDue
       status
-      carwash
-      o_date
+      carwashName
+      serTime
+      userName
+      carUrl
+      createdAt
+      updatedAt
+      userRequestId
+    }
+  }
+`;
+export const updateUserRequests = /* GraphQL */ `
+  mutation UpdateUserRequests(
+    $input: UpdateUserRequestsInput!
+    $condition: ModelUserRequestsConditionInput
+  ) {
+    updateUserRequests(input: $input, condition: $condition) {
+      id
+      brand
+      regNO
+      model
+      Desc
+      location
+      package
+      packDesc
+      totalDue
+      status
+      carwashName
+      serTime
+      userName
+      carUrl
+      createdAt
+      updatedAt
+      userRequestId
+    }
+  }
+`;
+export const deleteUserRequests = /* GraphQL */ `
+  mutation DeleteUserRequests(
+    $input: DeleteUserRequestsInput!
+    $condition: ModelUserRequestsConditionInput
+  ) {
+    deleteUserRequests(input: $input, condition: $condition) {
+      id
+      brand
+      regNO
+      model
+      Desc
+      location
+      package
+      packDesc
+      totalDue
+      status
+      carwashName
+      serTime
+      userName
+      carUrl
+      createdAt
+      updatedAt
+      userRequestId
+    }
+  }
+`;
+export const createUserPic = /* GraphQL */ `
+  mutation CreateUserPic(
+    $input: CreateUserPicInput!
+    $condition: ModelUserPicConditionInput
+  ) {
+    createUserPic(input: $input, condition: $condition) {
+      id
+      imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const updateRequests = /* GraphQL */ `
-  mutation UpdateRequests(
-    $input: UpdateRequestsInput!
-    $condition: ModelRequestsConditionInput
+export const updateUserPic = /* GraphQL */ `
+  mutation UpdateUserPic(
+    $input: UpdateUserPicInput!
+    $condition: ModelUserPicConditionInput
   ) {
-    updateRequests(input: $input, condition: $condition) {
+    updateUserPic(input: $input, condition: $condition) {
       id
-      brand
-      regNO
-      userName
-      package
-      totalDue
-      status
-      carwash
-      o_date
+      imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteRequests = /* GraphQL */ `
-  mutation DeleteRequests(
-    $input: DeleteRequestsInput!
-    $condition: ModelRequestsConditionInput
+export const deleteUserPic = /* GraphQL */ `
+  mutation DeleteUserPic(
+    $input: DeleteUserPicInput!
+    $condition: ModelUserPicConditionInput
   ) {
-    deleteRequests(input: $input, condition: $condition) {
+    deleteUserPic(input: $input, condition: $condition) {
       id
-      brand
-      regNO
-      userName
-      package
-      totalDue
-      status
-      carwash
-      o_date
+      imageUrl
       createdAt
       updatedAt
     }

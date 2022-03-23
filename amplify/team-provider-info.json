@@ -1,19 +1,19 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-newbackend-staging-81149-authRole",
-      "UnauthRoleArn": "arn:aws:iam::560474932961:role/amplify-newbackend-staging-81149-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::560474932961:role/amplify-newbackend-staging-81149-authRole",
+      "AuthRoleName": "amplify-reactnatcarwashapp-staging-225304-authRole",
+      "UnauthRoleArn": "arn:aws:iam::560474932961:role/amplify-reactnatcarwashapp-staging-225304-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::560474932961:role/amplify-reactnatcarwashapp-staging-225304-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-newbackend-staging-81149-deployment",
-      "UnauthRoleName": "amplify-newbackend-staging-81149-unauthRole",
-      "StackName": "amplify-newbackend-staging-81149",
-      "StackId": "arn:aws:cloudformation:us-east-1:560474932961:stack/amplify-newbackend-staging-81149/67dc0900-9eb7-11ec-b507-0a8bbda23b13",
-      "AmplifyAppId": "d34a1linycr8zw"
+      "DeploymentBucketName": "amplify-reactnatcarwashapp-staging-225304-deployment",
+      "UnauthRoleName": "amplify-reactnatcarwashapp-staging-225304-unauthRole",
+      "StackName": "amplify-reactnatcarwashapp-staging-225304",
+      "StackId": "arn:aws:cloudformation:us-east-1:560474932961:stack/amplify-reactnatcarwashapp-staging-225304/2bc0d040-a70e-11ec-b532-0a6a53c5fe8f",
+      "AmplifyAppId": "d3ctwbp9pi56o3"
     },
     "categories": {
       "auth": {
-        "newBackend": {}
+        "reactNatCarwashApp": {}
       }
     }
   }

@@ -3,8 +3,8 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "newbac3c6c1f1b",
-    "userPoolName": "newBackend",
+    "resourceNameTruncated": "reactnff2008b7",
+    "userPoolName": "reactNatCarwashApp",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -14,13 +14,12 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Forgot password code: {####}",
-    "emailVerificationMessage": "Forgot password code: {####}",
+    "emailVerificationSubject": "Verification code: {####}",
+    "emailVerificationMessage": "Verification code: {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-      "preferred_username",
       "phone_number",
       "email"
     ],
@@ -29,10 +28,10 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "newBac3c6c1f1b_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "reactNff2008b7_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "3c6c1f1b",
-    "resourceName": "newBackend",
+    "sharedId": "ff2008b7",
+    "resourceName": "reactNatCarwashApp",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
     "useDefault": "manual",

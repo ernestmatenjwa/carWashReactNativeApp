@@ -9,6 +9,32 @@ export const getAdmin = /* GraphQL */ `
       email
       phone
       imageUrl
+      picture {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      request {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          package
+          packDesc
+          totalDue
+          status
+          serTime
+          userName
+          carUrl
+          createdAt
+          updatedAt
+          adminRequestId
+        }
+        nextToken
+      }
       carwash {
         items {
           id
@@ -19,11 +45,13 @@ export const getAdmin = /* GraphQL */ `
           createdAt
           updatedAt
           adminCarwashId
+          carwashLogoId
         }
         nextToken
       }
       createdAt
       updatedAt
+      adminPictureId
     }
   }
 `;
@@ -40,9 +68,95 @@ export const listAdmins = /* GraphQL */ `
         email
         phone
         imageUrl
+        picture {
+          id
+          imageUrl
+          createdAt
+          updatedAt
+        }
+        request {
+          nextToken
+        }
         carwash {
           nextToken
         }
+        createdAt
+        updatedAt
+        adminPictureId
+      }
+      nextToken
+    }
+  }
+`;
+export const getAdminRequests = /* GraphQL */ `
+  query GetAdminRequests($id: ID!) {
+    getAdminRequests(id: $id) {
+      id
+      brand
+      regNO
+      model
+      Desc
+      package
+      packDesc
+      totalDue
+      status
+      serTime
+      userName
+      carUrl
+      createdAt
+      updatedAt
+      adminRequestId
+    }
+  }
+`;
+export const listAdminRequests = /* GraphQL */ `
+  query ListAdminRequests(
+    $filter: ModelAdminRequestsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAdminRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        brand
+        regNO
+        model
+        Desc
+        package
+        packDesc
+        totalDue
+        status
+        serTime
+        userName
+        carUrl
+        createdAt
+        updatedAt
+        adminRequestId
+      }
+      nextToken
+    }
+  }
+`;
+export const getAdminPic = /* GraphQL */ `
+  query GetAdminPic($id: ID!) {
+    getAdminPic(id: $id) {
+      id
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAdminPics = /* GraphQL */ `
+  query ListAdminPics(
+    $filter: ModelAdminPicFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAdminPics(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        imageUrl
         createdAt
         updatedAt
       }
@@ -58,9 +172,16 @@ export const getCarwash = /* GraphQL */ `
       location
       Desc
       imageUrl
+      logo {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
       adminCarwashId
+      carwashLogoId
     }
   }
 `;
@@ -77,9 +198,43 @@ export const listCarwashes = /* GraphQL */ `
         location
         Desc
         imageUrl
+        logo {
+          id
+          imageUrl
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         adminCarwashId
+        carwashLogoId
+      }
+      nextToken
+    }
+  }
+`;
+export const getBusinessLogo = /* GraphQL */ `
+  query GetBusinessLogo($id: ID!) {
+    getBusinessLogo(id: $id) {
+      id
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listBusinessLogos = /* GraphQL */ `
+  query ListBusinessLogos(
+    $filter: ModelBusinessLogoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBusinessLogos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        imageUrl
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -93,8 +248,51 @@ export const getUser = /* GraphQL */ `
       email
       phone
       imageUrl
+      request {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          location
+          package
+          packDesc
+          totalDue
+          status
+          carwashName
+          serTime
+          userName
+          carUrl
+          createdAt
+          updatedAt
+          userRequestId
+        }
+        nextToken
+      }
+      car {
+        items {
+          id
+          brand
+          regNO
+          model
+          Desc
+          imageUrl
+          createdAt
+          updatedAt
+          userCarId
+        }
+        nextToken
+      }
+      picture {
+        id
+        imageUrl
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
+      userPictureId
     }
   }
 `;
@@ -111,8 +309,21 @@ export const listUsers = /* GraphQL */ `
         email
         phone
         imageUrl
+        request {
+          nextToken
+        }
+        car {
+          nextToken
+        }
+        picture {
+          id
+          imageUrl
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
+        userPictureId
       }
       nextToken
     }
@@ -122,7 +333,6 @@ export const getRegisteredCars = /* GraphQL */ `
   query GetRegisteredCars($id: ID!) {
     getRegisteredCars(id: $id) {
       id
-      userID
       brand
       regNO
       model
@@ -130,6 +340,7 @@ export const getRegisteredCars = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      userCarId
     }
   }
 `;
@@ -142,7 +353,6 @@ export const listRegisteredCars = /* GraphQL */ `
     listRegisteredCars(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        userID
         brand
         regNO
         model
@@ -150,82 +360,85 @@ export const listRegisteredCars = /* GraphQL */ `
         imageUrl
         createdAt
         updatedAt
+        userCarId
       }
       nextToken
     }
   }
 `;
-export const getCars = /* GraphQL */ `
-  query GetCars($id: ID!) {
-    getCars(id: $id) {
+export const getUserRequests = /* GraphQL */ `
+  query GetUserRequests($id: ID!) {
+    getUserRequests(id: $id) {
       id
-      userID
       brand
       regNO
       model
       Desc
+      location
+      package
+      packDesc
+      totalDue
+      status
+      carwashName
+      serTime
+      userName
+      carUrl
+      createdAt
+      updatedAt
+      userRequestId
+    }
+  }
+`;
+export const listUserRequests = /* GraphQL */ `
+  query ListUserRequests(
+    $filter: ModelUserRequestsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        brand
+        regNO
+        model
+        Desc
+        location
+        package
+        packDesc
+        totalDue
+        status
+        carwashName
+        serTime
+        userName
+        carUrl
+        createdAt
+        updatedAt
+        userRequestId
+      }
+      nextToken
+    }
+  }
+`;
+export const getUserPic = /* GraphQL */ `
+  query GetUserPic($id: ID!) {
+    getUserPic(id: $id) {
+      id
       imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const listCars = /* GraphQL */ `
-  query ListCars(
-    $filter: ModelCarsFilterInput
+export const listUserPics = /* GraphQL */ `
+  query ListUserPics(
+    $filter: ModelUserPicFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listCars(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUserPics(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        userID
-        brand
-        regNO
-        model
-        Desc
         imageUrl
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getRequests = /* GraphQL */ `
-  query GetRequests($id: ID!) {
-    getRequests(id: $id) {
-      id
-      brand
-      regNO
-      userName
-      package
-      totalDue
-      status
-      carwash
-      o_date
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listRequests = /* GraphQL */ `
-  query ListRequests(
-    $filter: ModelRequestsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        brand
-        regNO
-        userName
-        package
-        totalDue
-        status
-        carwash
-        o_date
         createdAt
         updatedAt
       }

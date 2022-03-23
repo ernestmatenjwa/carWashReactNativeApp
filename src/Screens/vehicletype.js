@@ -158,12 +158,9 @@ export default function VihicleScreen({ navigation, route }) {
   };
   return(
     <View style={styles.container}>
-       <View style={{height: "10%", backgroundColor: "#064451", width: width, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
-        <Iconicons name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: "white", margin: "5%"}}/>
-           <Text style={{marginTop: "-15%", color: "white", fontSize:25, fontWeight:"500", alignSelf: "center"}}>Services</Text>
-        </View>
-    <Text style={{paddingLeft: 15, paddingTop: 5, fontSize:20, color: "#064451", fontWeight: "bold"}}>Tab car type for to select package</Text>
-    <View style={{marginTop:"1%", 
+    
+    <Text style={{paddingLeft: 15, paddingTop: 5, fontSize:15, color: "#064451", }}>Tab car type for to select package</Text>
+    <View style={{ 
                   width:'100%',
                   flexDirection:'row', 
                   flexWrap:'wrap',
@@ -561,11 +558,9 @@ export default function VihicleScreen({ navigation, route }) {
 }
 const styles = StyleSheet.create({
   container:{
-      width:'100%',
-      //height:'85%',
-      flexDirection:'row',
-      flexWrap:'wrap',
-      justifyContent:'center',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
     marginTop: 30,
@@ -655,7 +650,7 @@ container: {
   inner:{
     backgroundColor:'#ffffff',
     alignItems:'center',
-    height:"35%",
+    height:"33%",
     width: "45%",
     //borderRadius:100,
     margin:4,

@@ -7,13 +7,14 @@ import {
     Dimensions, 
     FlatList, 
     TouchableOpacity,
-    Alert } from "react-native";
+    Alert, Image } from "react-native";
     import {
       Auth, 
       API,
       graphqlOperation,
     } from 'aws-amplify';
 import { listRegisteredCars } from "../graphql/queries";
+import { getUser } from "../graphql/queries";
 import { deleteRegisteredCars } from "../graphql/mutations";
 import COLORS from '../constants/consts/colors';
 import Iconicons from "react-native-vector-icons/Ionicons"
@@ -48,6 +49,7 @@ const { width, height } = Dimensions.get("screen");
 export default function RegisteredCars({ navigation, route }) {
   const [car, setCar] = React.useState([]);
   const [id, setID] = React.useState([]);
+  const [cur, setCur] = React.useState([]);
   const [isModalVisible, setModalVisible] = React.useState(false);
   const {packg, carD, global} = route?.params || {};
   //const { input } = route?.params || {};
@@ -57,17 +59,17 @@ export default function RegisteredCars({ navigation, route }) {
   }
   React.useEffect(() => {
     const fetchCars = async () => {
+    const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+    const ID = userInfo.attributes.sub
+   const userData = await API.graphql(graphqlOperation(getUser, {id: ID}));
+
       try {
-        const usersData = await API.graphql(
-          graphqlOperation(
-            listRegisteredCars
-          )
-        )
-        if(usersData.data.listRegisteredCars.items.length === 0)
+        const usersData = await API.graphql(graphqlOperation(getUser, {id: ID}));
+        if(usersData.data.getUser.car.items.length === 0)
         {
           navigation.navigate("CarBrand")
         }else{
-          setCar(usersData.data.listRegisteredCars.items);
+          setCar(userData.data.getUser.car.items);          
         }
       } catch (e) {
         console.log(e);
@@ -78,22 +80,18 @@ export default function RegisteredCars({ navigation, route }) {
   }, [car])
 const show = () => {
   setModalVisible(!isModalVisible);
-  //console.log(packg, "++++++++", carD)
+
 };
 const close = () => {
   setModalVisible(!isModalVisible);
 };
 const del = async (id) => {
-  //const {  location: b_location, name: bname, Desc : Desc, imageUrl: imageUrl } = data;
-  console.log("Clickedd", id)
   Alert.alert("clicked", id)
   try{
       const car = {
           id: id,
       }
-      console.log(car)
       const dedm = await API.graphql({query: deleteRegisteredCars, variables: {input: car}});
-      console.log("You have successfully deleted a car")
       Alert.alert("You have successfully deleted a car")
   } catch (e) {
     console.log(e)
@@ -102,27 +100,24 @@ const del = async (id) => {
   
 }
   return(
-    <View style={styles.container}>
-        
-        <View style={{height:"2%", }}></View>
-    
+    <View style={styles.container}>   
+    <View style={{height:"2%", }}></View>
     <FlatList 
       data={car}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
         <TouchableOpacity onPress={() => navigation.navigate("DateSetter", {carOpt : item, packg, carD, global}) }>
           <View style={styles.userInfo}>
-            <View>
+          <View style={styles.UserImgWrapper}>
+              <Image style={styles.UserImg} source={{uri: item.imageUrl}} />
+          </View>
+            <View style={styles.TextSection}>
                 <Text style={styles.UserName}>{item.brand} - {item.regNO}</Text>
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Model: {item.model}</Text>
                 <Text style={{width: width/1.8,fontWeight: 'bold', fontSize: 12, color: COLORS.black}}>Description: {item.Desc}</Text>
-               <View style={{flexDirection: 'row', paddingTop: "2%"}}>
+               <View style={{flexDirection: 'row', paddingTop: "2%", marginLeft:"50%"}}>
                <Pressable onPress={() => navigation.navigate("ResgistEdit", {carOpt : item}) }><Text style={{color: "green", fontSize: 16, fontWeight: "bold"}}>EDIT</Text></Pressable>
                 <Pressable onPress={() => del(item.id)}><Text style={{paddingLeft: 20, color: "red", fontSize: 16, fontWeight: "bold"}}>DELETE</Text></Pressable>
-                <Pressable 
-                onPress={() => navigation.navigate("DateSetter")}
-                style={{marginLeft: "50%"}}
-                ><Text style={{ color: "#064451", fontSize: 16, fontWeight: "bold"}}>SELECT</Text></Pressable> 
                    </View> 
             </View>
           </View>   
@@ -146,6 +141,11 @@ const del = async (id) => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 header: {
     marginTop: 30,
     flexDirection: 'row',
@@ -178,10 +178,6 @@ actionButtonIcon: {
     fontSize: 20,
     height: 22,
     color: 'white',
-  },
-container: {
-    backgroundColor: COLORS.gray,
-    flex: 1,
   },
   item: {
     backgroundColor: '#F5F5F5',
@@ -223,8 +219,8 @@ container: {
     padding: 2,
   },
   UserImg: {
-    width: width/2.7,
-    height: height/8,
+    width: width/4.7,
+    height: height/9,
     borderRadius: 13,
     marginBottom: 15,
   },

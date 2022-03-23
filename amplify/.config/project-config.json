@@ -2,7 +2,7 @@
   "providers": [
     "awscloudformation"
   ],
-  "projectName": "newBackend",
+  "projectName": "reactNatCarwashApp",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {

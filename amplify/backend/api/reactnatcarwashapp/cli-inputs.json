@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "reactnatcarwashapp",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Users\\CodeTribe00L\\Desktop\\Projects\\final App\\carWashAdminApp\\amplify\\backend\\api\\reactnatcarwashapp\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    }
+  }
+}

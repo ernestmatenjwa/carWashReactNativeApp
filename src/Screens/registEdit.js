@@ -17,7 +17,7 @@ import { listRegisteredCars } from "../graphql/queries";
 import COLORS from '../constants/consts/colors';
 import Iconicons from "react-native-vector-icons/Ionicons"
 import Modal from "react-native-modal";
-import CustomInput from '../components/CustomInput/CustomInput';
+import CustomInput from '../components/cus';
 import {useForm} from 'react-hook-form';
 import { updateRegisteredCars } from "../graphql/mutations";
 
@@ -29,12 +29,11 @@ export default function  ResgistEdit({ navigation, route }) {
   const {control, handleSubmit, watch} = useForm();
 
   const apd = async data => {
-    const {name: name, model: model, regNO: regNO, Desc: desc} = data;
+    const {model: model, regNO: regNO, Desc: desc} = data;
     console.log(data)
     try{
         const car = {
             id: carOpt.id,
-            brand: data.name,
             model: data.model,
             regNO: data.regNO,
             Desc: data.desc
@@ -50,30 +49,8 @@ export default function  ResgistEdit({ navigation, route }) {
  }
     return (
     <View style={styles.container}>
-      <View style={{marginTop: "30%",height:width-2, width:"90%", alignSelf: "center", flex: 1}}>
-      <View
-      style={{ }}
-      >
-      <Text style={[styles.tit, {alignSelf: "center", color:"green"}]}>UPDATE</Text>
-      <Text style={styles.tit}>Car Brand</Text>
-      
-      <CustomInput
-      name="name"
-      control={control}
-        style={styles.inpt}
-        inputContainerStyle={styles.Con}
-        inputStyle ={styles.inputText}
-        defaultValue={carOpt.brand}
-        iconName='pencil'
-        rules={{
-          required: 'Brand name is required',
-          minLength: {
-            value: 2,
-            message: 'Brand name should be at least 2 characters long',
-          },
-        }}
-      />
-        <Text style={styles.tit}>Car Model</Text>
+      <Text style={[styles.tift, {alignSelf: "center", color:"green", marginBottom: 5, fontSize: "bold", fontSize: 20}]}>UPDATE</Text>
+        <Text style={[styles.tit, {paddingRight: "55%",}]}>Car Model</Text>
       <CustomInput
       name="model"
       control={control}
@@ -107,7 +84,7 @@ export default function  ResgistEdit({ navigation, route }) {
           },
         }}
       />
-      <Text style={styles.tit}>Discription</Text>
+      <Text style={[styles.tit, {paddingRight: "55%",}]}>Discription</Text>
       <CustomInput
       name="desc"
       control={control}
@@ -124,7 +101,7 @@ export default function  ResgistEdit({ navigation, route }) {
         },
       }}
       />
-        <View style={{flexDirection:"row", alignContent: "center"}}>
+        <View style={{flexDirection:"row",}}>
       <Pressable
       onPress={handleSubmit(apd)}
       style={{padding: 10}}
@@ -133,9 +110,6 @@ export default function  ResgistEdit({ navigation, route }) {
       onPress={() => navigation.goBack()}
       style={{padding: 10}}
       ><Text style={{fontSize: 20, fontWeight: "bold", color: "red"}}>CANCEL</Text></Pressable>
-      </View>
-      </View>
-    
       </View>
     </View>
     );
@@ -154,7 +128,7 @@ const styles = StyleSheet.create({
   },
   tit: {
     fontSize: 20,
-    padding: 5,
+    paddingRight: "30%",
     color: "#064451",
     fontWeight: "bold"
   },
@@ -180,10 +154,7 @@ const styles = StyleSheet.create({
       height: 22,
       color: 'white',
     },
-  container: {
-      backgroundColor: COLORS.gray,
-      flex: 1,
-    },
+
     item: {
       backgroundColor: '#F5F5F5',
       padding: 20,

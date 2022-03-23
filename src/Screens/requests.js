@@ -8,13 +8,15 @@ import { Text,
  FlatList,
  TouchableOpacity,
 Image } from 'react-native';
+import moment from "moment";
+import { dummyData, FONTS, SIZES, COLORS, icons, images } from '../constants';
 import {
     Auth, 
     API,
     graphqlOperation,
   } from 'aws-amplify';
 import { listRequests } from "../graphql/queries";
-import { getRequests } from "../graphql/queries";
+import { getUser } from "../graphql/queries";
 import { LinearGradient } from 'expo-linear-gradient';
 import mapImage from "../../assets/pictures/map.jpg"
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -113,94 +115,80 @@ const carwash = [
 export default function RequestScreen({ navigation }) {
   const [searchValue, onChangesearchValue] = React.useState('');
   const [req, setReq] = React.useState([]);
-
-  /*React.useEffect(() => {
-    const getR = async (e) => {
-      const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
-      const ID = userInfo.attributes.sub
-         //e.preventDefault();
-        // console.log('called1111111========', ID);
-         try{
-           console.log('try');
-          const userData = await API.graphql(graphqlOperation(getRequests, {id: ID}));
-          console.log('yes22 ', userData);
-         // console.log('>> ', profile.data?.data.getUserByEmail.name, '<<');
-         setReq({data: userData})
-         console.log(req)
-         console.log("===================")
-            } catch (e) {
-                console.log('error getting user 22', e);  
-            } 
-    }
-    getR();
-   }, []);*/
+  const [cur, setCur] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchReq = async () => {
+    const fetchCars = async () => {
+    const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+    const ID = userInfo.attributes.sub
+   const userData = await API.graphql(graphqlOperation(getUser, {id: ID}));
       try {
-        const usersData = await API.graphql(
-          graphqlOperation(
-            listRequests
-          )
-        )
-        //return
-        if(usersData.data.listRequests.items.length === 0)
+        const usersData = await API.graphql(graphqlOperation(getUser, {id: ID}));
+
+        if(usersData.data.getUser.car.items.length === 0)
         {
-          Alert.alert("You have not made any request to any car wash yet")
-          return
+          //navigation.navigate("CarBrand")
+        }else{
+          setReq(userData.data.getUser.request.items);
         }
-        setReq(usersData.data.listRequests.items);
-        for (let step = 0; step < 5; step++) {
-          
-          //console.log('Walking east one step ', req.items.brand);
-        }
-        //console.log(req)
       } catch (e) {
         console.log(e);
       }
    
     }
-    fetchReq();
-  }, [])
-
+    fetchCars();
+  }, [req])
   return (
   <View style={{backgroundColor: "lightgrey"}} >
   <View style={{height: 10}}></View>
  
  <FlatList 
-      style={{width: width, paddingBottom: 0, height: width/0.61666 /*elevation: 50*/}}
       data={req}
       keyExtractor={item=>item.id}
       renderItem={({item}) => (
-        <View >
-          <View style={styles.userInfo}>
-            <View style={styles.TextSection}>
-              <View style={styles.UserInfoText}>
-                <Text style={styles.packagee}>{item.package} | {item.carwash}</Text>
-              </View>
-              <Text style={styles.carbranndd}>{item.brand} - {item.regNO}</Text>
-              
-              <Text style={styles.UserName}>Service date: {item.o_date} | Total: R {item.totalDue}</Text>
-              <Text style={styles.UserName}>Req date: {item.createdAt}</Text>
-              <Text style={{color: "green",  }}>status: {item.status}</Text>
-            </View>
-          </View>
-        </View>
-      )}
-    />
+        <View style={styles.userInfo}>
+        <Image style={styles.UserImg} source={{uri: item.carUrl}} />
+      <View style={styles.TextSection}>
+      <View style={styles.TimeDate}>
+      <View style={{height: 20}}></View>
+  <Text style={{color: COLORS.gray, fontSize: 9,}}>{moment(item.createdAt).format('DD MMMM YYYY, h:mm:ss a')}</Text>
+</View>
+<View style={[styles.FirstRow, {flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between"}]}>
+  <Text style={styles.UserName}>{/*item.vehicleType}{' - '*/}{item.package} - R {item.totalDue}</Text>
+</View>
+<View><Text>{item.brand} {item.model} {item.Desc} - {item.regNO}</Text></View>
+<View><Text style={{color: "black"}}>{item.carwashName} - {item.location} </Text></View>
+<View style={[styles.SecondRow, {flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between"}]}>
+  <Text style={{color: COLORS.black, fontSize: 10}}>Service date: {item.serTime}</Text>
+  <Text style={{color: COLORS.black, fontSize: 10}}>{item.status}</Text>
+</View>
+      </View>
+</View>
+      )
+    }
+    ListEmptyComponent={<View><Text>Sorry we currently dnt have requests from you</Text></View>}
+    /> 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: height / 6.8,
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  SecondRow: {
+
+  },
+  FirstRow: {
+
+  },
+  TimeDate: {
+
   },
   inputContainer: {
-    height: 50,
+    //height: 50,
     borderRadius:20,
     //borderColor: '#064451',
     //borderWidth: 1,  
@@ -230,81 +218,57 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   userInfo: {
+    width: width/1.03,
+    height: 110,
+    backgroundColor:"white",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingBottom: 20,
-  },
-  u: {
-    fontSize: 10,
-    color: "lightgrey",
-    fontWeight: "700",
-  },
-  UserImgWrapper: {
-    paddingTop: 50,
-    paddingBottom: 15,
-    marginLeft: 5,
+    marginHorizontal: 2,
+    marginBottom: 2,
+    marginTop: 2,
+    borderRadius: 13,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+    //padding: 2,
   },
   UserImg: {
-    width: 120,
-    height: 70,
-    borderRadius: 0,
-  },
-  icon:{
-    color:'#064451',
-    width:20,
+    width: 60,
+    height: 60,
+    borderRadius: 13,
+    padding: 10,
+    marginTop: 25,
   },
   TextSection: {
     flexDirection: "column",
     justifyContent: "center",
-    paddingBottom: 1,
-    paddingTop: 3,
-    paddingLeft: 5,
-    marginLeft: 10,
-    width: width - 20,
-    //borderWidth: 0.1,
-    //elevation: 100,
-   // borderColor: "#cccccc",
-    borderLeftColor: "#064451",
-    borderLeftWidth: 7,
-    borderTopLeftRadius: 7,
-    borderBottomLeftRadius: 7,
-    backgroundColor: "white"
+    padding: 15,
+    paddingTop: 1,
+    //marginLeft: -110,
+    width: 300,
+    
   },
   UserInfoText: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: -4,
-  },
-  btns: {
-    flexDirection: "row",
-    justifyContent: "space-around",
     marginBottom: 5,
   },
   UserName: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "bold",
-    //margin: 20,
-    //fontFamily: "Lato-Regular",
+    color: "#064451",
   },
-  packagee: {
-    fontSize: 18,
-    fontWeight: "bold",
-    backgroundColor: "#064451",
-    color: "white",
-    //fontFamily: "Lato-Regular",
+  MessageText:{
+    fontWeight: 'bold',
+    fontSize: 14, 
+    color: "lightgrey",
   },
-  carbranndd: {
-    fontSize: 18,
-    fontWeight: "500",
-    //fontFamily: "Lato-Regular",
+
+  UserImgWrapper: {
+    padding: 30,
+    //paddingBottom: 15,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  PostTime: {
-    fontSize: 12,
-    color: "#666",
-    //fontFamily: "Lato-Regular",
-  },
-  MessageText: {
-    fontSize: 14,
-    color: "#333333"
-  }
+
 })

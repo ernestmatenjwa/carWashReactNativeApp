@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView, StyleSheet, Button,Platform,Pressable,Touchab
 import COLORS from '../constants/consts/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
-//import { event } from 'react-native-reanimated';
+import moment from "moment";
 
 
 
@@ -12,10 +12,10 @@ function DateSetter({navigation, route}) {
   const [show,setShow] = useState(false);
   const [text,setText] = useState('Empty');
   const {packg, carD, carOpt, global} = route?.params || {};
-  const [t,setT] = useState('Empty');
-  const [d,setD] = useState('Empty');
-
+  const [t,setT] = useState('XX:XX');
+  const [d,setD] = useState('XX-XX-XX');
   const [date, setDate] = useState(new Date());
+  const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -23,8 +23,8 @@ function DateSetter({navigation, route}) {
     setDate(currentDate);
 
     let tempDate = new Date(currentDate);
-    let fDate = tempDate.getDate()+'/'+(tempDate.getMonth()+1)+'/'+tempDate.getFullYear()
-    let fTime = tempDate.getHours()+':' + tempDate.getMinutes();
+    let fDate = tempDate.getDate()+' '+month[(tempDate.getMonth())]+' '+tempDate.getFullYear()
+    let fTime = tempDate.getHours()+':' + (tempDate.getMinutes());
     setText('Date: ' + fDate + '\n Time: ' + fTime)
     setD(fDate)
     setT(fTime)
@@ -44,17 +44,15 @@ function DateSetter({navigation, route}) {
     showMode('time');
   };
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
-      <View style={style.header}>
-      <Icon name='arrow-back' size={28} onPress={() => navigation.goBack()}  style={{color: COLORS.white, marginTop: 9, marginLeft: 0}}/>
-       <View style={{marginLeft: 35}}>
-         <Text style={{fontSize: 40, marginTop: "40%", fontWeight: "bold", alignSelf: "center", color: COLORS.white}}>Date & Time</Text>
-       </View>
-      </View>
-      <Text onPress={() => navigation.navigate("CheckoutScreen", {packg, carD, carOpt, t, d, global})} style={{fontSize: 18, paddingLeft: "5%", marginTop: "3%", fontWeight: "bold", color: COLORS.tial}}>Select time and date</Text>
+    <View style={style.container}>
+        <View style={style.SectionHeader}>
+        </View>
+        <View style={style.SectionHeader}>
+        <Text style={{fontSize: 18, paddingLeft: "5%", marginTop: "3%", fontWeight: "bold", color:"white"}}>Select time and date</Text>
+        </View>
         <View>
-        
-      <View  style={{width:"90%", alignItems:'center',padding:50, borderColor:COLORS.tial, borderWidth:2, margin:25}}>
+        <View style={{height: 15}}></View>
+      <View  style={{width:300, height:100, alignItems:'center', alignSelf:'center', borderColor:COLORS.tial, borderWidth:2, }}>
         <Text style={{fontWeight:'bold',fontSize:20}}>{text}</Text>
       </View>
       <View style={{
@@ -62,7 +60,7 @@ function DateSetter({navigation, route}) {
      //marginLeft:"18%",
      flexDirection: 'row', 
      width:"150%",
-     marginLeft: "20%"
+     marginLeft: "12%"
   }}>
    <Icon
     onPress={showTimepicker}
@@ -96,7 +94,7 @@ function DateSetter({navigation, route}) {
       )}
     </View>
     {(() => {
-              if (t === "Empty" && d ==="Empty"){
+              if (text === "Empty"){
                   return (
                     <Pressable style={[style.bookbtn, {backgroundColor: "red"}]}
                      onPress={() => {
@@ -115,33 +113,45 @@ function DateSetter({navigation, route}) {
                 </Pressable>
               );
             })()}
-        
-   
-   
-    
-   
-    </SafeAreaView>
+            
+    </View>
   );
 };
 
 const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  SectionHeader: {
+    backgroundColor: "#064451",
+    width: "100%",
+    //height: 10,
+    flex: 0.3,
+    marginTop: "-30%",
+    flexDirection: "row",
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+  },
   header:{
     //marginTop: 30,
     flexDirection: 'row',
     paddingHorizontal: 20,
     backgroundColor: "#064451",
-    height: "25%",
+    height: "20%",
     borderBottomEndRadius:20,
     borderBottomStartRadius:20
   },
   bookbtn:{
-    width: 170,
+    width: "80%",
     height: 50,
     backgroundColor: COLORS.tial,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: "center",
     borderRadius: 10,
-    marginLeft: 170,
+    //marginLeft: 170,
     marginBottom: 50,
     marginTop:"40%"
   },
