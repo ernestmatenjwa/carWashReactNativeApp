@@ -138,14 +138,12 @@ export default function ProfileScreen({ navigation }) {
 
     <View style={styles.body}>
     <View style={styles.items}>
-          <Icon
-          
+          <Icon  
           style={styles.icon}
             size={28}
             name="user"
           />
            <Text style={styles.name}>{name ? name: "FullName"}</Text>              
-          
           </View>
           <View style={styles.items}>
           <Icon
@@ -154,7 +152,6 @@ export default function ProfileScreen({ navigation }) {
             name="envelope"
           />
           <Text style={styles.info}>{email ? email : "example@gmail.com"}</Text>
-      
           </View>
           <View style={styles.items} >
           <Icon
