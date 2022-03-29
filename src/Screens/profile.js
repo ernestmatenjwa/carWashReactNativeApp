@@ -5,17 +5,13 @@ import { Text,
   View, 
   Image,
   Pressable,
+  ImageBackground,
   Alert } from 'react-native';
-import { StatusBar } from "expo-status-bar";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {LinearGradient} from 'expo-linear-gradient';
-import Modal from "react-native-modal";
-import CustomInput from '../components/CustomInput/CustomInput';
-import { API, graphqlOperation, Auth } from "aws-amplify";
-import { getUser } from '../graphql/queries';
-import { updateUser } from "../graphql/mutations";
-import Iconicons from "react-native-vector-icons/Ionicons"
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {useForm} from 'react-hook-form';
+import { getUser } from "../graphql/queries"
+import { API, graphqlOperation, Auth } from "aws-amplify";
+import gbImage from "../../assets/splash.png"
 
 
 const { width, height }= Dimensions.get("screen");
@@ -23,48 +19,27 @@ const { width, height }= Dimensions.get("screen");
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-
-export default function ProfileScreen({ navigation }) {
+export default function ProfileScreen({ navigation, route }) {
   const [name, setName] = React.useState('Full name');
   const [user, setUser] = React.useState([]);
   const [profile, setProfile] = React.useState([]);
   const [email, setEmail] = React.useState('x@gmail.com');
-  const [phone, setPhone] = React.useState('xx xxxx xxxx');
+  const [phone, setPhone] = React.useState('xxx xxxx xxxx');
   const [id, setID] = React.useState('');
   const [isModalVisible, setModalVisible] = React.useState(false);
   const [imgeUrl, setImageUrl] = React.useState("https://image.shutterstock.com/image-vector/camera-add-icon-260nw-1054194038.jpg");
-  const {control, handleSubmit, watch} = useForm();
 
-  const show = () => {
-    setModalVisible(!isModalVisible);
-  };
-  const close = () => {
-    setModalVisible(!isModalVisible);
-  };
-  const signOut = () => {
-    Auth.signOut()
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-  }
-  const editProfile = async (data) => {
-    try {
-      
-    } catch (e) {
-      console.log(e);
-    }
-  }
   React.useEffect(() => {
     const getProfile = async (e) => {
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
-      const ID = userInfo.attributes.sub
          try{
-          const userData = await API.graphql(graphqlOperation(getUser, {id: ID}));
-          setProfile({data: userData})
-          setName(userData.data.getUser.name)
-              setEmail(userData.data.getUser.email)
-              setPhone(userData.data.getUser.phone)
-              setID(userData.data.getUser.id)
-              setImageUrl(userData.data.getUser.imageUrl)
+            const userData = await API.graphql(graphqlOperation(getUser, {id: userInfo.attributes.sub}));
+            setProfile({data: userData})
+            setName(userData.data.getUser.name)
+            setEmail(userData.data.getUser.email)
+            setPhone(userData.data.getUser.phone)
+            setID(userData.data.getUser.id)
+            setImageUrl(userData.data.getUser.imageUrl)
             } catch (e) {
                 console.log('error getting user 22', e);  
             } 
@@ -83,195 +58,323 @@ export default function ProfileScreen({ navigation }) {
        onLoad();
        getProfile();
    }, [profile]);
-   const apd = async data => {
-    const {email: email, name: name, phone: phone} = data;
-    try{
-        const user = {
-            id: id,
-            name: data.name,
-            email: data.email,
-            phone: data.phone
-        }
-        console.log(user)
-        const apdm = await API.graphql({query: updateUser, variables: {input: user}});
-        Alert.alert("You have successfully apdated your profile")
-        setModalVisible(!isModalVisible);
-    } catch (e) {
-      console.log(e)
-        Alert.alert(e)
-    } 
-    
- }
+
   return (
-    <View style = {styles.container}>
-    <View style={{ flexDirection: "row", marginBottom: "10%"}}>
-        <Iconicons style={{padding: 10}} name="camera-outline" size={35} color={"#064451"} />
-        {<Image style={{ width: width/4.7,
-                         height: height/9,
-                         borderRadius: 33,
-                         borderWidth: 1,
-                         borderColor: "grey",
-                         }} 
-                         source={{uri: imgeUrl}} />}<Iconicons onPress={() =>  navigation.push("ProfileEdit", {name, email, phone, id})} style={{padding: 10}} name="create-outline" size={35} color={"#064451"} />
+    <View style={styles.container}>
+    <View style={styles.header}>
+       <Text style={styles.HeaderText}>Welcome back,  {name}!</Text>
     </View>
- 
-     <Text style={[styles.text_footer, {marginTop:"-10%"}]}>Full Name</Text>
-     <View style={{borderWidth: 1, borderColor: "grey", padding: 7, width: 300,  alignSelf: "center"}}>
-     <Text style={{fontSize: 16}}>{name}</Text>
-     </View>
-     
-     <Text style={styles.text_footer}>Email Address</Text>
-     <View style={{borderWidth: 1, borderColor: "grey", padding: 7, width: 300, alignSelf: "center"}}>
-     <Text style={{fontSize: 16}}>{email}</Text>
-     </View>
-     <Text style={styles.text_footer}>Phone</Text>
-     <View style={{borderWidth: 1, borderColor: "grey", padding: 7, width: 300, alignSelf: "center"}}>
-     <Text style={{fontSize: 16}}>{phone}</Text>
-     </View>
-     <Text onPress={navigation.push("Splash")}>Logout</Text>
-     </View>
+   
+    <Image style={styles.avatar} source={{uri:imgeUrl}}/>
+    <View style={styles.viewAl}>
+    <Pressable 
+      style={[styles.text_footer, {}]}>
+      <Icon
+          style={styles.iconZb}
+          size={24}
+          name="camera"
+       />
+      </Pressable> 
+      <Pressable 
+      // style={styles.iconZb} 
+      onPress={() => navigation.navigate("ProfileEdit", {name, email, phone, id})}>        
+      <Icon
+        style={styles.iconZb}
+        size={24}
+        name="edit"
+      />
+      </Pressable>
+    </View>
+
+   
+
+    <View style={styles.body}>
+    <View style={styles.items}>
+          <Icon  
+          style={styles.icon}
+            size={28}
+            name="user"
+          />
+           <Text style={styles.name}>{name}</Text>              
+          </View>
+          <View style={styles.items}>
+          <Icon
+          style={styles.icon}
+            size={24}
+            name="envelope"
+          />
+          <Text style={styles.info}>{email}</Text>
+          </View>
+          <View style={styles.items} >
+          <Icon
+          style={styles.icon}
+            size={24}
+            name="phone"
+          />
+         <Text style={styles.description}>{phone}</Text>
+        </View>
+    </View>
+</View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    //backgroundColor: "grey"
-    //overflow: "visible",
-  },
-  Con: {
-    height: 35,
-    padding: 5,
-  },
-  tit: {
-    fontSize: 20,
-    padding: 5,
-    color: "#064451",
-    fontWeight: "bold",
-    paddingLeft: "5%",
-  },
-  inpt:{
-    height: 30,
-    borderColor: "black",
+    flex: 1, 
+    width: width,
     backgroundColor: "white",
-    opacity: 1,
-    borderWidth: 0.5,
-    borderColor: "black"
+    // padding: 1,
   },
-  icon: {
-      color: "#064451",
+  viewAl: {
+    // marginTop:50,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
-  UserImg: {
+  iconZb: {
+    height: 30,
+    width: 30,
+    margin:40,
+    color:"#064451"
+  },
+  header:{
+    backgroundColor: "#064451",
+    height:200,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius:25
+  },
+  HeaderText:{
+    color: "white",
+    marginBottom:10,
+    alignSelf:'center',
+    position: 'absolute',
+    marginTop:50,
+    fontSize:22,
+    color:"#FFFFFF",
+    fontWeight:'600',
+  },
+  avatar: {
+    width: 130,
+    height: 130,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: "white",
+    marginBottom:10,
+    alignSelf:'center',
+    position: 'absolute',
+    marginTop:130,
+    
+    backgroundColor:  "#064451"
+  },
+ 
+  body:{
+    margin: 15,
+    // backgroundColor: `transparent`,
+    borderColor: "#064451",
+    borderWidth: 2,
+    borderTopWidth:0,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius:25,
+    padding: 15
+  },
+  bodyContent: {
+    flex: 1,
+    // alignItems: 'flex-start',
+    padding:30,
+  },
+  items:{
+    marginTop: 15,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  name:{
+    fontSize:22,
+    color:"#064451",
+    fontWeight:'600',
+    // textAlign: 'flex-start',
+  },
+  icon:{
+    color: "#064451",
+    marginRight: 20,
+  },
+  info:{
+    fontSize:20,
+    color: "#064451",
+    fontWeight:'400',
+  },
+  description:{
+    fontSize:22,
+    color: "#696969",
+    fontWeight:'500',
+  },
+  buttonContainer: {
+    marginTop:10,
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+    backgroundColor: "#064451",
+  },
+  buttonText:{
+    color: "#ffffff",
+  }
+});
+
+const style = StyleSheet.create({
+    container: {
+      flex: 1, 
+      width: width,
+      //backgroundColor: '#009387'
+      padding: 10
+    },
+    icon: {
+        color: "#064451",
+    },
+    loginG:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        //alignSelf: "flex-end",
+        //paddingVertical: 12,
+        //paddingHorizontal: 32,
+        borderRadius: 15,
+        elevation: 3,
+        backgroundColor: "#064451",
+        //borderWidth:2,
+        //borderColor: '#064451',
+        width: '40%',
+        height: 50,
+        marginLeft: "55%",
+      },
+      tit: {
+        fontSize: 20,
+        padding: 5,
+        color: "#064451",
+        fontWeight: "bold"
+      },
+      inpt:{
+        height: 30,
+        borderColor: "black",
+        backgroundColor: "white",
+        opacity: 1,
+        borderWidth: 0.5,
+        borderColor: "black"
+      },
+      inputText: {
+        fontSize: 20,
+        padding: 10,
+        color: "black"
+      },
+      Con: {
+        height: 35,
+        padding: 5,
+      },
+    UserImg: {
       width: 90,
       height: 90,
       borderRadius: 25,
+      },
+    header: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        paddingHorizontal: 20,
+        paddingBottom: 50
     },
-  header: {
-      flex: 1,
-      justifyContent: 'flex-end',
-      paddingHorizontal: 20,
-      paddingBottom: 50
-  },
-  footer: {
-      height: 450,
-      marginLeft:10,
-      marginRight:10,
-      backgroundColor: '#fff',
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
-      borderBottomLeftRadius:20,
-      borderBottomRightRadius:20,
-      paddingHorizontal: 20,
-      paddingVertical: 30,
+    footer: {
+        height: 450,
+        marginLeft:10,
+        marginRight:10,
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        borderBottomLeftRadius:20,
+        borderBottomRightRadius:20,
+        paddingHorizontal: 20,
+        paddingVertical: 30,
+        
+        
+       
+    },
+    text_header: {
+        color: '#064451',
+        fontWeight: 'bold',
+        fontSize: 25,
+        textAlign:'center',
+        paddingBottom:30
+    },
+    text_footer: {
+        color: '#064451',
+        fontSize: 18,
+        paddingTop: 0,
+    },
+    action: {
+        flexDirection: 'row',
+        marginTop: 10,
+        borderBottomWidth: 1,
+        borderTopWidth:1,
+        borderTopColor:'#f2f2f2',
+        borderLeftWidth:1,
+        borderLeftColor:'#f2f2f2',
+        borderRightWidth:1,
+        borderRightColor:'#f2f2f2',
+        borderBottomColor: '#f2f2f2',
+        paddingBottom: 5,
       
-      
-     
-  },
-  text_header: {
-      color: '#064451',
-      fontWeight: 'bold',
-      fontSize: 25,
-      textAlign:'center',
-      paddingBottom:30
-  },
-  text_footer: {
-      color: '#064451',
-      fontSize: 18,
-      paddingTop: 10,
-      paddingLeft: "8%",
-      alignSelf: "flex-start",
-      fontWeight: "bold"
-  },
-  action: {
-      flexDirection: 'row',
-      marginTop: 10,
-      borderBottomWidth: 1,
-      borderTopWidth:1,
-      borderTopColor:'#f2f2f2',
-      borderLeftWidth:1,
-      borderLeftColor:'#f2f2f2',
-      borderRightWidth:1,
-      borderRightColor:'#f2f2f2',
-      borderBottomColor: '#f2f2f2',
-      paddingBottom: 5,
+    },
+    actionError: {
+        flexDirection: 'row',
+        marginTop: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#FF0000',
+        paddingBottom: 5
+    },
+    textInput: {
+        flex: 1,
+        //marginTop: Platform.OS === 'ios' ? 0 : -12,
+        paddingLeft: 10,
+        color: '#05375a',
+        
+    },
+    errorMsg: {
+        color: '#FF0000',
+        fontSize: 14,
+    },
+    button: {
+        alignItems: 'flex-end',
+        marginTop: "-5%"
+    },
+    signIn: {
+        width: '30%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        //marginTop: "1%"
+    },
+    textSign: {
+        fontSize: 18,
+        fontWeight: 'bold'
+    },
+    text:{
+        color: '#05375a',
+    },
+    icons:{
+        flexDirection:'row',
+        alignItems:'flex-start'
+    },
+    image: {
+      height:'100%',
+      width:"100%",
+      justifyContent:'center',
+      alignItems:"center",
+      borderRadius:25,
+      overflow:'hidden'
+      },
+      text: {
+        color: "white",
+        fontSize: 42,
+        fontWeight: "bold",
+        textAlign: "center",
     
-  },
-  actionError: {
-      flexDirection: 'row',
-      marginTop: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: '#FF0000',
-      paddingBottom: 5
-  },
-  textInput: {
-      flex: 1,
-      //marginTop: Platform.OS === 'ios' ? 0 : -12,
-      paddingLeft: 10,
-      color: '#05375a',
-      
-  },
-  errorMsg: {
-      color: '#FF0000',
-      fontSize: 14,
-  },
-  button: {
-      alignItems: 'flex-end',
-      //marginTop: "-3%"
-  },
-  signIn: {
-      width: '30%',
-      height: 50,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 10,
-      //marginTop: "1%"
-  },
-  textSign: {
-      fontSize: 18,
-      fontWeight: 'bold'
-  },
-  text:{
-      color: '#05375a',
-  },
-  icons:{
-      flexDirection:'row',
-      alignItems:'flex-start'
-  },
-  image: {
-    height:'100%',
-    width:"100%",
-    justifyContent:'center',
-    alignItems:"center",
-    borderRadius:25,
-    overflow:'hidden'
-    },
-    text: {
-      color: "white",
-      fontSize: 42,
-      fontWeight: "bold",
-      textAlign: "center",
-  
-    }
+      }
   });

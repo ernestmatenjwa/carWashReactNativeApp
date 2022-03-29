@@ -142,25 +142,7 @@ const TabScreen = () => {
         name="Profile" 
         component={ProfileScreen}
         options={{
-          title: 'My Profile',
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: "white",
-            fontWeight: "700",
-            fontSize: 40,
-            padding: 20,
-          },
-          headerStyle: {
-            height: 170,
-            backgroundColor: '#064451',
-            shadowColor: '#064451',
-            elevation: 0,
-            borderBottomLeftRadius: 10,
-            borderBottomRightRadius: 10,
-          },
-          headerBackTitleVisible: false
-        }}
-        />
+          header: () => null}} />
     </Tabs.Navigator>
   ) 
 }
@@ -336,7 +318,7 @@ export default function App() {
         name="VehicleScreen" 
         component={VehicleScreen} 
         options={({route}) => ({
-          title: "Payment",
+          title: "Services",
           headerBackTitleVisible: false,
           headerTitleAlign: 'center',
           headerTitleStyle: {
