@@ -18,6 +18,10 @@ import { updateUser } from "../graphql/mutations";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useForm} from 'react-hook-form';
 
+// import ImagePicker from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker';
+import { RNS3 } from 'react-native-aws3';
+import awsconfig from '../aws-exports'
 
 const { width, height }= Dimensions.get("screen");
 
@@ -36,6 +40,48 @@ export default function ProfileScreen({ navigation }) {
   
   const {control, handleSubmit, watch} = useForm();
 
+
+  const [selectedImage, setSelectedImage] = React.useState("");
+
+  let openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert('Permission to access camera roll is required!');
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+    if (pickerResult.cancelled === true) {
+      return;
+    }
+    setSelectedImage(pickerResult.uri);
+    const file ={
+          uri: pickerResult.uri,
+          name: "profilePic",
+          type: 'image/png'
+          }
+        
+          console.log(file);
+          // const config ={
+          //   keyPrefix: 's3/',
+          //   bucket: 'photos',  //Bucket name
+          //   region: 'us-east-1',
+          //   accessKey: 'awsconfig.accessKeyId',
+          //   secretKey: 'awsconfig.secretAccessKey',
+          //   successActionStatus: 201	
+          // }
+          // RWS3.put(file,config).
+          // then(response=>{
+          //   setSelectedImage(response.body.postResponse.location);
+          // })
+          const user = {
+            imageUrl: selectedImage
+          }
+          // await API.graphql({query: updateUser, variables: {input: user}});
+          console.log(selectedImage);
+  }
   const show = () => {
     setModalVisible(!isModalVisible);
   };
@@ -84,6 +130,7 @@ export default function ProfileScreen({ navigation }) {
        onLoad();
        getProfile();
    }, [profile]);
+ 
    const apd = async data => {
     const {email: email, name: name, phone: phone} = data;
     //const {  location: b_location, name: bname, Desc : Desc, imageUrl: imageUrl } = data;
@@ -93,7 +140,7 @@ export default function ProfileScreen({ navigation }) {
             id: id,
             name: data.name,
             email: data.email,
-            phone: data.phone
+            phone: data.phone,
         }
         console.log(user)
         const apdm = await API.graphql({query: updateUser, variables: {input: user}});
@@ -106,16 +153,43 @@ export default function ProfileScreen({ navigation }) {
     } 
     
  }
+ const picUpdate = async data => {
+  const {email: email, name: name, phone: phone, imageUrl: imageUrl} = data;
+
+  console.log(data.name)
+  try{
+      const user = {
+          id: id,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          imageUrl: selectedImage
+      }
+      console.log(user)
+      const apdm = await API.graphql({query: updateUser, variables: {input: user}});
+  } catch (e) {
+    console.log(e)
+      Alert.alert(e)
+  } 
+  
+}
+
+
   return (
     <View style={styles.container}  >
     <View style={styles.header}>
        <Text style={styles.HeaderText}>Welcome back,  {name}!</Text>
     </View>
    
-    <Image style={styles.avatar} source={{uri:profile.data?.data.getUser.imageUrl}}/>
+    {/* <Image style={styles.avatar} source={{uri:profile.data?.data.getUser.imageUrl}}/> */}
+    
+    <Image style={styles.avatar} source={{uri:selectedImage}}/>
+    
     <View style={styles.viewAl}>
     <Pressable 
-      onPress={show}
+      // onPress={show}
+      
+      onPress={openImagePickerAsync}
       style={[styles.text_footer, {}]}>
       <Icon
           style={styles.iconZb}
@@ -250,8 +324,6 @@ export default function ProfileScreen({ navigation }) {
       );
     })()}
 </View>
-
-
   );
 }
 const styles = StyleSheet.create({
