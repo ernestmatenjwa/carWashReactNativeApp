@@ -42,5 +42,12 @@
         }
       }
     }
+  },
+  "storage": {
+    "s3reactnatcarwashappprofilestorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }

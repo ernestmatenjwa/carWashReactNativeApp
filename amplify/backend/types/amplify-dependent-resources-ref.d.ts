@@ -17,5 +17,11 @@ export type AmplifyDependentResourcesAttributes = {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
+    },
+    "storage": {
+        "s3reactnatcarwashappprofilestorage": {
+            "BucketName": "string",
+            "Region": "string"
+        }
     }
 }

@@ -5,113 +5,41 @@ import { Text,
   View, 
   Image,
   Pressable,
-  TouchableOpacity,
+  ImageBackground,
   Alert } from 'react-native';
-import { StatusBar } from "expo-status-bar";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {LinearGradient} from 'expo-linear-gradient';
-import Modal from "react-native-modal";
-import CustomInput from '../components/CustomInput/CustomInput';
-import { API, graphqlOperation, Auth } from "aws-amplify";
-import { getUser } from '../graphql/queries';
-import { updateUser } from "../graphql/mutations";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useForm} from 'react-hook-form';
+import { getUser } from "../graphql/queries"
+import { API, graphqlOperation, Auth } from "aws-amplify";
+import gbImage from "../../assets/splash.png"
 
-// import ImagePicker from 'react-native-image-picker';
-import * as ImagePicker from 'expo-image-picker';
-import { RNS3 } from 'react-native-aws3';
-import awsconfig from '../aws-exports'
 
 const { width, height }= Dimensions.get("screen");
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-
-export default function ProfileScreen({ navigation }) {
-  const [name, setName] = React.useState('');
+export default function ProfileScreen({ navigation, route }) {
+  const [name, setName] = React.useState('Full name');
   const [user, setUser] = React.useState([]);
   const [profile, setProfile] = React.useState([]);
-  const [email, setEmail] = React.useState('');
-  const [phone, setPhone] = React.useState('');
+  const [email, setEmail] = React.useState('x@gmail.com');
+  const [phone, setPhone] = React.useState('xxx xxxx xxxx');
   const [id, setID] = React.useState('');
   const [isModalVisible, setModalVisible] = React.useState(false);
-  
-  const {control, handleSubmit, watch} = useForm();
+  const [imgeUrl, setImageUrl] = React.useState("https://image.shutterstock.com/image-vector/camera-add-icon-260nw-1054194038.jpg");
 
-
-  const [selectedImage, setSelectedImage] = React.useState("");
-
-  let openImagePickerAsync = async () => {
-    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert('Permission to access camera roll is required!');
-      return;
-    }
-
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
-
-    if (pickerResult.cancelled === true) {
-      return;
-    }
-    setSelectedImage(pickerResult.uri);
-    const file ={
-          uri: pickerResult.uri,
-          name: "profilePic",
-          type: 'image/png'
-          }
-        
-          console.log(file);
-          // const config ={
-          //   keyPrefix: 's3/',
-          //   bucket: 'photos',  //Bucket name
-          //   region: 'us-east-1',
-          //   accessKey: 'awsconfig.accessKeyId',
-          //   secretKey: 'awsconfig.secretAccessKey',
-          //   successActionStatus: 201	
-          // }
-          // RWS3.put(file,config).
-          // then(response=>{
-          //   setSelectedImage(response.body.postResponse.location);
-          // })
-          const user = {
-            imageUrl: selectedImage
-          }
-          // await API.graphql({query: updateUser, variables: {input: user}});
-          console.log(selectedImage);
-  }
-  const show = () => {
-    setModalVisible(!isModalVisible);
-  };
-  const close = () => {
-    setModalVisible(!isModalVisible);
-  };
-  const editProfile = async (data) => {
-    try {
-      
-    } catch (e) {
-      console.log(e);
-    }
-  }
   React.useEffect(() => {
     const getProfile = async (e) => {
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
-      const ID = userInfo.attributes.sub
-         //e.preventDefault();
-         console.log('called1111111========', ID);
          try{
-           //console.log('try');
-          const userData = await API.graphql(graphqlOperation(getUser, {id: ID}));
-          //console.log('yes22 ', userData);
-         // console.log('>> ', profile.data?.data.getUserByEmail.name, '<<');
-          setProfile({data: userData})
-          setName(userData.data.getUser.name)
-              setEmail(userData.data.getUser.email)
-              setPhone(userData.data.getUser.phone)
-              setID(userData.data.getUser.id)
-          // console.log(profile)
+            const userData = await API.graphql(graphqlOperation(getUser, {id: userInfo.attributes.sub}));
+            setProfile({data: userData})
+            setName(userData.data.getUser.name)
+            setEmail(userData.data.getUser.email)
+            setPhone(userData.data.getUser.phone)
+            setID(userData.data.getUser.id)
+            setImageUrl(userData.data.getUser.imageUrl)
             } catch (e) {
                 console.log('error getting user 22', e);  
             } 
@@ -130,66 +58,16 @@ export default function ProfileScreen({ navigation }) {
        onLoad();
        getProfile();
    }, [profile]);
- 
-   const apd = async data => {
-    const {email: email, name: name, phone: phone} = data;
-    //const {  location: b_location, name: bname, Desc : Desc, imageUrl: imageUrl } = data;
-    console.log(data.name)
-    try{
-        const user = {
-            id: id,
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-        }
-        console.log(user)
-        const apdm = await API.graphql({query: updateUser, variables: {input: user}});
-        console.log("You have successfully apdated your profile")
-        Alert.alert("You have successfully apdated your profile")
-        setModalVisible(!isModalVisible);
-    } catch (e) {
-      console.log(e)
-        Alert.alert(e)
-    } 
-    
- }
- const picUpdate = async data => {
-  const {email: email, name: name, phone: phone, imageUrl: imageUrl} = data;
-
-  console.log(data.name)
-  try{
-      const user = {
-          id: id,
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          imageUrl: selectedImage
-      }
-      console.log(user)
-      const apdm = await API.graphql({query: updateUser, variables: {input: user}});
-  } catch (e) {
-    console.log(e)
-      Alert.alert(e)
-  } 
-  
-}
-
 
   return (
-    <View style={styles.container}  >
+    <View style={styles.container}>
     <View style={styles.header}>
        <Text style={styles.HeaderText}>Welcome back,  {name}!</Text>
     </View>
    
-    {/* <Image style={styles.avatar} source={{uri:profile.data?.data.getUser.imageUrl}}/> */}
-    
-    <Image style={styles.avatar} source={{uri:selectedImage}}/>
-    
+    <Image style={styles.avatar} source={{uri:imgeUrl}}/>
     <View style={styles.viewAl}>
     <Pressable 
-      // onPress={show}
-      
-      onPress={openImagePickerAsync}
       style={[styles.text_footer, {}]}>
       <Icon
           style={styles.iconZb}
@@ -199,7 +77,7 @@ export default function ProfileScreen({ navigation }) {
       </Pressable> 
       <Pressable 
       // style={styles.iconZb} 
-      onPress={show}>        
+      onPress={() => navigation.navigate("ProfileEdit", {name, email, phone, id})}>        
       <Icon
         style={styles.iconZb}
         size={24}
@@ -217,7 +95,7 @@ export default function ProfileScreen({ navigation }) {
             size={28}
             name="user"
           />
-           <Text style={styles.name}>{name ? name: "FullName"}</Text>              
+           <Text style={styles.name}>{name}</Text>              
           </View>
           <View style={styles.items}>
           <Icon
@@ -225,101 +103,17 @@ export default function ProfileScreen({ navigation }) {
             size={24}
             name="envelope"
           />
-          <Text style={styles.info}>{email ? email : "example@gmail.com"}</Text>
+          <Text style={styles.info}>{email}</Text>
           </View>
           <View style={styles.items} >
           <Icon
-          
           style={styles.icon}
             size={24}
             name="phone"
           />
-  <Text style={styles.description}>{phone ? phone: "+27 122 510 995"}</Text>
-        
-          </View>
-
+         <Text style={styles.description}>{phone}</Text>
+        </View>
     </View>
-     {(() => {
-    if (isModalVisible === true){
-      return (
-      <Modal isVisible={isModalVisible} style={{backgroundColor: "white",opacity: 0.8,}}>   
-        <View
-        style={{height:"80%"}}
-        >
-        <Text style={[styles.tit, {alignSelf: "center", color:"green"}]}>UPDATE</Text>
-        <Text style={styles.tit}>Name</Text>
-        <CustomInput
-        name="name"
-        control={control}
-        style={styles.inpt}
-          inputContainerStyle={styles.Con}
-          inputStyle ={styles.inputText}
-          defaultValue={name}
-          rightIcon={<Icon size={24} 
-          style={styles.icon} name='user'/>}
-          rules={{
-            required: 'Username is required',
-            minLength: {
-              value: 3,
-              message: 'Username should be at least 3 characters long',
-            },
-            maxLength: {
-              value: 24,
-              message: 'Username should be max 24 characters long',
-            },
-          }}
-        />
-          <Text style={styles.tit}>Email</Text>
-        <CustomInput
-        name="email"
-        control={control}
-        style={styles.inpt}
-          inputContainerStyle={styles.Con}
-          inputStyle ={styles.inputText}
-          defaultValue={email}
-          rightIcon={<Icon size={24} 
-          style={styles.icon} name='envelope'/>}
-          rules={{
-            required: 'Email is required',
-            pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
-          }}
-        />
-        <Text style={styles.tit}>Phone Number</Text>
-        <CustomInput
-        name="phone"
-        control={control}
-          style={styles.inpt}
-          inputContainerStyle={styles.Con}
-          inputStyle ={styles.inputText}
-          defaultValue={phone}
-          rightIcon={<Icon size={24} 
-          style={styles.icon} name='phone'/>}
-          rules={{
-            required: 'Phone is required',
-            minLength: {
-              value: 12,
-              message: 'Phone should be at least 13 digits long',
-            },
-          }}
-        />
-        </View>
-        <View style={{flexDirection:"row", alignContent: "center"}}>
-        <Pressable
-        onPress={handleSubmit(apd)}
-        style={{padding: 10}}
-        ><Text style={{fontSize: 20, fontWeight: "bold", color: "green"}}>UPDATE</Text></Pressable>
-        <Pressable 
-        onPress={close}
-        style={{padding: 10}}
-        ><Text style={{fontSize: 20, fontWeight: "bold", color: "red"}}>CANCEL</Text></Pressable>
-        </View>
-      </Modal>
-        )
-      }
-      return (
-        null
-      );
-    })()}
 </View>
   );
 }

@@ -1,0 +1,12 @@
+{
+  "resourceName": "s3reactnatcarwashappprofilestorage",
+  "bucketName": "reactnat-carwashapp-profile-storage",
+  "policyUUID": "39df7d12",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}
