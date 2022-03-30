@@ -22,7 +22,6 @@ const EMAIL_REGEX =
 export default function ProfileEdit({ navigation, route }) {
   const {name, email, phone, id} = route?.params || {};
   const {control, handleSubmit, watch} = useForm();
- 
   const apd = async data => {
     const {email: email, name: name, phone: phone} = data;
     try{

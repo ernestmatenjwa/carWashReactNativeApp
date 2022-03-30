@@ -9,9 +9,16 @@ import { Text,
   Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useForm} from 'react-hook-form';
-import { getUser } from "../graphql/queries"
+import { getUser } from "../graphql/queries";
+import { updateUser } from '../graphql/mutations';
 import { API, graphqlOperation, Auth } from "aws-amplify";
 import gbImage from "../../assets/splash.png"
+
+// import ImagePicker from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker';
+import Amplify, {Storage} from 'aws-amplify';
+import awsconfig from '../aws-exports'
+Amplify.configure(awsconfig)
 
 
 const { width, height }= Dimensions.get("screen");
@@ -28,7 +35,55 @@ export default function ProfileScreen({ navigation, route }) {
   const [id, setID] = React.useState('');
   const [isModalVisible, setModalVisible] = React.useState(false);
   const [imgeUrl, setImageUrl] = React.useState("https://image.shutterstock.com/image-vector/camera-add-icon-260nw-1054194038.jpg");
+  
 
+  let openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert('Permission to access camera roll is required!');
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+    if (pickerResult.cancelled === true) {
+      return;
+    }
+    setImageUrl(pickerResult.uri);
+    const file ={
+          uri: pickerResult.uri,
+          name: "profilePic",
+          type: 'image/png'
+          }
+          // console.log("Bulk ",pickerResult);
+          // console.log("File: ",file);
+
+          Storage.put(file , pickerResult.uri,{
+            level: 'public/profilePic' + id,
+            keyPrefix: 's3/',
+            bucket: 'reactnat-carwashapp-profile-storage225304-staging',  //Bucket name
+            region: 'us-east-1',
+            contentType: file.type
+          }).then(res=>{
+            
+            console.log("Storage: ", res.key.uri)
+            setImageUrl(res.key.uri);
+             try{
+              const admin = {
+                  id: id,
+                  imageUrl: res.key.uri
+              }
+              const apdm =  API.graphql({query: updateUser, variables: {input: admin}});
+              Alert.alert("You have successfully apdated your profile")
+              
+          } catch (e) {
+            console.log(e)
+              Alert.alert(e)
+          } 
+          })
+
+  }
   React.useEffect(() => {
     const getProfile = async (e) => {
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
@@ -40,11 +95,15 @@ export default function ProfileScreen({ navigation, route }) {
             setPhone(userData.data.getUser.phone)
             setID(userData.data.getUser.id)
             setImageUrl(userData.data.getUser.imageUrl)
+          // console.log(profile);
+
             } catch (e) {
                 console.log('error getting user 22', e);  
             } 
    }
-       function loadUser() { 
+
+
+          function loadUser() { 
            return Auth.currentAuthenticatedUser({bypassCache: true});
        }
        async function onLoad() {
@@ -68,7 +127,9 @@ export default function ProfileScreen({ navigation, route }) {
     <Image style={styles.avatar} source={{uri:imgeUrl}}/>
     <View style={styles.viewAl}>
     <Pressable 
-      style={[styles.text_footer, {}]}>
+      style={[styles.text_footer, {}]}
+      onPress={openImagePickerAsync}
+     >
       <Icon
           style={styles.iconZb}
           size={24}
